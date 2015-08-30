@@ -1,4 +1,4 @@
-== OhMyFees
+# OhMyFees - Fees Management Web Application
 
 OhMyFees is a web fees management application that handles the fees statements of the university.
 Student can access the application to make online payment for their fees.
