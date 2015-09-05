@@ -1,18 +1,15 @@
-<header class="navbar navbar-fixed-top">
-  <nav>
-    <div class="container">
-      <div class="navbar-header">
-        <%= link_to "OhMyFees", root_path, id: "logo" %>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Home",   root_path %></li>
-          <li><%= link_to "Help",   help_path %></li>
-          <li><%= link_to "Log in", '#' %></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<header>
+  <div class="padding-left-2 padding-right-2" id="header">
+    <nav class="float-left flex-center-left horizontal">
+      <%= link_to "OhMyFees", root_path, id: "logo" %>
+    </nav>
+    <nav class="float-right flex-center-right spaced-3x">
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home",   root_path %></li>
+        <li><%= link_to "Dashboard", dashboard_path %></li>
+        <li><%= link_to "Help",   help_path %></li>
+        <li><%= link_to "Log in", '#' %></li>
+      </ul>
+    </nav>
+  </div>
 </header>
