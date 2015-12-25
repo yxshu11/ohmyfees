@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get 'contact'   =>  'landing_pages#contact'
   get 'dashboard' =>  'landing_pages#dashboard'
 
+  get 'registration' => 'students#new'
+
 end
