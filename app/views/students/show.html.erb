@@ -1,0 +1,20 @@
+<% provide(:title, @student.name) %>
+
+<div class="jumbotron">
+	<section>
+			<h1>Account Information:<hr></h1>
+				<h2>
+					<b>Student Name:</b>
+						<%= @student.name %>
+						<br><br>
+					<b>Student Number:</b>
+						<%= @student.student_number %>
+						<br><br>
+					<b>Email:</b>
+						<%= @student.email %>
+						<br><br>
+				<h2>
+
+				<%= link_to "Back", root_path, class: "btn btn-lg btn-primary" %>
+	</section>
+</div>

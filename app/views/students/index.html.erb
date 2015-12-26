@@ -1,0 +1,29 @@
+<% provide(:title, 'All Students') %>
+
+<h1>All Students</h1>
+
+<%= will_paginate %>
+
+<table class="table">
+  <tr>
+    <td class="no-repeat-header">ID</td>
+    <td class="no-repeat-header">Name</td>
+    <td class="no-repeat-header">TP Number</td>
+    <td class="no-repeat-header">Email</td>
+  </tr>
+  <% @students.each do |s| %>
+  <tr>
+    <td><%= s.id %></td>
+    <td><%= s.name %></td>
+    <td><%= s.student_number %></td>
+    <td><%= s.email %></td>
+
+  </tr>
+  <% end %>
+</table>
+
+<%= will_paginate %>
+
+<div class="center">
+  <%= link_to "Back", root_path, class: "btn btn-primary" %>
+</div>
