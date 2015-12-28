@@ -1,0 +1,28 @@
+<% provide(:title, 'Login') %>
+
+<div class="container">
+<h1>Log In</h1>
+  <div class="row">
+      <div class="col-md-6 col-md-offset-3 well">
+        <%= form_for(:session, url: login_path) do |f| %>
+
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control' %>
+
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control' %>
+
+          <%= label_tag "User Type" %>
+          <%= radio_button_tag(:type, "Student") %>
+          <%= label_tag(:student_type, "Student") %>
+
+          <%= radio_button_tag(:type, "Staff") %>
+          <%= label_tag(:staff_type, "Staff") %>
+          <br>
+          <%= f.submit "Log In", class: "btn btn-primary" %>
+        <% end %>
+        <br>
+        <b>New Student? <%= link_to "Sign Up", registration_path %></b>
+      </div>
+    </div>
+</div>

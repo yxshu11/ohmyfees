@@ -1,4 +1,29 @@
-<% provide(:title, "Dashboard") %>
+<% provide(:title, 'Dashboard') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <!-- Sidebar -->
+      <h3 class="margin-bottom-1">Good Day, </h3>
+      <br>
+      <%= link_to "View Profile", '#' %>
+      <br>
+      <hr>
+
+      <nav class="pills margin-left-1 margin-right-1 text-small">
+        <%= link_to "View Payment", '#' %>
+        <%= link_to "Payment History", '#' %>
+        <%= link_to "Make Payment", '#' %>
+      </nav>
+    </div>
+    <div class="col-md-8">
+      <!-- Dashboard Panel -->
+      <h1>Dashboard</h1>
+      <hr>
+
+    </div>
+  </div>
+</div>
 
 <div id="main">
   <div>
@@ -18,11 +43,7 @@
 
           <h4 class="margin-left-2 margin-right-2 lighten">Menu</h4><br>
 
-          <nav class="pills margin-left-1 margin-right-1 text-small">
-              <%= link_to "View Payment", '#' %>
-              <%= link_to "Payment History", '#' %>
-              <%= link_to "Make Payment", '#' %>
-            </nav>
+
         </div>
 
         <div id="wrapper-right" class="darken">
@@ -42,7 +63,7 @@
                 </div>
                 <div class="row float-left">
                   <!-- Content Insert here -->
-                  
+
                 </div>
               </div>
             </div>

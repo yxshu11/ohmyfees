@@ -1,10 +1,22 @@
 <footer>
-  <div class="padding-left-2 padding-right-2" id="footer">
-    <nav class="float-left flex-center-left horizontal">© OhMyFees & Asia Pacific University 2015. All right reserved.</nav>
-    <nav class="float-right flex-center-right horizontal">
-      <%= link_to "Help",   help_path %>
-      <%= link_to "Contact", contact_path %>
-      <a href="http://webspace.apiit.edu.my/" target="_blank">Webspace</a>
-    </nav>
-  </div>
+  <nav class="navbar navbar-default" id="footer">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <p class="footer-text">© OHMYFEES & Asia Pacific University 2015. All right reserved.</p>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Help",   help_path %></li>
+            <li><%= link_to "Contact", contact_path %></li>
+            <li><a href="http://webspace.apiit.edu.my/" target="_blank">Webspace</a></li>
+          </ul>
+      </div>
+    </div>
+  </nav>
 </footer>
