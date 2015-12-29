@@ -13,12 +13,8 @@
           <%= f.password_field :password, class: 'form-control' %>
 
           <%= label_tag "User Type" %>
-          <%= radio_button_tag(:type, "Student") %>
-          <%= label_tag(:student_type, "Student") %>
+          <%= select_tag :type, options_for_select(["Student","Staff"]), :include_blank => true, class: 'form-control'%>
 
-          <%= radio_button_tag(:type, "Staff") %>
-          <%= label_tag(:staff_type, "Staff") %>
-          <br>
           <%= f.submit "Log In", class: "btn btn-primary" %>
         <% end %>
         <br>
