@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   # Student Controller
   get     'students'      =>    'students#index'
-  get     'student/registration'  =>    'students#new'
+  get     'student_registration'  =>    'students#new'
 
   # Staff Controller
 
