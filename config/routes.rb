@@ -15,7 +15,12 @@ Rails.application.routes.draw do
 
   # Student Controller
   get     'students'      =>    'students#index'
-  get     'registration'  =>    'students#new'
+  get     'student/registration'  =>    'students#new'
+
+  # Staff Controller
+
+  get     'staffs'        =>    'staffs#index'
+  get     'staff/registration'    =>    'staffs#new'
 
   # Session Controller
   get     'login'         =>    'sessions#new'
@@ -24,5 +29,6 @@ Rails.application.routes.draw do
 
   # Resources
   resources :students
+  # resources :users
 
 end
