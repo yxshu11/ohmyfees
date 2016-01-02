@@ -5,12 +5,12 @@ class SessionsController < ApplicationController
 
   def create
     # Get the student obj by searching the email
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    @user = User.find_by(email: params[:session][:email].downcase)
+    if @user && @user.authenticate(params[:session][:password])
       # Log In and Handle something
       flash[:success] = "Log In Successfully!"
-      log_in user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      log_in @user
+      params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
       redirect_to root_path
     else
       # Create an Error Message

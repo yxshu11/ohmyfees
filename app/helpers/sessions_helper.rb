@@ -18,6 +18,10 @@ module SessionsHelper
     end
   end
 
+  def current_user?(user)
+    user == current_user
+  end
+
   # Returns the logged-in user type
   def current_user_type
     if !current_user.blank?
