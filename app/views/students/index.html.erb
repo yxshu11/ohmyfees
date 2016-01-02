@@ -11,6 +11,8 @@
           <td class="no-repeat-header">Name</td>
           <td class="no-repeat-header">TP Number</td>
           <td class="no-repeat-header">Email</td>
+          <td class="no-repeat-header">Contact Number</td>
+          <td class="no-repeat-header">Action</td>
         </tr>
         <% @students.each do |s| %>
         <tr>
@@ -18,7 +20,11 @@
           <td><%= s.name %></td>
           <td><%= s.student_number %></td>
           <td><%= s.email %></td>
-
+          <td><%= s.contact_number %></td>
+          <td>
+            <%= link_to "Delete", s, method: :delete,
+                        data: { confirm: "Comfirm to remove this student?" } %>
+          </td>
         </tr>
         <% end %>
       </table>

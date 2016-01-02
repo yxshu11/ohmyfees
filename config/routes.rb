@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'staffs/new'
-
-  get 'staffs/show'
-
-  get 'staffs/index'
-
   root                                  'landing_pages#home'
 
   # Landing Pages Controller
@@ -29,6 +23,6 @@ Rails.application.routes.draw do
 
   # Resources
   resources :students
-  # resources :users
+  resources :staffs
 
 end

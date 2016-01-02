@@ -1,6 +1,8 @@
 class StudentsController < ApplicationController
+  # User access control
   before_action :logged_in_user, only: [:edit, :update, :show, :index]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :staff_user, only: [:index, :destroy]
+  before_action :correct_user, only: [:show, :edit, :update]
 
   # GET for students_path
   def index
@@ -49,24 +51,45 @@ class StudentsController < ApplicationController
     end
   end
 
+  # DELETE for destroy student
+  def destroy
+    Student.find(params[:id]).destroy
+    flash[:success] = "Student account deleted."
+    redirect_to students_path
+  end
+
   private
-    # Define the Params for the student for security purpose.
+    # Define the Strong Parameters (Params) for the student for security purpose in the views.
     def student_params
       params.require(:student).permit(:name, :student_number, :contact_number, :intake, :email,
                                       :password, :password_confirmation)
     end
 
-    # Before Filters
+    # Before Filters for User access control
     # Confirms a logged-in user.
     def logged_in_user
       unless logged_in?
+        store_location
         flash[:danger] = "Please log in."
         redirect_to login_path
       end
     end
+
     # Confirms the correct user.
     def correct_user
       @student = Student.find(params[:id])
-      redirect_to(root_path) unless current_user?(@student)
+      unless current_user?(@student)
+        flash[:danger] = "Access Denied."
+        redirect_to(root_path)
+      end
     end
+
+    # Confirms an Staff user.
+    def staff_user
+      unless current_user_type == "Staff"
+        flash[:danger] = "Access Denied."
+        redirect_to(root_path)
+      end
+    end
+
 end

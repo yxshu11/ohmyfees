@@ -9,8 +9,10 @@
         <tr>
           <td class="no-repeat-header">ID</td>
           <td class="no-repeat-header">Name</td>
-          <td class="no-repeat-header">TP Number</td>
+          <td class="no-repeat-header">Staff Number</td>
           <td class="no-repeat-header">Email</td>
+          <td class="no-repeat-header">Contact Number</td>
+          <td class="no-repeat-header">Action</td>
         </tr>
         <% @staffs.each do |s| %>
         <tr>
@@ -18,7 +20,11 @@
           <td><%= s.name %></td>
           <td><%= s.staff_number %></td>
           <td><%= s.email %></td>
-
+          <td><%= s.contact_number %></td>
+          <td>
+            <%= link_to "Delete", s, method: :delete,
+                        data: { confirm: "Comfirm to remove this staff?" } %>
+          </td>
         </tr>
         <% end %>
       </table>
