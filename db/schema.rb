@@ -21,9 +21,11 @@ ActiveRecord::Schema.define(version: 20160102061312) do
     t.string   "email"
     t.string   "staff_number"
     t.string   "student_number"
+    t.string   "contact_number"
     t.string   "intake"
-    t.string   "password_digest"
     t.string   "type"
+    t.string   "password_digest"
+    t.string   "remember_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

@@ -12,13 +12,18 @@
           <%= f.label :password %>
           <%= f.password_field :password, class: 'form-control' %>
 
-          <%= label_tag "User Type" %>
-          <%= select_tag :type, options_for_select(["Student","Staff"]), :include_blank => true, class: 'form-control'%>
+          <%= f.label :remember_me, class: "checkbox inline" do %>
+            <%= f.check_box :remember_me %>
+            <span>Remember me on this computer</span>
+          <% end %>
+
+          <!-- <%= label_tag "User Type" %>
+          <%= select_tag :type, options_for_select(["Student","Staff"]), :include_blank => true, class: 'form-control'%> -->
 
           <%= f.submit "Log In", class: "btn btn-primary" %>
         <% end %>
         <br>
-        <b>New Student? <%= link_to "Sign Up", registration_path %></b>
+        <b>New Student? <%= link_to "Sign Up", student_registration_path %></b>
       </div>
     </div>
 </div>

@@ -12,6 +12,7 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
     if @student.save
       # Successfully Sign Up
+      log_in @student
       flash[:success] = "Sign Up Completed, Welcome to OHMYFEES!"
       redirect_to @student
     else
@@ -27,7 +28,7 @@ class StudentsController < ApplicationController
   private
 
     def student_params
-      params.require(:student).permit(:name, :student_number, :intake, :email,
+      params.require(:student).permit(:name, :student_number, :contact_number, :intake, :email,
                                       :password, :password_confirmation)
     end
 end

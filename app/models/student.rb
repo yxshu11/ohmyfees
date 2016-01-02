@@ -13,5 +13,4 @@ class Student < User
   validates :student_number, presence: true, length: { maximum: 8 },
             format: { with: VALID_TP_REGEX },
             uniqueness: { case_sensitive: false}
-
 end
