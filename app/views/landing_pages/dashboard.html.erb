@@ -1,70 +1,88 @@
 <% provide(:title, 'Dashboard') %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <!-- Sidebar -->
-      <h3 class="margin-bottom-1">Good Day, <%= current_user.name %></h3>
-      <br>
-      <%= link_to "View Profile", current_user %>
-      <br>
-      <hr>
-      
-      <nav class="pills margin-left-1 margin-right-1 text-small">
-        <%= link_to "View Payment", '#' %>
-        <%= link_to "Payment History", '#' %>
-        <%= link_to "Make Payment", '#' %>
-      </nav>
-    </div>
-    <div class="col-md-8">
-      <!-- Dashboard Panel -->
-      <h1>Dashboard</h1>
-      <hr>
-
-    </div>
-  </div>
-</div>
-
-<div id="main">
-  <div>
-    <div id="wrapper-main" class="">
-      <div>
-        <div id="sidebar" class="grey">
-          <div class="padding-1 padding-top-2 collapse-margin-bottom-1">
-
-            <div class="text-center padding-top-1">
-              <h3 class="margin-bottom-1">Good Day, Mac Shu</h3>
-              <br>
-              <%= link_to "View Profile", '#' %>
-              <br>
-            </div>
-              <hr>
-          </div>
-
-          <h4 class="margin-left-2 margin-right-2 lighten">Menu</h4><br>
-
-
+<div class="panel center">
+  <div class="wrapper">
+    <!-- <div class="sidebar">
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <b class="simple-text">Good Day,<br> <%= current_user.name%></a>
         </div>
 
-        <div id="wrapper-right" class="darken">
-          <div id="center-right">
-            <div class="wrap padding-left-4">
-              <div>
-                <div class="wrap margin-bottom-2 margin-top-4">
-                  <div class="float-left">
-                    <h1>Dashboard</h1>
-                  </div>
-                  <div class="float-right margin-right-1">
-                    <div class="icon-wrap-right float-right">
-                      <input style="transition:width .02s ease;width:172px;" class="transparent" placeholder="Search Fees">
-                      <span class="glyphicon glyphicon-search"></span></input>
-                  </div>
-                </div>
-                </div>
-                <div class="row float-left">
-                  <!-- Content Insert here -->
+        <div class="collapse navbar-collapse" id="dashboard-navbar-collapse">
+          <ul class="nav">
+            <li>
+              <%= link_to "View Profile", current_user %>
+            </li>
+            <li>
+              <%= link_to "View Students", students_path %>
+            </li>
+            <li>
+              <%= link_to "View Staffs", staffs_path %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div> -->
 
-                </div>
+    <div class="main-panel">
+      <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Dashboard</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="content">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="card">
+              <div class="header">
+                <h4 class="title">Logo</h4>
+              </div>
+              <div class="content">
+                View Profile
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="header">
+                <h4 class="title">Logo</h4>
+              </div>
+              <div class="content">
+                View Students
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="header">
+                <h4 class="title">Logo</h4>
+              </div>
+              <div class="content">
+                View Staffs
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="header">
+                <h4 class="title">Logo</h4>
+              </div>
+              <div class="content">
+                View Payments
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="card">
+              <div class="header">
+                <h4 class="title">Logo</h4>
+              </div>
+              <div class="content">
+                Make Payments
               </div>
             </div>
           </div>

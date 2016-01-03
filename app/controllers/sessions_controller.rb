@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Log In Successfully!"
       log_in @user
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-      redirect_back_or root_path
+      redirect_back_or dashboard_path
     else
       # Create an Error Message
       flash.now[:danger] = 'Invalid email/password combination.'
