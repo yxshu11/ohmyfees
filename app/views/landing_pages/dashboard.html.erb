@@ -1,93 +1,92 @@
 <% provide(:title, 'Dashboard') %>
 
-<div class="panel center">
-  <div class="wrapper">
-    <!-- <div class="sidebar">
-      <div class="sidebar-wrapper">
-        <div class="logo">
-          <b class="simple-text">Good Day,<br> <%= current_user.name%></a>
-        </div>
+<div class="panel panel-default">
+  <div class="panel-heading panel-heading-text">Dashboard</div>
+  <div class="panel-body center panel-body-prop">
+    <div class="row">
+      Display Unpaid Fees for Student
+    </div>
+    <br><hr><br>
+    <div class="row">
 
-        <div class="collapse navbar-collapse" id="dashboard-navbar-collapse">
-          <ul class="nav">
-            <li>
-              <%= link_to "View Profile", current_user %>
-            </li>
-            <li>
-              <%= link_to "View Students", students_path %>
-            </li>
-            <li>
-              <%= link_to "View Staffs", staffs_path %>
-            </li>
-          </ul>
-        </div>
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <a href="#">
+          <div class="card">
+            <div class="header">
+              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </div>
+            <div class="content">
+              View Profile
+            </div>
+          </div>
+        </a>
       </div>
-    </div> -->
 
-    <div class="main-panel">
-      <nav class="navbar navbar-default navbar-fixed">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Dashboard</a>
-          </div>
-        </div>
-      </nav>
-
-      <div class="content">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="card">
-              <div class="header">
-                <h4 class="title">Logo</h4>
-              </div>
-              <div class="content">
-                View Profile
-              </div>
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <a href="#">
+          <div class="card">
+            <div class="header">
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            </div>
+            <div class="content">
+              View Students
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="card">
-              <div class="header">
-                <h4 class="title">Logo</h4>
-              </div>
-              <div class="content">
-                View Students
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card">
-              <div class="header">
-                <h4 class="title">Logo</h4>
-              </div>
-              <div class="content">
-                View Staffs
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card">
-              <div class="header">
-                <h4 class="title">Logo</h4>
-              </div>
-              <div class="content">
-                View Payments
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3">
-            <div class="card">
-              <div class="header">
-                <h4 class="title">Logo</h4>
-              </div>
-              <div class="content">
-                Make Payments
-              </div>
-            </div>
-          </div>
-        </div>
+        </a>
       </div>
+
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <a href="#">
+          <div class="card">
+            <div class="header">
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            </div>
+            <div class="content">
+              View Staffs
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <a href="#">
+          <div class="card">
+            <div class="header">
+              <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+            </div>
+            <div class="content">
+              View Payments
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <a href="#">
+          <div class="card">
+            <div class="header">
+              <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+            </div>
+            <div class="content">
+              Make Payments
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <a href="#">
+          <div class="card">
+            <div class="header">
+              <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+            </div>
+            <div class="content">
+              Statistic
+            </div>
+          </div>
+        </a>
+      </div>
+
     </div>
   </div>
 </div>
