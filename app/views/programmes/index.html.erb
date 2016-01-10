@@ -1,0 +1,37 @@
+<% provide(:title, 'All Programmes') %>
+
+<div class="container">
+<h1>All Programmes</h1>
+  <div class="row">
+    <div class="col-md-12 well">
+    <%= will_paginate %>
+      <table class="table">
+        <tr>
+          <td class="no-repeat-header">ID</td>
+          <td class="no-repeat-header">Programme Name</td>
+          <td class="no-repeat-header">Type</td>
+          <!-- <td class="no-repeat-header">Duration</td> -->
+          <td class="no-repeat-header">Description</td>
+          <td class="no-repeat-header">Action</td>
+        </tr>
+        <% @programmes.each do |p| %>
+        <tr>
+          <td><%= p.id %></td>
+          <td><%= p.name %></td>
+          <td><%= p.programme_type%></td>
+          <td><%= p.description %></td>
+          <td>
+            <%= link_to "Delete", p, method: :delete,
+                        data: { confirm: "Confirm to remove this programme?" } %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <%= will_paginate %>
+
+    <div class="center">
+      <%= link_to "Back", dashboard_path , class: "btn btn-primary" %>
+    </div>
+  </div>
+  </div>
+</div>

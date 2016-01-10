@@ -10,10 +10,10 @@
     <div class="row">
 
       <div class="col-xs-6 col-sm-4 col-md-3">
-        <a href="#">
+        <a href="<%= @current_user.type == "Student" ? student_path(@current_user) : staff_path(@current_user) %>">
           <div class="card">
             <div class="header">
-              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              <span class="fa fa-cog fa-3x" aria-hidden="true"></span>
             </div>
             <div class="content">
               View Profile
@@ -22,37 +22,86 @@
         </a>
       </div>
 
-      <div class="col-xs-6 col-sm-4 col-md-3">
-        <a href="#">
-          <div class="card">
-            <div class="header">
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      <% if @current_user.type == "Staff" %>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="/students">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-user fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                View Students
+              </div>
             </div>
-            <div class="content">
-              View Students
+          </a>
+        </div>
+      <% end %>
+
+      <% if @current_user.type == "Staff" && @current_user.admin? %> <!-- Authenticate User Access Level -->
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="#">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-plus fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                Add Staff
+              </div>
             </div>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
+      <% end %>
+
+      <% if @current_user.type == "Staff" && @current_user.admin? %>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= staffs_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-user fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                View Staffs
+              </div>
+            </div>
+          </a>
+        </div>
+      <% end %>
+
+      <% if @current_user.type == "Staff" %>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= programme_registration_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-plus fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                Add Programme
+              </div>
+            </div>
+          </a>
+        </div>
+      <% end %>
+
+      <% if @current_user.type == "Staff" %>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= programmes_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-eye fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                View Programmes
+              </div>
+            </div>
+          </a>
+        </div>
+      <% end %>
 
       <div class="col-xs-6 col-sm-4 col-md-3">
         <a href="#">
           <div class="card">
             <div class="header">
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            </div>
-            <div class="content">
-              View Staffs
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-xs-6 col-sm-4 col-md-3">
-        <a href="#">
-          <div class="card">
-            <div class="header">
-              <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+              <span class="fa fa-eye fa-3x" aria-hidden="true"></span>
             </div>
             <div class="content">
               View Payments
@@ -65,7 +114,7 @@
         <a href="#">
           <div class="card">
             <div class="header">
-              <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+              <span class="fa fa-credit-card fa-3x" aria-hidden="true"></span>
             </div>
             <div class="content">
               Make Payments
@@ -74,19 +123,20 @@
         </a>
       </div>
 
-      <div class="col-xs-6 col-sm-4 col-md-3">
-        <a href="#">
-          <div class="card">
-            <div class="header">
-              <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+      <% if @current_user.type == "Staff" %>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="#">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-bar-chart fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                Statistic
+              </div>
             </div>
-            <div class="content">
-              Statistic
-            </div>
-          </div>
-        </a>
-      </div>
-
+          </a>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

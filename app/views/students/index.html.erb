@@ -23,7 +23,7 @@
           <td><%= s.contact_number %></td>
           <td>
             <%= link_to "Delete", s, method: :delete,
-                        data: { confirm: "Comfirm to remove this student?" } %>
+                        data: { confirm: "Confirm to remove this student?" } %>
           </td>
         </tr>
         <% end %>
@@ -31,7 +31,7 @@
       <%= will_paginate %>
 
     <div class="center">
-      <%= link_to "Back", root_path, class: "btn btn-primary" %>
+      <%= link_to "Back", dashboard_path, class: "btn btn-primary" %>
     </div>
   </div>
   </div>
