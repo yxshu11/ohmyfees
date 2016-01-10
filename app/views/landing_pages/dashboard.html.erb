@@ -39,7 +39,7 @@
 
       <% if @current_user.type == "Staff" && @current_user.admin? %> <!-- Authenticate User Access Level -->
         <div class="col-xs-6 col-sm-4 col-md-3">
-          <a href="#">
+          <a href="<%= staff_registration_path %>">
             <div class="card">
               <div class="header">
                 <span class="fa fa-plus fa-3x" aria-hidden="true"></span>

@@ -26,7 +26,17 @@
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, class: 'form-control' %>
 
+        <%= f.label :admin, "Admin Account?" %>
+        <%= f.select(:admin, [['True',true], ['False',false]],
+                    { include_blank: false},
+                    { class: 'form-control'}) %>
+
         <%= f.submit "Create Account", class: "btn btn-primary" %>
+
+        <section class="center">
+        <br>
+        <%= link_to "Back", dashboard_path, class: "btn btn-default" %>
+        </section>
 
       <% end %>
     </div>
