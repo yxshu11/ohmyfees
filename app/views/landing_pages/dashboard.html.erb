@@ -3,108 +3,37 @@
 <div class="panel panel-default">
   <div class="panel-heading panel-heading-text">Dashboard</div>
   <div class="panel-body center panel-body-prop">
-    <div class="row">
-      Display Unpaid Fees for Student
-    </div>
-    <br><hr><br>
-    <div class="row">
 
-      <div class="col-xs-6 col-sm-4 col-md-3">
-        <a href="<%= @current_user.type == "Student" ? student_path(@current_user) : staff_path(@current_user) %>">
-          <div class="card">
-            <div class="header">
-              <span class="fa fa-cog fa-3x" aria-hidden="true"></span>
-            </div>
-            <div class="content">
-              View Profile
-            </div>
-          </div>
-        </a>
+    <% if @current_user.type == "Student" %>
+      <div class="row">
+        Display Unpaid Fees for Student
+      </div>
+      <br>
+    <% elsif @current_user.type == "Staff" %>
+      Search Student for payment:<br><br>
+      <div class="row">
+        <div class="col-md-11">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-default">Submit</button>
+        </div>
       </div>
 
-      <% if @current_user.type == "Staff" %>
-        <div class="col-xs-6 col-sm-4 col-md-3">
-          <a href="/students">
-            <div class="card">
-              <div class="header">
-                <span class="fa fa-user fa-3x" aria-hidden="true"></span>
-              </div>
-              <div class="content">
-                View Students
-              </div>
-            </div>
-          </a>
-        </div>
-      <% end %>
+    <% end %>
 
-      <% if @current_user.type == "Staff" && @current_user.admin? %> <!-- Authenticate User Access Level -->
-        <div class="col-xs-6 col-sm-4 col-md-3">
-          <a href="<%= staff_registration_path %>">
-            <div class="card">
-              <div class="header">
-                <span class="fa fa-plus fa-3x" aria-hidden="true"></span>
-              </div>
-              <div class="content">
-                Add Staff
-              </div>
-            </div>
-          </a>
-        </div>
-      <% end %>
+    <hr>
 
-      <% if @current_user.type == "Staff" && @current_user.admin? %>
-        <div class="col-xs-6 col-sm-4 col-md-3">
-          <a href="<%= staffs_path %>">
-            <div class="card">
-              <div class="header">
-                <span class="fa fa-user fa-3x" aria-hidden="true"></span>
-              </div>
-              <div class="content">
-                View Staffs
-              </div>
-            </div>
-          </a>
-        </div>
-      <% end %>
-
-      <% if @current_user.type == "Staff" %>
-        <div class="col-xs-6 col-sm-4 col-md-3">
-          <a href="<%= programme_registration_path %>">
-            <div class="card">
-              <div class="header">
-                <span class="fa fa-plus fa-3x" aria-hidden="true"></span>
-              </div>
-              <div class="content">
-                Add Programme
-              </div>
-            </div>
-          </a>
-        </div>
-      <% end %>
-
-      <% if @current_user.type == "Staff" %>
-        <div class="col-xs-6 col-sm-4 col-md-3">
-          <a href="<%= programmes_path %>">
-            <div class="card">
-              <div class="header">
-                <span class="fa fa-eye fa-3x" aria-hidden="true"></span>
-              </div>
-              <div class="content">
-                View Programmes
-              </div>
-            </div>
-          </a>
-        </div>
-      <% end %>
-
+    <p>Fee Management</p>
+    <div class="row">
       <div class="col-xs-6 col-sm-4 col-md-3">
         <a href="#">
           <div class="card">
             <div class="header">
-              <span class="fa fa-eye fa-3x" aria-hidden="true"></span>
+              <span class="fa fa-dollar fa-3x" aria-hidden="true"></span>
             </div>
             <div class="content">
-              View Payments
+              View Fees
             </div>
           </div>
         </a>
@@ -123,7 +52,152 @@
         </a>
       </div>
 
-      <% if @current_user.type == "Staff" %>
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <a href="#">
+          <div class="card">
+            <div class="header">
+              <span class="fa fa-history fa-3x" aria-hidden="true"></span>
+            </div>
+            <div class="content">
+              View Payments
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <hr>
+
+    <% if @current_user.type == "Staff" %>
+      <p>Staff, Student and Fees Definition</p>
+      <div class="row">
+        <% if @current_user.admin? %> <!-- Authenticate User Access Level -->
+          <div class="col-xs-6 col-sm-4 col-md-3">
+            <a href="<%= staff_registration_path %>">
+              <div class="card">
+                <div class="header">
+                  <span class="fa fa-plus fa-3x" aria-hidden="true"></span>
+                </div>
+                <div class="content">
+                  Add Staff
+                </div>
+              </div>
+            </a>
+          </div>
+        <% end %>
+
+        <% if @current_user.admin? %>
+          <div class="col-xs-6 col-sm-4 col-md-3">
+            <a href="<%= staffs_path %>">
+              <div class="card">
+                <div class="header">
+                  <span class="fa fa-user fa-3x" aria-hidden="true"></span>
+                </div>
+                <div class="content">
+                  View Staffs
+                </div>
+              </div>
+            </a>
+          </div>
+        <% end %>
+
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= programme_registration_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-plus fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                Add Programme
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= programmes_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-book fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                View Programmes
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= utility_fee_registration_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-plus fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                Add Utility Fees
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= utility_fees_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-wrench fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                View Utility Fees
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= intakes_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-calendar fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                View Intakes
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= students_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-graduation-cap fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                View Students
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    <% end %>
+
+    <hr>
+
+    <% if @current_user.type == "Staff" %>
+      <p>Report and Statistic</p>
+      <div class="row">
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="#">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-file-pdf-o fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                Report
+              </div>
+            </div>
+          </a>
+        </div>
         <div class="col-xs-6 col-sm-4 col-md-3">
           <a href="#">
             <div class="card">
@@ -136,7 +210,25 @@
             </div>
           </a>
         </div>
-      <% end %>
+      </div>
+    <% end %>
+
+    <hr>
+
+    <p>Profile Management</p>
+    <div class="row">
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <a href="<%= @current_user.type == "Student" ? student_path(@current_user) : staff_path(@current_user) %>">
+          <div class="card">
+            <div class="header">
+              <span class="fa fa-cog fa-3x" aria-hidden="true"></span>
+            </div>
+            <div class="content">
+              View Profile
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </div>

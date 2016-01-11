@@ -15,6 +15,7 @@
           <td class="no-repeat-header">Description</td>
           <td class="no-repeat-header">Action</td>
           <td class="no-repeat-header">Action</td>
+          <td class="no-repeat-header">Action</td>
         </tr>
         <% @programmes.each do |p| %>
         <tr>
@@ -24,8 +25,8 @@
           <td><%= p.year %></td>
           <td><%= p.semester %></td>
           <td><%= p.description %></td>
-          <td><%= link_to "View", p %>
-          </td>
+          <td><%= link_to "View", p %></td>
+          <td><%= link_to "Edit", edit_programme_path(p) %></td>
           <td>
             <%= link_to "Delete", p, method: :delete,
                         data: { confirm: "Confirm to remove this programme?" } %>
@@ -36,6 +37,7 @@
       <%= will_paginate %>
 
     <div class="center">
+      <%= link_to "Add", programme_registration_path , class: "btn btn-primary" %> &nbsp;
       <%= link_to "Back", dashboard_path , class: "btn btn-default" %>
     </div>
   </div>

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-
-
+  # Homepage
   root                                  'landing_pages#home'
 
   # Landing Pages Controller
@@ -31,11 +30,17 @@ Rails.application.routes.draw do
   # Intake Controller
   get     'intakes'                 =>    'intakes#index'
 
+  # Utility Fees Controller
+  get     'utility_fee_registration' =>    'utility_fees#new'
+  get     'utility_fees'             =>    'utility_fees#index'
+
+
   # Resources
   resources :programmes do
     resources :intakes
   end
 
+  resources :utility_fees
   resources :intakes
   resources :students
   resources :staffs

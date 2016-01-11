@@ -19,15 +19,15 @@
 
         <%= f.label :semester, "Duration (Number of Semesters)" %>
         <%= f.text_field :semester, :maxlength => 1, class: 'form-control' %>
-        
+
         <%= f.label :description %>
         <%= f.text_area :description, :size => "30x5", class: 'form-control' %>
 
-        <%= f.submit "Add", class: "btn btn-primary" %>
+        <%= f.submit "Update", class: "btn btn-primary" %>
 
         <section class="center">
         <br>
-        <%= link_to "Back", dashboard_path, class: "btn btn-default" %>
+        <%= link_to "Back", programmes_path, class: "btn btn-default form-control" %>
         </section>
 
       <% end %>
