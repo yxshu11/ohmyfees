@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110082409) do
+ActiveRecord::Schema.define(version: 20160111042804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "intakes", force: :cascade do |t|
     t.string   "intake_code"
-    t.integer  "duration"
     t.date     "starting_date"
     t.float    "local_student_fee"
     t.float    "international_student_fee"
@@ -30,6 +29,8 @@ ActiveRecord::Schema.define(version: 20160110082409) do
   create_table "programmes", force: :cascade do |t|
     t.string   "programme_type"
     t.string   "name"
+    t.integer  "year"
+    t.integer  "semester"
     t.text     "description"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -49,6 +50,14 @@ ActiveRecord::Schema.define(version: 20160110082409) do
     t.boolean  "admin",           default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+  end
+
+  create_table "utility_fees", force: :cascade do |t|
+    t.string   "name"
+    t.float    "amount"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

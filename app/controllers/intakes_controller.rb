@@ -27,7 +27,7 @@ class IntakesController < ApplicationController
   end
 
   def edit
-    # @intake = Intake.find(params[:id])
+    @intake = Intake.find(params[:id])
   end
 
   def update
@@ -43,7 +43,6 @@ class IntakesController < ApplicationController
   private
 
     def intake_params
-      params.require(:intake).permit(:intake_code, :duration, :starting_date,
-      :local_student_fee, :international_student_fee)
+      params.require(:intake).permit(:intake_code, :starting_date, :local_student_fee, :international_student_fee)
     end
 end

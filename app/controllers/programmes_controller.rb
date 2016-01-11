@@ -49,7 +49,7 @@ class ProgrammesController < ApplicationController
   private
 
     def programme_params
-      params.require(:programme).permit(:programme_type, :name, :description)
+      params.require(:programme).permit(:programme_type, :name, :year, :semester, :description)
     end
 
     def logged_in_user

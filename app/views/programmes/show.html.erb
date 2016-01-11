@@ -14,6 +14,11 @@
           <td><b>Programme Type:</b></td>
 					<td><%= @programme.programme_type %></td>
 				</tr>
+        <tr>
+          <td><b>Programme Duration:</b></td>
+					<td><%= @programme.year %> Year(s) <br>
+          <%= @programme.semester %> Semester(s)</td>
+				</tr>
 				<tr>
           <td><b>Description:</b></td>
 					<td><%= @programme.description %></td>
@@ -25,6 +30,11 @@
             <% end %>
           </td>
         </tr>
+        <tr>
+          <td><b>Utility Fee(s):</b></td>
+					<td>
+          </td>
+        </tr>
 				<tr>
 					<td></td>
 					<td></td>
@@ -33,8 +43,9 @@
 			</h4>
 				<section class="center">
         <%= link_to "Add Intake", new_programme_intake_path(@programme), class: "btn btn-primary" %> &nbsp;
+        <%= link_to "Add Utility Fees", '#', class: "btn btn-primary" %> &nbsp;
 				<%= link_to "Edit", edit_programme_path(@programme), class: "btn btn-primary" %>  &nbsp;
-				<%= link_to "Back", dashboard_path, class: "btn btn-primary" %>
+				<%= link_to "Back", dashboard_path, class: "btn btn-default" %>
 			</section>
 		</div>
 	</div>

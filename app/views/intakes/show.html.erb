@@ -1,2 +1,37 @@
-<h1>Intakes#show</h1>
-<p>Find me in app/views/intakes/show.html.erb</p>
+<% provide(:title, @intake.intake_code) %>
+
+<div class="container">
+<h1>Intake Information:</h1>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+			<h4>
+			<table class="table noborder">
+        <tr>
+          <td class="no-repeat-header"><b>Intake Code:</b></td>
+          <td><%= @intake.intake_code %></td>
+				</tr>
+				<tr>
+          <td><b>Starting Date:</b></td>
+					<td><%= @intake.starting_date %></td>
+				</tr>
+				<tr>
+          <td><b>Local Student Fee:</b></td>
+					<td>RM&nbsp;<%= @intake.local_student_fee %></td>
+        </tr>
+        <tr>
+          <td><b>International Student Fee:</b></td>
+					<td>RM&nbsp;<%= @intake.international_student_fee %></td>
+        </tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			</h4>
+				<section class="center">
+				<%= link_to "Edit", edit_intake_path(@intake), class: "btn btn-primary" %>  &nbsp;
+				<%= link_to "Back", dashboard_path, class: "btn btn-primary" %>
+			</section>
+		</div>
+	</div>
+</div>

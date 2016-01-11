@@ -16,6 +16,12 @@
                     { include_blank: true,},
                     { class: 'form-control'}) %>
 
+        <%= f.label :year, "Duration (Number of Years)" %>
+        <%= f.text_field :year, :maxlength => 1, class: 'form-control' %>
+
+        <%= f.label :semester, "Duration (Number of Semesters)" %>
+        <%= f.text_field :semester, :maxlength => 1, class: 'form-control' %>
+
         <%= f.label :description %>
         <%= f.text_area :description, :size => "30x5", class: 'form-control' %>
 
@@ -25,7 +31,7 @@
         <br>
         <%= link_to "Back", dashboard_path, class: "btn btn-default" %>
         </section>
-        
+
       <% end %>
     </div>
   </div>
