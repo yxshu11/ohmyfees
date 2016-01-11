@@ -61,8 +61,8 @@ class StudentsController < ApplicationController
   private
     # Define the Strong Parameters (Params) for the student for security purpose in the views.
     def student_params
-      params.require(:student).permit(:name, :student_number, :contact_number, :intake, :email,
-                                      :password, :password_confirmation)
+      params.require(:student).permit(:name, :student_number, :contact_number, :intake, :international,
+                                      :email, :password, :password_confirmation)
     end
 
     # Before Filters for User access control
@@ -75,12 +75,14 @@ class StudentsController < ApplicationController
       end
     end
 
-    # Confirms the correct user.
+    # Confirms the correct user. (Staff is under exception)
     def correct_user
-      @student = Student.find(params[:id])
-      unless current_user?(@student)
-        flash[:danger] = "Access Denied."
-        redirect_to(root_path)
+      if current_user_type == "Student"
+        @student = Student.find(params[:id])
+        unless current_user?(@student)
+          flash[:danger] = "Access Denied."
+          redirect_to(root_path)
+        end
       end
     end
 

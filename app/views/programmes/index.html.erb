@@ -10,8 +10,8 @@
           <td class="no-repeat-header">ID</td>
           <td class="no-repeat-header">Programme Name</td>
           <td class="no-repeat-header">Type</td>
-          <!-- <td class="no-repeat-header">Duration</td> -->
           <td class="no-repeat-header">Description</td>
+          <td class="no-repeat-header">Action</td>
           <td class="no-repeat-header">Action</td>
         </tr>
         <% @programmes.each do |p| %>
@@ -20,6 +20,8 @@
           <td><%= p.name %></td>
           <td><%= p.programme_type%></td>
           <td><%= p.description %></td>
+          <td><%= link_to "View", p %>
+          </td>
           <td>
             <%= link_to "Delete", p, method: :delete,
                         data: { confirm: "Confirm to remove this programme?" } %>

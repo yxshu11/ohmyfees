@@ -17,7 +17,7 @@
         <%= f.label :contact_number %>
         <%= f.phone_field :contact_number, :maxlength => "11", class: 'form-control' %>
 
-        <%= f.label :email, "Email"%>
+        <%= f.label :email, "Email (@apu.edu.my)"%>
         <%= f.email_field :email, :readonly => true, class: 'form-control' %>
 
         <%= f.label :password %>
@@ -32,7 +32,7 @@
         <br>
         <%= link_to "Back", dashboard_path, class: "btn btn-default" %>
         </section>
-        
+
       <% end %>
     </div>
   </div>

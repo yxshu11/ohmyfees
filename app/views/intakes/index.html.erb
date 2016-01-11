@@ -1,0 +1,43 @@
+<% provide(:title, 'All Intakes') %>
+
+<div class="container">
+<h1>All Intakes</h1>
+  <div class="row">
+    <div class="col-md-12 well">
+    <%= will_paginate %>
+      <table class="table">
+        <tr>
+          <td class="no-repeat-header">ID</td>
+          <td class="no-repeat-header">Intake Code</td>
+          <td class="no-repeat-header">Duration</td>
+          <td class="no-repeat-header">Starting Date</td>
+          <td class="no-repeat-header">Local Student Fee</td>
+          <td class="no-repeat-header">International Student Fee</td>
+          <td class="no-repeat-header">Action</td>
+          <td class="no-repeat-header">Action</td>
+        </tr>
+        <% @intakes.each do |i| %>
+        <tr>
+          <td><%= i.id %></td>
+          <td><%= i.intake_code %></td>
+          <td><%= i.duration%></td>
+          <td><%= i.starting_date %></td>
+          <td><%= i.local_student_fee %></td>
+          <td><%= i.international_student_fee %></td>
+          <td><%= link_to "View", i %>
+          </td>
+          <td>
+            <%= link_to "Delete", i, method: :delete,
+                        data: { confirm: "Confirm to remove this intake?" } %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <%= will_paginate %>
+
+    <div class="center">
+      <%= link_to "Back", dashboard_path , class: "btn btn-primary" %>
+    </div>
+  </div>
+  </div>
+</div>

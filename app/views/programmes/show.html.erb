@@ -18,6 +18,13 @@
           <td><b>Description:</b></td>
 					<td><%= @programme.description %></td>
         </tr>
+        <tr>
+          <td><b>Intakes:</b></td>
+					<td><% @intakes.each do |i| %>
+            <%= link_to i.intake_code, i %><br>
+            <% end %>
+          </td>
+        </tr>
 				<tr>
 					<td></td>
 					<td></td>
@@ -25,6 +32,7 @@
 			</table>
 			</h4>
 				<section class="center">
+        <%= link_to "Add Intake", new_programme_intake_path(@programme), class: "btn btn-primary" %> &nbsp;
 				<%= link_to "Edit", edit_programme_path(@programme), class: "btn btn-primary" %>  &nbsp;
 				<%= link_to "Back", dashboard_path, class: "btn btn-primary" %>
 			</section>

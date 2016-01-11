@@ -17,6 +17,11 @@
         <%= f.label :intake %>
         <%= f.text_field :intake, class: 'form-control' %>
 
+        <%= f.label :international, "International Student?" %>
+        <%= f.select(:international, [['True',true], ['False',false]],
+                    { include_blank: true},
+                    { class: 'form-control'}) %>
+
         <%= f.label :contact_number %>
         <%= f.phone_field :contact_number, :maxlength => "11", class: 'form-control' %>
 

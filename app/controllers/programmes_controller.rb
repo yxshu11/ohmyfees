@@ -22,6 +22,8 @@ class ProgrammesController < ApplicationController
 
   def show
     @programme = Programme.find(params[:id])
+    select_programme @programme
+    @intakes = @programme.intakes.all
   end
 
   def edit

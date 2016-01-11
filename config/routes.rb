@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+
+
   root                                  'landing_pages#home'
 
   # Landing Pages Controller
@@ -26,8 +28,15 @@ Rails.application.routes.draw do
   get     'programme_registration'  =>    'programmes#new'
   get     'programmes'              =>    'programmes#index'
 
+  # Intake Controller
+  get     'intakes'                 =>    'intakes#index'
+
   # Resources
-  resources :programmes
+  resources :programmes do
+    resources :intakes
+  end
+
+  resources :intakes
   resources :students
   resources :staffs
 

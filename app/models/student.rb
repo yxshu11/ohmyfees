@@ -5,8 +5,10 @@ class Student < User
   validates :email, presence: true, length: { maximum: 25 },
             format: { with: VALID_EMAIL_REGEX },
             uniqueness:  {case_sensitive: false}
-  # The student instake code must be present with the maximum length of 15 chars
+  # The student intake code must be present with the maximum length of 15 chars
   validates :intake, presence: true, length: { maximum: 15 }
+  # The check whether the student is international student or not
+  validates :international, :inclusion => {:in => [true, false]}
   # The REGEX for the Student TP Number.
   VALID_TP_REGEX = /\ATP+[\d]{6}\z/i
   # Student number must be presented and the length not more than 8 and it is unique

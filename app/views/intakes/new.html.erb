@@ -1,0 +1,36 @@
+<% provide(:title, 'New Intake') %>
+
+<div class="container">
+<h1>Add New Intake</h1>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+      <%= form_for(@intake) do |f| %>
+
+        <%= render 'shared/error_messages', object: f.object %>
+
+        <%= f.label :intake_code %>
+        <%= f.text_field :intake_code, class: 'form-control' %>
+
+        <%= f.label :duration, "Duration (Number of Semesters)" %>
+        <%= f.text_field :duration, :maxlength => 1, class: 'form-control' %>
+
+        <%= f.label :starting_date %>
+        <%= f.date_field :starting_date, class: 'form-control' %>
+
+        <%= f.label :local_student_fee, "Malaysian Student Fees (RM)" %>
+        <%= f.text_field :local_student_fee, class: 'form-control' %>
+
+        <%= f.label :international_student_fee, "International Student Fees (RM)" %>
+        <%= f.text_field :international_student_fee, class: 'form-control' %>
+
+        <%= f.submit "Add", class: "btn btn-primary" %>
+
+        <section class="center">
+        <br>
+        <%= link_to "Back", dashboard_path, class: "btn btn-default" %>
+        </section>
+
+      <% end %>
+    </div>
+  </div>
+</div>

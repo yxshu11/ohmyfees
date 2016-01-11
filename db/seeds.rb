@@ -2,10 +2,11 @@ Student.create!(name: "Shu Yee Xen",
                 student_number: "TP028815",
                 email: "TP028815@mail.apu.edu.my",
                 intake: "UC3F1508SE",
+                international: False,
                 contact_number: "0123456789",
                 password: "111111",
                 password_confirmation: "111111",
-                admin: false)
+                admin: False)
 
 # Faker Gem generates dummy Student account in the database
 99.times do |n|
@@ -15,10 +16,12 @@ Student.create!(name: "Shu Yee Xen",
   intake = "UC3F1508IT"
   contact_number = "016123#{1000+(n+1)}"
   password = "password"
+  international = True
   Student.create!(name: name,
                   student_number: student_number,
                   email: email,
                   intake: intake,
+                  international: international,
                   contact_number: contact_number,
                   password: password,
                   password_confirmation: password,

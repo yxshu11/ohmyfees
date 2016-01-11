@@ -54,6 +54,7 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
     @current_user_type = nil
+    @selected_student = nil
   end
 
   # Friendly Forwarding
@@ -62,9 +63,30 @@ module SessionsHelper
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end
-  
+
   # Stores the URL trying to be accessed
   def store_location
     session[:forwarding_url] = request.url if request.get?
   end
+
+  # Stores the selected programme that the staff currently viewing
+  def select_programme(programme)
+    session[:programme_id] = programme.id
+  end
+
+  # Get the selected programme that the staff currently viewing
+  def selected_programme
+    @current_programme ||= Programme.find_by(id: session[:programme_id])
+  end
+
+  # Store the selected student that the staff currently viewing
+  def select_student(student)
+    session[:selected_student_id] = student.id
+  end
+
+  # Get the selected student that the staff currenly viweing
+  def selected_student
+    @selected_student ||= Student.find_by(id: session[:selected_studet_id])
+  end
+
 end

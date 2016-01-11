@@ -12,6 +12,7 @@
           <td class="no-repeat-header">Staff Number</td>
           <td class="no-repeat-header">Email</td>
           <td class="no-repeat-header">Contact Number</td>
+          <td class="no-repeat-header">Admin Account?</td>
           <td class="no-repeat-header">Action</td>
         </tr>
         <% @staffs.each do |s| %>
@@ -21,6 +22,7 @@
           <td><%= s.staff_number %></td>
           <td><%= s.email %></td>
           <td><%= s.contact_number %></td>
+          <td><%= s.admin.to_s.titleize %></td>
           <td>
             <%= link_to "Delete", s, method: :delete,
                         data: { confirm: "Comfirm to remove this staff?" } %>
@@ -31,7 +33,7 @@
       <%= will_paginate %>
 
     <div class="center">
-      <%= link_to "Back", dashboard_path, class: "btn btn-primary" %>
+      <%= link_to "Back", dashboard_path, class: "btn btn-default" %>
     </div>
   </div>
   </div>
