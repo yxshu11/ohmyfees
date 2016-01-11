@@ -1,6 +1,6 @@
 class ProgrammesController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-  before_action :staff_user_type, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  before_action :correct_user_type, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
   def index
     @programmes = Programme.paginate(page: params[:page])
@@ -60,7 +60,7 @@ class ProgrammesController < ApplicationController
       end
     end
 
-    def staff_user_type
+    def correct_user_type
       unless @current_user.type == "Staff"
         flash[:danger] = "Access Denied."
         redirect_to(root_path)

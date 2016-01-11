@@ -79,14 +79,14 @@ module SessionsHelper
     @current_programme ||= Programme.find_by(id: session[:programme_id])
   end
 
-  # Store the selected student that the staff currently viewing
-  def select_student(student)
-    session[:selected_student_id] = student.id
-  end
-
-  # Get the selected student that the staff currenly viweing
-  def selected_student
-    @selected_student ||= Student.find_by(id: session[:selected_studet_id])
-  end
+  # # Store the selected student that the staff currently viewing
+  # def select_student(student)
+  #   session[:selected_student_id] = student.id
+  # end
+  #
+  # # Get the selected student that the staff currenly viweing
+  # def selected_student
+  #   @selected_student ||= Student.find_by(id: session[:selected_studet_id])
+  # end
 
 end
