@@ -1,2 +1,45 @@
-<h1>StudentFees#show</h1>
-<p>Find me in app/views/student_fees/show.html.erb</p>
+<% provide(:title, @student_fee.name) %>
+
+<div class="container">
+<h1>Fees Information:</h1>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+			<h4>
+			<table class="table noborder">
+        <tr>
+          <td><b>Name:</b></td>
+          <td><%= @student_fee.name %></td>
+				</tr>
+				<tr>
+          <td><b>Description:</b></td>
+					<td><%= @student_fee.dscription %></td>
+				</tr>
+				<tr>
+          <td><b>Amount:</b></td>
+					<td>RM&nbsp;<%= @student_fee.amount %></td>
+        </tr>
+        <tr>
+          <td><b>Due Date:</b></td>
+					<td><%= @student_fee.due_date %></td>
+        </tr>
+        <tr>
+          <td><b>Outstanding:</b></td>
+					<td>#</td>
+        </tr>
+        <tr>
+          <td><b>Fine:</b></td>
+					<td>#</td>
+        </tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			</h4>
+				<section class="center">
+				<%= link_to "Pay", '#', class: "btn btn-primary" %>  &nbsp;
+				<%= link_to "Back", dashboard_path, class: "btn btn-default" %>
+			</section>
+		</div>
+	</div>
+</div>

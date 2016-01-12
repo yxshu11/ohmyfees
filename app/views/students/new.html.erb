@@ -15,7 +15,10 @@
         <%= f.text_field :student_number, class: 'form-control' %>
 
         <%= f.label :intake %>
-        <%= f.text_field :intake, class: 'form-control' %>
+        <%= f.collection_select :intake, Intake.all, :id, :intake_code,
+                              { include_blank: true},
+                              { class: 'form-control'} %>
+        <!-- <%= f.text_field :intake, class: 'form-control' %> -->
 
         <%= f.label :international, "International Student?" %>
         <%= f.select(:international, [['True',true], ['False',false]],

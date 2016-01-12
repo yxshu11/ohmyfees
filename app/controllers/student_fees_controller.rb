@@ -4,10 +4,10 @@ class StudentFeesController < ApplicationController
   end
 
   def show
-
+    @student_fee = StudentFee.find(params[:id])
   end
 
   def payment
-
+    # To be implemented.
   end
 end
