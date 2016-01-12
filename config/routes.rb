@@ -45,9 +45,13 @@ Rails.application.routes.draw do
     resources :intakes
   end
 
+  resources :students do
+    resources :student_fees
+  end
+
   resources :utility_fees
+  resources :student_fees
   resources :intakes
-  resources :students
   resources :staffs
 
 end

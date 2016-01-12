@@ -1,4 +1,7 @@
 class Student < User
+  # Define the relationship between Student and Student Fees
+  has_many :student_fees, foreign_key: 'user_id'
+
   # The REGEX for the email validation. Must be using APU email only
   VALID_EMAIL_REGEX = /\ATP+[\d]{6}+@mail+\.apu+\.edu+\.my+\z/i
   # Email of the student must be presented and the length not more than 25 char and it is unique

@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 20160112055229) do
   create_table "fines", force: :cascade do |t|
     t.string   "name"
     t.float    "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "student_fee_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "intakes", force: :cascade do |t|
@@ -34,8 +35,11 @@ ActiveRecord::Schema.define(version: 20160112055229) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.string   "paid_by"
+    t.integer  "student_fee_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "programmes", force: :cascade do |t|
@@ -53,6 +57,7 @@ ActiveRecord::Schema.define(version: 20160112055229) do
     t.float    "amount"
     t.date     "due_date"
     t.text     "description"
+    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

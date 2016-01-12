@@ -97,3 +97,26 @@ Programme.create!(name: "Diploma in Information & Communication Technology",
                   Students with opportunities for progression into advanced programmes of study of International standard in relevant areas.")
 
 # Generate Intakes
+Intake.create!(intake_code: "UC1F1601SE",
+               starting_date: DateTime.new(2016,1,13),
+               local_student_fee: 73700,
+               international_student_fee: 68400,
+               programme_id: 1)
+
+Intake.create!(intake_code: "UC1F1601IS",
+                starting_date: DateTime.new(2016,1,13),
+                local_student_fee: 73700,
+                international_student_fee: 68400,
+                programme_id: 2)
+
+Intake.create!(intake_code: "UCFF1601",
+                starting_date: DateTime.new(2016,1,13),
+                local_student_fee: 16700,
+                international_student_fee: 15900,
+                programme_id: 3)
+
+StudentFee.create!(name: "Library Deposit",
+                    amount: 400,
+                    due_date: DateTime.new(2016,2,13),
+                    description: "Librabry Deposit for the APU Library Usage.",
+                    user_id: 1)
