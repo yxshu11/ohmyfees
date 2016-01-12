@@ -1,2 +1,46 @@
-<h1>StudentFees#index</h1>
-<p>Find me in app/views/student_fees/index.html.erb</p>
+<% provide(:title, 'All Fees') %>
+
+<div class="container">
+<h1>All Fees</h1>
+  <div class="row">
+    <div class="col-md-12 well">
+    <%= will_paginate %>
+      <table class="table">
+        <tr>
+          <td class="no-repeat-header">ID</td>
+          <td class="no-repeat-header">Name</td>
+          <td class="no-repeat-header">Description</td>
+          <td class="no-repeat-header">Amount</td>
+          <td class="no-repeat-header">Due Date</td>
+          <td class="no-repeat-header">Outstanding</td>
+          <td class="no-repeat-header">Fine</td>
+          <td class="no-repeat-header">Action</td>
+          <td class="no-repeat-header">Action</td>
+        </tr>
+        <% if @student_fees.blank? %>
+          <tr class="center">
+            <td colspan="9"><br>There are no unpaid fees. </td>
+          </tr>
+        <% else %>
+          <% @student_fees.each do |sf| %>
+            <tr>
+              <td><%= sf.id %></td>
+              <td><%= sf.name %></td>
+              <td><%= sf.description %></td>
+              <td><%= sf.amount %></td>
+              <td><%= sf.due_date %></td>
+              <td> '#' </td>
+              <td><%= link_to "View", sf %></td>
+              <td><%= link_to "Pay", '#' %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
+      <%= will_paginate %>
+
+    <div class="center">
+      <%= link_to "Back", dashboard_path , class: "btn btn-default" %>
+    </div>
+  </div>
+  </div>
+</div>

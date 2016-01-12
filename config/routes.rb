@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'payments/index'
+
+  get 'payments/show'
+
   # Homepage
   root                                  'landing_pages#home'
 
@@ -11,7 +15,7 @@ Rails.application.routes.draw do
   get     'students'              =>    'students#index'
   get     'student_registration'  =>    'students#new'
 
-  get     'view_fees'             =>    'student_fees#index'
+  get     'student_fees'          =>    'student_fees#index'
   get     'payment'               =>    'student_fees#payment'
 
   # Staff Controller

@@ -24,49 +24,50 @@
 
     <hr>
 
-    <p>Fee Management</p>
-    <div class="row">
-      <div class="col-xs-6 col-sm-4 col-md-3">
-        <a href="#">
-          <div class="card">
-            <div class="header">
-              <span class="fa fa-dollar fa-3x" aria-hidden="true"></span>
+    <% if @current_user.type == "Student" %>
+      <p>Fee Management</p>
+      <div class="row">
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= student_fees_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-dollar fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                View Fees
+              </div>
             </div>
-            <div class="content">
-              View Fees
-            </div>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
 
-      <div class="col-xs-6 col-sm-4 col-md-3">
-        <a href="#">
-          <div class="card">
-            <div class="header">
-              <span class="fa fa-credit-card fa-3x" aria-hidden="true"></span>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="#">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-credit-card fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                Make Payments
+              </div>
             </div>
-            <div class="content">
-              Make Payments
-            </div>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
 
-      <div class="col-xs-6 col-sm-4 col-md-3">
-        <a href="#">
-          <div class="card">
-            <div class="header">
-              <span class="fa fa-history fa-3x" aria-hidden="true"></span>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="#">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-history fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">
+                View Payments
+              </div>
             </div>
-            <div class="content">
-              View Payments
-            </div>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
-    </div>
-
-    <hr>
+      <hr>
+    <% end %>
 
     <% if @current_user.type == "Staff" %>
       <p>Staff, Student and Fees Definition</p>
@@ -179,9 +180,10 @@
           </a>
         </div>
       </div>
+      <hr>
     <% end %>
 
-    <hr>
+
 
     <% if @current_user.type == "Staff" %>
       <p>Report and Statistic</p>
@@ -211,9 +213,8 @@
           </a>
         </div>
       </div>
+      <hr>
     <% end %>
-
-    <hr>
 
     <p>Profile Management</p>
     <div class="row">
