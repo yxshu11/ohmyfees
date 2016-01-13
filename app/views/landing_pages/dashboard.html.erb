@@ -2,16 +2,39 @@
 
 <div class="panel panel-default">
   <div class="panel-heading panel-heading-text">Dashboard</div>
-  <div class="panel-body center panel-body-prop">
+  <div class="panel-body panel-body-prop">
 
     <% if @current_user.type == "Student" %>
       <div class="row">
-        Display Unpaid Fees for Student
+        <div class="container well">
+          <table class="table">
+            <% if @student_fees.blank? %>
+              <tr class="center">
+                <td colspan="9"><br>There are no unpaid fees. </td>
+              </tr>
+            <% else %>
+              <p class="center"><b>Recent Fee Statements</b></p>
+              <tr>
+                <td class="no-repeat-header"><b>Name</b></td>
+                <td class="no-repeat-header"><b>Description</b></td>
+                <td class="no-repeat-header"><b>Due Date</b></td>
+                <td class="no-repeat-header"><b>Action</b></td>
+              </tr>
+              <% @student_fees.first(3).each do |sf| %>
+                <tr>
+                  <td><%= sf.name %></td>
+                  <td><%= sf.description %></td>
+                  <td><%= sf.due_date %></td>
+                  <td><%= link_to "View", sf %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </table>
+        </div>
       </div>
-      <br>
     <% elsif @current_user.type == "Staff" %>
-      Search Student for payment:<br><br>
-      <div class="row">
+      <p class="center"><b>Search Student for payment:</b></p><br><br>
+      <div class="row center">
         <div class="col-md-11">
           <input type="text" class="form-control" placeholder="Search">
         </div>
@@ -25,8 +48,8 @@
     <hr>
 
     <% if @current_user.type == "Student" %>
-      <p>Fee Management</p>
-      <div class="row">
+      <p><b>Fee Management</b></p>
+      <div class="row center">
         <div class="col-xs-6 col-sm-4 col-md-3">
           <a href="<%= student_fees_path %>">
             <div class="card">
@@ -34,7 +57,7 @@
                 <span class="fa fa-dollar fa-3x" aria-hidden="true"></span>
               </div>
               <div class="content">
-                View Fees
+                View Fees Statements
               </div>
             </div>
           </a>
@@ -70,8 +93,8 @@
     <% end %>
 
     <% if @current_user.type == "Staff" %>
-      <p>Staff, Student and Fees Definition</p>
-      <div class="row">
+      <p><b>Staff, Student and Fees Definition</b></p>
+      <div class="row center">
         <% if @current_user.admin? %> <!-- Authenticate User Access Level -->
           <div class="col-xs-6 col-sm-4 col-md-3">
             <a href="<%= staff_registration_path %>">
@@ -186,8 +209,8 @@
 
 
     <% if @current_user.type == "Staff" %>
-      <p>Report and Statistic</p>
-      <div class="row">
+      <p><b>Report and Statistic</b></p>
+      <div class="row center">
         <div class="col-xs-6 col-sm-4 col-md-3">
           <a href="#">
             <div class="card">
@@ -216,8 +239,8 @@
       <hr>
     <% end %>
 
-    <p>Profile Management</p>
-    <div class="row">
+    <p><b>Profile Management</b></p>
+    <div class="row center">
       <div class="col-xs-6 col-sm-4 col-md-3">
         <a href="<%= @current_user.type == "Student" ? student_path(@current_user) : staff_path(@current_user) %>">
           <div class="card">

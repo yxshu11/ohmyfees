@@ -7,15 +7,16 @@
     <%= will_paginate %>
       <table class="table">
         <tr>
-          <td class="no-repeat-header">ID</td>
-          <td class="no-repeat-header">Name</td>
-          <td class="no-repeat-header">Description</td>
-          <td class="no-repeat-header">Amount</td>
-          <td class="no-repeat-header">Due Date</td>
-          <td class="no-repeat-header">Outstanding</td>
-          <td class="no-repeat-header">Fine</td>
-          <td class="no-repeat-header">Action</td>
-          <td class="no-repeat-header">Action</td>
+          <td class="no-repeat-header"><b>ID</td>
+          <td class="no-repeat-header"><b>Name</td>
+          <td class="no-repeat-header"><b>Description</td>
+          <td class="no-repeat-header"><b>Amount</td>
+          <td class="no-repeat-header"><b>Due Date</td>
+          <td class="no-repeat-header"><b>Outstanding</td>
+          <td class="no-repeat-header"><b>Fine</td>
+          <td class="no-repeat-header"><b>Action</td>
+          <td class="no-repeat-header"><b>Action</td>
+          <td class="no-repeat-header"><b>Action</td>
         </tr>
         <% if @student_fees.blank? %>
           <tr class="center">
@@ -24,11 +25,17 @@
         <% else %>
           <% @student_fees.each do |sf| %>
             <tr>
-              <td><%= sf.id %></td>
+              <td>SF#<%= sf.id %></td>
               <td><%= sf.name %></td>
               <td><%= sf.description %></td>
               <td>RM&nbsp;<%= number_with_precision(sf.amount, :precision => 2) %></td>
               <td><%= sf.due_date %></td>
+              <td><% if sf.due_date < DateTime.now %>
+                  <%= sf.due_date class: "outstanding" %>
+                  <% else %>
+                  -
+                  <% end %>
+              </td>
               <td> - </td>
               <td><%= link_to "View", sf %></td>
               <td><%= link_to "Pay", '#' %></td>
