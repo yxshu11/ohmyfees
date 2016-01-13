@@ -136,3 +136,9 @@ Student.create!(name: "Shu Yee Xen",
                    password_confirmation: password,
                    admin: false)
 end
+
+StudentFee.create!(name: "Outstanding Fee (Testing)",
+                    amount: 500,
+                    due_date: DateTime.new(2016,1,10),
+                    description: "Testing the outstanding fees.",
+                    user_id: 7)

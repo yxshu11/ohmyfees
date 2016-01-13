@@ -31,7 +31,9 @@
               <td>RM&nbsp;<%= number_with_precision(sf.amount, :precision => 2) %></td>
               <td><%= sf.due_date %></td>
               <td><% if sf.due_date < DateTime.now %>
-                  <%= sf.due_date class: "outstanding" %>
+                  <div class="outstanding">
+                    RM&nbsp;<%= number_with_precision(sf.amount, :precision => 2) %>
+                  </div>
                   <% else %>
                   -
                   <% end %>
