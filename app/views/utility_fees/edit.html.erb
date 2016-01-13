@@ -14,6 +14,11 @@
         <%= f.label :amount, "Amount (RM)" %>
         <%= f.text_field :amount, class: 'form-control' %>
 
+        <%= f.label :repetitive_payment, "Repetitive Payment?" %>
+        <%= f.select(:repetitive_payment, [['True',true], ['False',false]],
+                    { include_blank: false},
+                    { :disabled => true, class: 'form-control'}) %>
+
         <%= f.label :description %>
         <%= f.text_area :description, :size => "30x5", class: 'form-control' %>
 

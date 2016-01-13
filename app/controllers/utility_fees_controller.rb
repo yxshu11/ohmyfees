@@ -47,7 +47,7 @@ class UtilityFeesController < ApplicationController
   private
 
     def fee_params
-      params.require(:utility_fee).permit(:name, :amount, :description)
+      params.require(:utility_fee).permit(:name, :amount, :repetitive_payment, :description)
     end
 
     def logged_in_user

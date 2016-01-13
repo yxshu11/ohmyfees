@@ -10,6 +10,7 @@
           <td class="no-repeat-header">ID</td>
           <td class="no-repeat-header">Name</td>
           <td class="no-repeat-header">Amount</td>
+          <td class="no-repeat-header">Repetitive Payment?</td>
           <td class="no-repeat-header">Description</td>
           <td class="no-repeat-header">Action</td>
           <td class="no-repeat-header">Action</td>
@@ -20,6 +21,7 @@
             <td><%= uf.id %></td>
             <td><%= uf.name %></td>
             <td>RM&nbsp;<%= uf.amount %></td>
+            <td><%= uf.repetitive_payment.to_s.titleize %></td>
             <td><%= uf.description %></td>
             <td><%= link_to "View", uf %></td>
             <td><%= link_to "Edit", edit_utility_fee_path(uf) %></td>

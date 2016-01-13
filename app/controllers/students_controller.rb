@@ -12,6 +12,7 @@ class StudentsController < ApplicationController
   # GET for student_registration
   def new
     @student = Student.new
+    @intakes = Intake.all 
   end
 
   # POST for student_registration
@@ -20,11 +21,6 @@ class StudentsController < ApplicationController
     if @student.save
       # Successfully Sign Up
       log_in @student
-      # Assign Fees to the student profile (Dummy For Now)
-      @student.student_fees.create!(name: "Library Deposit",
-                                  amount: 300,
-                                  due_date: DateTime.new(2016,2,13),
-                                  description: "Library Deposit for APU Library Usage")
       # Redirect student to the dashboard
       flash[:success] = "Sign Up Completed, Welcome to OHMYFEES!"
       redirect_to @student

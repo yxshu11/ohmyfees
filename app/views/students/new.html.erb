@@ -15,7 +15,7 @@
         <%= f.text_field :student_number, class: 'form-control' %>
 
         <%= f.label :intake %>
-        <%= f.collection_select :intake, Intake.all, :intake_code, :intake_code,
+        <%= f.collection_select :intake, @intakes, :intake_code, :intake_code,
                               { include_blank: true},
                               { class: 'form-control'} %>
         <!-- <%= f.text_field :intake, class: 'form-control' %> -->

@@ -14,6 +14,10 @@
           <td><b>Amount:</b></td>
 					<td>RM&nbsp;<%= @utility_fee.amount %></td>
 				</tr>
+        <tr>
+          <td><b>Repetitive Payment?:</b></td>
+					<td><%= @utility_fee.repetitive_payment.to_s.titleize %></td>
+				</tr>
 				<tr>
           <td><b>Description:</b></td>
 					<td><%= @utility_fee.description %></td>

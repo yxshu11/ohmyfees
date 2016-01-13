@@ -1,33 +1,3 @@
-Student.create!(name: "Shu Yee Xen",
-                student_number: "TP028815",
-                email: "TP028815@mail.apu.edu.my",
-                intake: "UC3F1508SE",
-                international: false,
-                contact_number: "0123456789",
-                password: "111111",
-                password_confirmation: "111111",
-                admin: false)
-
-# Faker Gem generates dummy Student account in the database
-99.times do |n|
-  name = Faker::Name.name
-  student_number = "TP#{100000+(n+1)}"
-  email = "TP#{100000+(n+1)}@mail.apu.edu.my"
-  intake = "UC3F1508IT"
-  contact_number = "016123#{1000+(n+1)}"
-  password = "password"
-  international = true
-  Student.create!(name: name,
-                  student_number: student_number,
-                  email: email,
-                  intake: intake,
-                  international: international,
-                  contact_number: contact_number,
-                  password: password,
-                  password_confirmation: password,
-                  admin: false)
-end
-
 # Generate Staff Account (Admin)
 Staff.create!(name: "John Testing",
               staff_number: "SA000238",
@@ -97,6 +67,12 @@ Programme.create!(name: "Diploma in Information & Communication Technology",
                   Students with opportunities for progression into advanced programmes of study of International standard in relevant areas.")
 
 # Generate Intakes
+Intake.create!(intake_code: "UCFF1601IT",
+                starting_date: DateTime.new(2016,1,13),
+                local_student_fee: 16700,
+                international_student_fee: 15900,
+                programme_id: 3)
+
 Intake.create!(intake_code: "UC1F1601SE",
                starting_date: DateTime.new(2016,1,13),
                local_student_fee: 73700,
@@ -109,14 +85,54 @@ Intake.create!(intake_code: "UC1F1601IS",
                 international_student_fee: 68400,
                 programme_id: 2)
 
-Intake.create!(intake_code: "UCFF1601",
-                starting_date: DateTime.new(2016,1,13),
-                local_student_fee: 16700,
-                international_student_fee: 15900,
-                programme_id: 3)
+# Generate Utility Fees
+UtilityFee.create!(name: "Registration Fee",
+                   amount: 300,
+                   repetitive_payment: false,
+                   description: "Student Registration fee for new comer.")
 
-StudentFee.create!(name: "Library Deposit",
-                    amount: 400,
-                    due_date: DateTime.new(2016,2,13),
-                    description: "Librabry Deposit for the APU Library Usage.",
-                    user_id: 1)
+UtilityFee.create!(name: "Student ID Card",
+                  amount: 30,
+                  repetitive_payment: true,
+                  description: "Fee for student ID card. NFC Chip built-in.")
+
+UtilityFee.create!(name: "Library Deposit",
+                   amount: 400,
+                   repetitive_payment: false,
+                   description: "Librabry Deposit for the APU Library Usage.")
+
+UtilityFee.create!(name: "Library Fee",
+                  amount: 100,
+                  repetitive_payment: true,
+                  description: "Librabry Fee for the APU Library Usage. Pay Yearly.")
+
+# Generate Student Accounts
+Student.create!(name: "Shu Yee Xen",
+                 student_number: "TP028815",
+                 email: "TP028815@mail.apu.edu.my",
+                 intake: "UC1F1601SE",
+                 international: false,
+                 contact_number: "0123456789",
+                 password: "111111",
+                 password_confirmation: "111111",
+                 admin: false)
+
+# Faker Gem generates dummy Student account in the database
+99.times do |n|
+   name = Faker::Name.name
+   student_number = "TP#{100000+(n+1)}"
+   email = "TP#{100000+(n+1)}@mail.apu.edu.my"
+   intake = "UCFF1601IT"
+   contact_number = "016123#{1000+(n+1)}"
+   password = "password"
+   international = true
+   Student.create!(name: name,
+                   student_number: student_number,
+                   email: email,
+                   intake: intake,
+                   international: international,
+                   contact_number: contact_number,
+                   password: password,
+                   password_confirmation: password,
+                   admin: false)
+end

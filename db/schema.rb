@@ -82,8 +82,9 @@ ActiveRecord::Schema.define(version: 20160112055229) do
     t.string   "name"
     t.float    "amount"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "repetitive_payment"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
 end

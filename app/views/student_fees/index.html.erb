@@ -27,11 +27,12 @@
               <td><%= sf.id %></td>
               <td><%= sf.name %></td>
               <td><%= sf.description %></td>
-              <td>RM&nbsp;<%= sf.amount %></td>
+              <td>RM&nbsp;<%= number_with_precision(sf.amount, :precision => 2) %></td>
               <td><%= sf.due_date %></td>
-              <td> '#' </td>
+              <td> - </td>
               <td><%= link_to "View", sf %></td>
               <td><%= link_to "Pay", '#' %></td>
+              <td><%= check_box_tag :name, value = "1", checked = false, options = { :disabled => true }%></td>
             </tr>
           <% end %>
         <% end %>

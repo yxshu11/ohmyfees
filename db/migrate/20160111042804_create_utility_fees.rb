@@ -4,7 +4,8 @@ class CreateUtilityFees < ActiveRecord::Migration
       t.string  :name
       t.float   :amount
       t.text    :description
-      
+      t.boolean :repetitive_payment
+
       t.timestamps null: false
     end
   end
