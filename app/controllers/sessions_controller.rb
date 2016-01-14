@@ -8,10 +8,18 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:session][:email].downcase)
     if @user && @user.authenticate(params[:session][:password])
       # Log In and Handle something
-      flash[:success] = "Log In Successfully!"
-      log_in @user
-      params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-      redirect_back_or dashboard_path
+      if @user.type == "Staff" || @user.activated?
+        # If the user is activated!
+        flash[:success] = "Log In Successfully!"
+        log_in @user
+        params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
+        redirect_back_or dashboard_path
+      else
+        message = "Account not activated. "
+        message += "Check your email for the activation link."
+        flash[:warning] = message
+        redirect_to root_path
+      end
     else
       # Create an Error Message
       flash.now[:danger] = 'Invalid email/password combination.'

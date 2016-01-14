@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'payments/index'
-
-  get 'payments/show'
 
   # Homepage
   root                                  'landing_pages#home'
@@ -17,6 +14,9 @@ Rails.application.routes.draw do
 
   get     'student_fees'          =>    'student_fees#index'
   get     'payment'               =>    'student_fees#payment'
+
+  get     'payments'              =>    'payments#index'
+
 
   # Staff Controller
 
@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     resources :student_fees
   end
 
+  resources :account_activations
   resources :utility_fees
   resources :student_fees
   resources :intakes

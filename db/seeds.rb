@@ -115,7 +115,9 @@ Student.create!(name: "Shu Yee Xen",
                  contact_number: "0123456789",
                  password: "111111",
                  password_confirmation: "111111",
-                 admin: false)
+                 admin: false,
+                 activated: true,
+                 activated_at: Time.zone.now)
 
 # Faker Gem generates dummy Student account in the database
 99.times do |n|
@@ -134,7 +136,9 @@ Student.create!(name: "Shu Yee Xen",
                    contact_number: contact_number,
                    password: password,
                    password_confirmation: password,
-                   admin: false)
+                   admin: false,
+                   activated: true,
+                   activated_at: Time.zone.now)
 end
 
 StudentFee.create!(name: "Outstanding Fee (Testing)",

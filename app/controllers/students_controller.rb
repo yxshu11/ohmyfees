@@ -12,7 +12,7 @@ class StudentsController < ApplicationController
   # GET for student_registration
   def new
     @student = Student.new
-    @intakes = Intake.all 
+    @intakes = Intake.all
   end
 
   # POST for student_registration
@@ -20,10 +20,12 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
     if @student.save
       # Successfully Sign Up
-      log_in @student
+      @student.send_activation_mail
+      flash[:info] = "Please check your email to activate your account."
+      # log_in @student
+      #flash[:success] = "Sign Up Completed, Welcome to OHMYFEES!"
       # Redirect student to the dashboard
-      flash[:success] = "Sign Up Completed, Welcome to OHMYFEES!"
-      redirect_to @student
+      redirect_to root_path
     else
       # Handle Unsuccessful Sign Up
       render 'new'

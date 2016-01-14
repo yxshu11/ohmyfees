@@ -36,7 +36,9 @@ ActiveRecord::Schema.define(version: 20160112055229) do
 
   create_table "payments", force: :cascade do |t|
     t.string   "name"
+    t.float    "amount"
     t.string   "paid_by"
+    t.string   "paying_method"
     t.integer  "student_fee_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -73,9 +75,12 @@ ActiveRecord::Schema.define(version: 20160112055229) do
     t.string   "type"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.boolean  "admin",           default: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.boolean  "admin",             default: false
+    t.string   "activation_digest"
+    t.boolean  "activated",         default: false
+    t.datetime "activated_at"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "utility_fees", force: :cascade do |t|

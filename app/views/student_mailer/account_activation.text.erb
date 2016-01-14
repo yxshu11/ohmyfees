@@ -1,0 +1,9 @@
+Good day, <%= @student.name %>!
+
+Welcome to the OHMYFEES, your hassle-free online fees management system.
+
+Click on the link below to activate your account:
+
+<%= edit_account_activation_url(@student.activation_token, email: @student.email) %>
+
+Thank you.
