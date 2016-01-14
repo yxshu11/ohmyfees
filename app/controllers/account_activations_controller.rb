@@ -2,7 +2,7 @@ class AccountActivationsController < ApplicationController
 
   def edit
     student = Student.find_by(email: params[:email])
-    if student && !student.activated? && user.authenticated?(:activation, params[:id])
+    if student && !student.activated? && student.authenticated?(:activation, params[:id])
       student.activate
       log_in student
       flash[:success] = "Account Activated!"

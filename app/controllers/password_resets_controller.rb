@@ -43,7 +43,7 @@ class PasswordResetsController < ApplicationController
     end
 
     def password_blank?
-      params[:student][:password].blank?
+      params[:user][:password].blank?
     end
 
     # Before filter
@@ -53,13 +53,15 @@ class PasswordResetsController < ApplicationController
     end
 
     def valid_user
-      unless (@student && @student.activated? && @user.authenticated?(:reset, params[:id]))
+      # Staff no need to activate their account.
+      unless (@user && (@user.type == "Staff" || @user.activated?) &&
+              @user.authenticated?(:reset, params[:id]))
         redirect_to root_path
       end
     end
 
     def check_expiration
-      if @student.password_reset_expired?
+      if @user.password_reset_expired?
         flash[:danger] = "Password reset has expired."
         redirect_to new_password_reset_url
       end
