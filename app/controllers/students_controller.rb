@@ -13,18 +13,19 @@ class StudentsController < ApplicationController
   def new
     @student = Student.new
     @intakes = Intake.all
+    # (Cause error for now)
   end
 
   # POST for student_registration
   def create
     @student = Student.new(student_params)
+    @intakes = Intake.all
     if @student.save
-      # Successfully Sign Up
+      # Student account is create, but activation needed.
       @student.send_activation_mail
+      # Notify the student about the activation.
       flash[:info] = "One last step, please check your email to activate your account."
-      # log_in @student
-      # flash[:success] = "Sign Up Completed, Welcome to OHMYFEES!"
-      # Redirect student to the dashboard
+      # Meanwhile, redirect the student back to the homepage.
       redirect_to root_path
     else
       # Handle Unsuccessful Sign Up

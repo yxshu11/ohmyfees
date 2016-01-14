@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   # Accessible Attributes
-  attr_accessor :remember_token
-
+  attr_accessor :remember_token, :activation_token, :reset_token
   # Convert the email addresses into small capital letter before saving into database.
-  before_save { self.email = email.downcase }
+  before_save :downcase_email
+
+
   # Name of the User must be presented and the length not more than 100 chars
   validates :name,  presence: true, length: { maximum: 100 }
   # Phone of the user must be presented and the length not more than 11 chars
@@ -43,4 +44,28 @@ class User < ActiveRecord::Base
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest, User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  def send_password_reset_email
+    if self.type == "Staff"
+      StaffMailer.password_reset(self).deliver_now
+    elsif self.type == "Student"
+      StudentMailer.password_reset(self).deliver_now
+    end
+  end
+
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
+  private
+
+    def downcase_email
+      self.email = email.downcase
+    end
 end

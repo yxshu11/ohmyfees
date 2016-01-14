@@ -10,8 +10,8 @@ class SessionsController < ApplicationController
       # Log In and Handle something
       if @user.type == "Staff" || @user.activated?
         # If the user is activated!
-        flash[:success] = "Log In Successfully!"
         log_in @user
+        flash[:success] = "Log In Successfully!"
         params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
         redirect_back_or dashboard_path
       else
