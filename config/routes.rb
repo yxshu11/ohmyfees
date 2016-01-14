@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # Homepage
   root                                  'landing_pages#home'
 
@@ -39,6 +38,7 @@ Rails.application.routes.draw do
   get     'utility_fee_registration' =>    'utility_fees#new'
   get     'utility_fees'             =>    'utility_fees#index'
 
+  get     'password_resets/edit'
 
   # Resources
   resources :programmes do
@@ -49,7 +49,8 @@ Rails.application.routes.draw do
     resources :student_fees
   end
 
-  resources :account_activations
+  resources :account_activations, only: [:edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
   resources :utility_fees
   resources :student_fees
   resources :intakes

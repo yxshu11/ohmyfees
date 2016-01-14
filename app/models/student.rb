@@ -2,7 +2,7 @@ class Student < User
   # Define the relationship between Student and Student Fees
   has_many :student_fees, foreign_key: 'user_id'
 
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
   before_create :create_activation_digest
 
   after_create :assign_fee
@@ -36,6 +36,20 @@ class Student < User
 
   def send_activation_mail
     StudentMailer.account_activation(self).deliver_now
+  end
+
+  def create_reset_digest
+    self.reset_token = Student.new_token
+    update_attribute(:reset_digest, Student.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  def send_password_reset_email
+    StudentMailer.password_reset(self).deliver_now
+  end
+
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
   end
 
   private

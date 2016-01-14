@@ -8,7 +8,7 @@ class StudentMailer < ApplicationMailer
   def account_activation(student)
     @student = student
 
-    mail to: @student.email, subject: "OHMYFEES Account Activation"
+    mail to: @student.email, subject: "Account Activation | OHMYFEES"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -16,9 +16,9 @@ class StudentMailer < ApplicationMailer
   #
   #   en.student_mailer.password_reset.subject
   #
-  def password_reset
-    @greeting = "Hi"
+  def password_reset(student)
+    @student = student
 
-    mail to: "to@example.org"
+    mail to: @student.email, subject: "Password Reset | OHMYFEES"
   end
 end
