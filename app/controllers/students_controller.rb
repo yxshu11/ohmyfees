@@ -21,9 +21,9 @@ class StudentsController < ApplicationController
     if @student.save
       # Successfully Sign Up
       @student.send_activation_mail
-      flash[:info] = "Please check your email to activate your account."
+      flash[:info] = "One last step, please check your email to activate your account."
       # log_in @student
-      #flash[:success] = "Sign Up Completed, Welcome to OHMYFEES!"
+      # flash[:success] = "Sign Up Completed, Welcome to OHMYFEES!"
       # Redirect student to the dashboard
       redirect_to root_path
     else
