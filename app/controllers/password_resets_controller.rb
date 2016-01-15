@@ -8,7 +8,14 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:password_reset][:email].downcase)
+    user = User.find_by(email: params[:password_reset][:email].downcase)
+
+    if user.type == "Student"
+      @user = Student.find(user.id)
+    elsif user.type == "Staff"
+      @user = Staff.find(user.id)
+    end
+
     if @user
       @user.create_reset_digest
       @user.send_password_reset_email
@@ -27,10 +34,10 @@ class PasswordResetsController < ApplicationController
     if password_blank?
       flash.now[:danger] = "Password can't be blank."
       render 'edit'
-    elsif @user.update_attribute(user_params)
+    elsif @user.update_attributes(user_params)
       log_in @user
       flash[:success] = "Password has been reset."
-      redirected_to @user
+      redirect_to @user
     else
       render 'edit'
     end
@@ -39,17 +46,32 @@ class PasswordResetsController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:password, :password_confirmation)
+      if @user.type == "Student"
+        params.require(:student).permit(:password, :password_confirmation)
+      elsif @user.type == "Staff"
+        params.require(:staff).permit(:password, :password_confirmation)
+      end
+
     end
 
     def password_blank?
-      params[:user][:password].blank?
+      if @user.type == "Student"
+        params[:student][:password].blank?
+      elsif @user.type == "Staff"
+        params[:staff][:password].blank?
+      end
     end
 
     # Before filter
 
     def get_user
-      @user = User.find_by(email: params[:email])
+      user = User.find_by(email: params[:email])
+
+      if user.type == "Student"
+        @user = Student.find(user.id)
+      elsif user.type == "Staff"
+        @user = Staff.find(user.id)
+      end
     end
 
     def valid_user
