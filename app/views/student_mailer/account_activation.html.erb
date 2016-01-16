@@ -1,12 +1,18 @@
 <div class="container-fluid">
   <div class="row center">
     <div class="col-md-12">
-      <h1>OHMYFEES</h1>
-      <p>Good day, <%= @student.name %>!</p>
-      <p>Welcome to the OHMYFEES, your hassle-free online fees management system.</p>
-      <p>Click on the link below to activate your account: </p>
-      <%= link_to "Activate", edit_account_activation_url(@student.activation_token, email: @student.email) %>
-      <p>Thank you.</p>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Account Activation | OHMYFEES</h3>
+        </div>
+        <div class="panel-body">
+          <p>Good day, <%= @student.name %>!</p>
+          <p>Welcome to the OHMYFEES, your hassle-free online fees management system.</p>
+          <p>Click on the link below to activate your account: </p>
+          <%= link_to "Activate", edit_account_activation_url(@student.activation_token, email: @student.email) %>
+          <p>Thank you.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
