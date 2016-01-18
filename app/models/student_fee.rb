@@ -6,4 +6,11 @@ class StudentFee < ActiveRecord::Base
 
   # Arrange the model data according to he due date in ascending order.
   default_scope -> { order(due_date: :asc) }
+
+  def check_fees
+    # Check the outstanding fees for the students.
+    self.all.each do |sf|
+      
+    end
+  end
 end
