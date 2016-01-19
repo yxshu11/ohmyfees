@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row center">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Due Payment | OHMYFEES</h3>
+            </div>
+            <div class="panel-body">
+              <p>Good day, <b><%= @student.name %></b>&nbsp;!</p>
+              <p>Kindly to inform that, the below fee statement is due soon:</p>
+              <p>Name: <%= @fee_details.name %></p>
+              <p>Description: <%= @fee_details.description %></p>
+              <p>Amount: <%= @fee_details.amount %></p>
+              <p>Due on: <%= @fee_details.due_date %></p>
+              <p>Please make the payment online using OHMYFEES or pay in the cashier counter as soon as possible
+                to avoid the outstanding fine.</p>
+              <p>Thank you.</p>
+              <p class="small">By OHMYFEES. This is computer generated email, do not reply.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
