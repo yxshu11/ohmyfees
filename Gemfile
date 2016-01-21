@@ -23,12 +23,15 @@ gem 'sidekiq'
 
 # Figaro Gem
 gem 'figaro'
+
 # Chart and Table Gems
 gem 'googlecharts'
 gem 'chartkick'
 gem 'dateslices'
 gem 'table-for'
-# Paypal Gem
+
+# Payment Gateway Gem
+gem 'activemerchant'
 gem 'paypal-sdk-rest'
 
 group :development, :test do
