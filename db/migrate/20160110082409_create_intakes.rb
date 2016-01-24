@@ -5,7 +5,7 @@ class CreateIntakes < ActiveRecord::Migration
       t.date    :starting_date
       t.float   :local_student_fee
       t.float   :international_student_fee
-      t.integer :programme_id
+      t.integer :programme_id, index: true
 
       t.timestamps null: false
     end

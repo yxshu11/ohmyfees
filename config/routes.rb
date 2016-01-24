@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   get     'student_registration'  =>    'students#new'
 
   get     'student_fees'          =>    'student_fees#index'
-  get     'payment'               =>    'student_fees#payment'
 
-  get     'payments'              =>    'payments#index'
+  # get     'pay'                   =>    'payments#new'
+  get     'history'               =>    'payments#index'
 
 
   # Staff Controller
@@ -46,13 +46,17 @@ Rails.application.routes.draw do
   end
 
   resources :students do
-    resources :student_fees
+    resources :student_fees do
+      resources :payments
+      resources :fines
+    end
   end
 
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :utility_fees
   resources :student_fees
+  resources :payments
   resources :intakes
   resources :staffs
 

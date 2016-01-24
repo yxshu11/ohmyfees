@@ -5,7 +5,7 @@ class CreatePayments < ActiveRecord::Migration
       t.float   :amount
       t.string  :paid_by
       t.string  :paying_method
-      t.integer :student_fee_id
+      t.integer :student_fee_id, index: true
 
       t.timestamps null: false
     end

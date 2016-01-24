@@ -20,8 +20,8 @@
           <td><%= i.id %></td>
           <td><%= i.intake_code %></td>
           <td><%= i.starting_date %></td>
-          <td><%= i.local_student_fee %></td>
-          <td><%= i.international_student_fee %></td>
+          <td>RM&nbsp;<%= number_with_precision(i.local_student_fee, :precision => 2) %></td>
+          <td>RM&nbsp;<%= number_with_precision(i.international_student_fee, :precision => 2) %></td>
           <td><%= link_to "View", i %>
           </td>
           <td>

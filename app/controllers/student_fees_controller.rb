@@ -20,7 +20,11 @@ class StudentFeesController < ApplicationController
     end
   end
 
-  def payment
-    # To be implemented.
-  end
+  # def pay
+  #   # To be implemented.
+  #   if current_user_type == "Student"
+  #     # Display the fees that belong only the to the signed in student
+  #     @student_fees = current_user.student_fees.find(params[:id])
+  #   end
+  # end
 end

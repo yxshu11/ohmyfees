@@ -1,6 +1,8 @@
 class Student < User
   # Define the relationship between Student and Student Fees
   has_many :student_fees, foreign_key: 'user_id'
+  has_many :payments, through: :student_fees
+  has_many :fines, through: :student_fees
 
   # Before create the student account, create the account activation token for the student for account activation purpose.
   before_create :create_activation_digest

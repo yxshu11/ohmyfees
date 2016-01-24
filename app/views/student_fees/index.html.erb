@@ -16,7 +16,7 @@
           <td class="no-repeat-header"><b>Fine</td>
           <td class="no-repeat-header"><b>Action</td>
           <td class="no-repeat-header"><b>Action</td>
-          <td class="no-repeat-header"><b>Action</td>
+          <!-- <td class="no-repeat-header"><b>Action</td> -->
         </tr>
         <% if @student_fees.blank? %>
           <tr class="center">
@@ -40,8 +40,8 @@
               </td>
               <td> - </td>
               <td><%= link_to "View", sf %></td>
-              <td><%= link_to "Pay", '#' %></td>
-              <td><%= check_box_tag :name, value = "1", checked = false, options = { :disabled => true }%></td>
+              <td><%= link_to "Pay", new_student_student_fee_payment_path(current_user,sf) %></td>
+              <!-- <td><%= check_box_tag :name, value = "1", checked = false, options = { :disabled => true }%></td> -->
             </tr>
           <% end %>
         <% end %>
