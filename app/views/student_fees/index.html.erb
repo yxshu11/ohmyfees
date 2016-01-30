@@ -8,9 +8,9 @@
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#recent" aria-controls="recent" role="tab" data-toggle="tab">Recent Fees</a></li>
-          <li role="presentation"><a href="#outstanding" aria-controls="outstanding" role="tab" data-toggle="tab">Outstanding Fees</a></li>
-          <li role="presentation"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All Fees</a></li>
+          <li role="presentation" class="active"><a href="#recent" aria-controls="recent" role="tab" data-toggle="tab">Recent</a></li>
+          <li role="presentation"><a href="#outstanding" aria-controls="outstanding" role="tab" data-toggle="tab">Outstanding</a></li>
+          <li role="presentation"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -111,48 +111,51 @@
 
           <div role="tabpanel" class="tab-pane" id="all">
             <%= will_paginate %>
-              <table class="table">
-                <tr>
-                  <td class="no-repeat-header"><b>ID</td>
-                  <td class="no-repeat-header"><b>Name</td>
-                  <td class="no-repeat-header"><b>Description</td>
-                  <td class="no-repeat-header"><b>Amount</td>
-                  <td class="no-repeat-header"><b>Due Date</td>
-                  <td class="no-repeat-header"><b>Outstanding</td>
-                  <td class="no-repeat-header"><b>Fine</td>
-                  <td class="no-repeat-header"><b>Action</td>
-                  <td class="no-repeat-header"><b>Action</td>
-                  <!-- <td class="no-repeat-header"><b>Action</td> -->
-                </tr>
-                <% if @student_fees.blank? %>
-                  <tr class="center">
-                    <td colspan="9"><br>There are no unpaid fees. </td>
+              <table class="table table-hover tablesaw tabler-tablesaw-stack" data-tablesaw-mode="stack">
+                <thead>
+                  <tr>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">ID</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Name</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Description</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Amount</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Due Date</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="5">Outstanding</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="6">Fine</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
                   </tr>
-                <% else %>
-                  <% @student_fees.each do |sf| %>
-                    <tr>
-                      <td>SF#<%= sf.id %></td>
-                      <td><%= sf.name %></td>
-                      <td><%= sf.description %></td>
-                      <td>RM&nbsp;<%= number_with_precision(sf.amount, :precision => 2) %></td>
-                      <td><%= sf.due_date %></td>
-                      <td><% if sf.due_date < DateTime.now %>
-                          <div class="outstanding">
-                            RM&nbsp;<%= number_with_precision(sf.amount, :precision => 2) %>
-                          </div>
-                          <% else %>
-                          -
-                          <% end %>
+                </thead>
+                <tbody>
+                  <% if @student_fees.blank? %>
+                    <tr class="center">
+                      <td colspan="9"><br>There are no current outstanding fees. </td>
+                    </tr>
+                  <% else %>
+                    <% @student_fees.each do |sf| %>
+                      <tr>
+                        <td>SF#<%= sf.id %></td>
+                        <td><%= sf.name %></td>
+                        <td><%= sf.description %></td>
+                        <td>RM&nbsp;<%= number_with_precision(sf.amount, :precision => 2) %></td>
+                        <td><%= sf.due_date %></td>
+                        <td><% if sf.due_date < DateTime.now %>
+                            <div class="outstanding">
+                              RM&nbsp;<%= number_with_precision(sf.amount, :precision => 2) %>
+                            </div>
+                            <% else %>
+                                -
+                            <% end %>
                       </td>
                       <td> - </td>
                       <td><%= link_to "View", sf %></td>
                       <td><%= link_to "Pay", new_student_student_fee_payment_path(current_user,sf) %></td>
                       <!-- <td><%= check_box_tag :name, value = "1", checked = false, options = { :disabled => true }%></td> -->
                     </tr>
+                    <% end %>
                   <% end %>
-                <% end %>
+                </tbody>
               </table>
-              <%= will_paginate %>
+            <%= will_paginate %>
           </div>
         </div>
 
