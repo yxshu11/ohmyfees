@@ -6,28 +6,32 @@
 
     <% if @current_user.type == "Student" %>
       <div class="row">
-        <div class="container well">
+        <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 well">
           <table class="table">
             <% if @student_fees.blank? %>
               <tr class="center">
                 <td colspan="9"><br>There are no unpaid fees. </td>
               </tr>
             <% else %>
-              <p class="center"><b>Recent Fee Statements</b></p>
-              <tr>
-                <td class="no-repeat-header"><b>Name</b></td>
-                <td class="no-repeat-header"><b>Description</b></td>
-                <td class="no-repeat-header"><b>Due Date</b></td>
-                <td class="no-repeat-header"><b>Action</b></td>
-              </tr>
-              <% @student_fees.first(3).each do |sf| %>
-                <tr>
-                  <td><%= sf.name %></td>
-                  <td><%= sf.description %></td>
-                  <td><%= sf.due_date %></td>
-                  <td><%= link_to "View", sf %></td>
-                </tr>
-              <% end %>
+              <h4 class="center">Recent Fee Statements</h4>
+              <table class="table table-striped tablesaw tabler-tablesaw-stack" data-tablesaw-mode="stack">
+                <thead>
+                  <tr>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">Name</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Description</th>
+                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Due Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @student_fees.first(3).each do |sf| %>
+                    <tr>
+                      <td><%= link_to sf.name, sf %></td>
+                      <td><%= sf.description %></td>
+                      <td><%= sf.due_date %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
             <% end %>
           </table>
         </div>
@@ -56,9 +60,7 @@
               <div class="header">
                 <span class="fa fa-dollar fa-3x" aria-hidden="true"></span>
               </div>
-              <div class="content">
-                View Fees Statements
-              </div>
+              <div class="content">Fees Statements</div>
             </div>
           </a>
         </div>
@@ -69,9 +71,7 @@
               <div class="header">
                 <span class="fa fa-credit-card fa-3x" aria-hidden="true"></span>
               </div>
-              <div class="content">
-                Make Payments
-              </div>
+              <div class="content">Make Payments</div>
             </div>
           </a>
         </div>
@@ -82,9 +82,7 @@
               <div class="header">
                 <span class="fa fa-history fa-3x" aria-hidden="true"></span>
               </div>
-              <div class="content">
-                View Payments
-              </div>
+              <div class="content">Payment History</div>
             </div>
           </a>
         </div>
@@ -102,9 +100,7 @@
                 <div class="header">
                   <span class="fa fa-plus fa-3x" aria-hidden="true"></span>
                 </div>
-                <div class="content">
-                  Add Staff
-                </div>
+                <div class="content">Add Staff</div>
               </div>
             </a>
           </div>
@@ -117,9 +113,7 @@
                 <div class="header">
                   <span class="fa fa-user fa-3x" aria-hidden="true"></span>
                 </div>
-                <div class="content">
-                  View Staffs
-                </div>
+                <div class="content">View Staffs</div>
               </div>
             </a>
           </div>
@@ -131,9 +125,7 @@
               <div class="header">
                 <span class="fa fa-plus fa-3x" aria-hidden="true"></span>
               </div>
-              <div class="content">
-                Add Programme
-              </div>
+              <div class="content">Add Programme</div>
             </div>
           </a>
         </div>
@@ -144,9 +136,7 @@
               <div class="header">
                 <span class="fa fa-book fa-3x" aria-hidden="true"></span>
               </div>
-              <div class="content">
-                View Programmes
-              </div>
+              <div class="content">View Programmes</div>
             </div>
           </a>
         </div>
@@ -157,9 +147,7 @@
               <div class="header">
                 <span class="fa fa-plus fa-3x" aria-hidden="true"></span>
               </div>
-              <div class="content">
-                Add Utility Fees
-              </div>
+              <div class="content">Add Utility Fees</div>
             </div>
           </a>
         </div>
@@ -170,9 +158,7 @@
               <div class="header">
                 <span class="fa fa-wrench fa-3x" aria-hidden="true"></span>
               </div>
-              <div class="content">
-                View Utility Fees
-              </div>
+              <div class="content">View Utility Fees</div>
             </div>
           </a>
         </div>
@@ -183,9 +169,7 @@
               <div class="header">
                 <span class="fa fa-calendar fa-3x" aria-hidden="true"></span>
               </div>
-              <div class="content">
-                View Intakes
-              </div>
+              <div class="content">View Intakes</div>
             </div>
           </a>
         </div>
@@ -196,9 +180,7 @@
               <div class="header">
                 <span class="fa fa-graduation-cap fa-3x" aria-hidden="true"></span>
               </div>
-              <div class="content">
-                View Students
-              </div>
+              <div class="content">View Students</div>
             </div>
           </a>
         </div>
@@ -217,9 +199,7 @@
               <div class="header">
                 <span class="fa fa-file-pdf-o fa-3x" aria-hidden="true"></span>
               </div>
-              <div class="content">
-                Report
-              </div>
+              <div class="content">Report</div>
             </div>
           </a>
         </div>
@@ -229,9 +209,7 @@
               <div class="header">
                 <span class="fa fa-bar-chart fa-3x" aria-hidden="true"></span>
               </div>
-              <div class="content">
-                Statistic
-              </div>
+              <div class="content">Statistic</div>
             </div>
           </a>
         </div>
@@ -247,9 +225,7 @@
             <div class="header">
               <span class="fa fa-cog fa-3x" aria-hidden="true"></span>
             </div>
-            <div class="content">
-              View Profile
-            </div>
+            <div class="content">View Profile</div>
           </div>
         </a>
       </div>

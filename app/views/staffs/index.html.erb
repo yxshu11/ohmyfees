@@ -5,32 +5,36 @@
   <div class="row">
     <div class="col-md-12 well">
     <%= will_paginate %>
-      <table class="table">
-        <tr>
-          <td class="no-repeat-header">ID</td>
-          <td class="no-repeat-header">Name</td>
-          <td class="no-repeat-header">Staff Number</td>
-          <td class="no-repeat-header">Email</td>
-          <td class="no-repeat-header">Contact Number</td>
-          <td class="no-repeat-header">Admin Account?</td>
-          <td class="no-repeat-header">Action</td>
-        </tr>
-        <% @staffs.each do |s| %>
-        <tr>
-          <td><%= s.id %></td>
-          <td><%= s.name %></td>
-          <td><%= s.staff_number %></td>
-          <td><%= s.email %></td>
-          <td><%= s.contact_number %></td>
-          <td><%= s.admin.to_s.titleize %></td>
-          <td>
-            <%= link_to "Delete", s, method: :delete,
-                        data: { confirm: "Comfirm to remove this staff?" } %>
-          </td>
-        </tr>
-        <% end %>
+      <table class="table table-striped tablesaw tabler-tablesaw-stack" data-tablesaw-mode="stack">
+        <thead>
+          <tr>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">ID</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Name</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Staff Number</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Email</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Contact Number</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Admin Account?</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @staffs.each do |s| %>
+          <tr>
+            <td><%= s.id %></td>
+            <td><%= s.name %></td>
+            <td><%= s.staff_number %></td>
+            <td><%= s.email %></td>
+            <td><%= s.contact_number %></td>
+            <td><%= s.admin.to_s.titleize %></td>
+            <td>
+              <%= link_to "Delete", s, method: :delete,
+                          data: { confirm: "Comfirm to remove this staff?" } %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
       </table>
-      <%= will_paginate %>
+    <%= will_paginate %>
 
     <div class="center">
       <%= link_to "Back", dashboard_path, class: "btn btn-default" %>

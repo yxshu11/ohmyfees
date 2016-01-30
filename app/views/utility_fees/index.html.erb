@@ -5,32 +5,36 @@
   <div class="row">
     <div class="col-md-12 well">
     <%= will_paginate %>
-      <table class="table">
-        <tr>
-          <td class="no-repeat-header">ID</td>
-          <td class="no-repeat-header">Name</td>
-          <td class="no-repeat-header">Amount</td>
-          <td class="no-repeat-header">Repetitive Payment?</td>
-          <td class="no-repeat-header">Description</td>
-          <td class="no-repeat-header">Action</td>
-          <td class="no-repeat-header">Action</td>
-          <td class="no-repeat-header">Action</td>
-        </tr>
-        <% @utility_fees.each do |uf| %>
+      <table class="table table-striped tablesaw tabler-tablesaw-stack" data-tablesaw-mode="stack">
+        <thead>
           <tr>
-            <td><%= uf.id %></td>
-            <td><%= uf.name %></td>
-            <td>RM&nbsp;<%= uf.amount %></td>
-            <td><%= uf.repetitive_payment.to_s.titleize %></td>
-            <td><%= uf.description %></td>
-            <td><%= link_to "View", uf %></td>
-            <td><%= link_to "Edit", edit_utility_fee_path(uf) %></td>
-            <td><%= link_to "Delete", uf, method: :delete, data: { confirm: "Confirm to remove this fee?" } %>
-            </td>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">ID</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Name</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Amount</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Repetitive Payment?</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Description</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
           </tr>
-        <% end %>
+        </thead>
+        <tbody>
+          <% @utility_fees.each do |uf| %>
+            <tr>
+              <td><%= uf.id %></td>
+              <td><%= uf.name %></td>
+              <td>RM&nbsp;<%= uf.amount %></td>
+              <td><%= uf.repetitive_payment.to_s.titleize %></td>
+              <td><%= uf.description %></td>
+              <td><%= link_to "View", uf %></td>
+              <td><%= link_to "Edit", edit_utility_fee_path(uf) %></td>
+              <td><%= link_to "Delete", uf, method: :delete, data: { confirm: "Confirm to remove this fee?" } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
-      <%= will_paginate %>
+    <%= will_paginate %>
 
     <div class="center">
       <%= link_to "Add", utility_fee_registration_path , class: "btn btn-primary" %> &nbsp;

@@ -5,38 +5,42 @@
   <div class="row">
     <div class="col-md-12 well">
     <%= will_paginate %>
-      <table class="table">
-        <tr>
-          <td class="no-repeat-header">ID</td>
-          <td class="no-repeat-header">Name</td>
-          <td class="no-repeat-header">TP Number</td>
-          <td class="no-repeat-header">Intake</td>
-          <td class="no-repeat-header">International Student?</td>
-          <td class="no-repeat-header">Email</td>
-          <td class="no-repeat-header">Contact Number</td>
-          <td class="no-repeat-header">Action</td>
-          <td class="no-repeat-header">Action</td>
-          <td class="no-repeat-header">Action</td>
-        </tr>
-        <% @students.each do |s| %>
-        <tr>
-          <td><%= s.id %></td>
-          <td><%= s.name %></td>
-          <td><%= s.student_number %></td>
-          <td><%= s.intake %></td>
-          <td><%= s.international.to_s.titleize %></td>
-          <td><%= s.email %></td>
-          <td><%= s.contact_number %></td>
-          <td><%= link_to "View", s %></td>
-          <td><%= link_to "Edit", edit_student_path(s) %></td>
-          <td>
-            <%= link_to "Delete", s, method: :delete,
-                        data: { confirm: "Confirm to remove this student?" } %>
-          </td>
-        </tr>
-        <% end %>
+      <table class="table table-striped tablesaw tabler-tablesaw-stack" data-tablesaw-mode="stack">
+        <thead>
+          <tr>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">ID</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Name</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">TP Number</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Intake</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">International Student?</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Email</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Contact Number</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @students.each do |s| %>
+          <tr>
+            <td><%= s.id %></td>
+            <td><%= s.name %></td>
+            <td><%= s.student_number %></td>
+            <td><%= s.intake %></td>
+            <td><%= s.international.to_s.titleize %></td>
+            <td><%= s.email %></td>
+            <td><%= s.contact_number %></td>
+            <td><%= link_to "View", s %></td>
+            <td><%= link_to "Edit", edit_student_path(s) %></td>
+            <td>
+              <%= link_to "Delete", s, method: :delete,
+                          data: { confirm: "Confirm to remove this student?" } %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
       </table>
-      <%= will_paginate %>
+    <%= will_paginate %>
 
     <div class="center">
       <%= link_to "Back", dashboard_path, class: "btn btn-default" %>
