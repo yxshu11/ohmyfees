@@ -1,59 +1,68 @@
 <% provide(:title, 'Fee Payment') %>
 
 <div class="container">
-<h1>Fee Payment</h1>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3 well">
-  <h4>Fee Details</h4>
-  <h5>
-    <table class="table">
-      <tr>
-        <td><b>Name:</b></td>
-        <td><%= @student_fee.name %></td>
-      </tr>
-      <tr>
-        <td><b>Description:</b></td>
-        <td><%= @student_fee.description %></td>
-      </tr>
-      <tr>
-        <td><b>Amount (Included Fine):</b></td>
-        <td>RM&nbsp;<%= @student_fee.amount %></td>
-      </tr>
-      <tr>
-        <td><b>Due Date:</b></td>
-        <td><%= @student_fee.due_date %></td>
-      </tr>
-    </table>
-  </h5>
-</div>
+  <h1>Fee Payment</h1>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+      <h4>Fee Details</h4>
+      <h5>
+        <table class="table">
+          <tr>
+            <td><b>Name:</b></td>
+            <td><%= @student_fee.name %></td>
+          </tr>
+          <tr>
+            <td><b>Description:</b></td>
+            <td><%= @student_fee.description %></td>
+          </tr>
+          <tr>
+            <td><b>Amount (Included Fine):</b></td>
+            <td>RM&nbsp;<%= @student_fee.amount %></td>
+          </tr>
+          <tr>
+            <td><b>Due Date:</b></td>
+            <td><%= @student_fee.due_date %></td>
+          </tr>
+        </table>
+      </h5>
+    </div>
+  </div>
 
-</div>
+  <div class="row center">
+    <div class="col-md-6 col-md-offset-3 well">
+      <%= form_tag(pay_student_student_fee_payments_path, :method => 'post', :multipart => true) do %>
+        <!-- <%= image_submit_tag "btn_xpressCheckout.gif", class: "btn btn-default" %> -->
+        <%= submit_tag "Pay", class: "btn btn-default" %>
+      <% end %>
+    </div>
+  </div>
+
+<!-- </div>
   <div class="row">
     <div class="col-md-6 col-md-offset-3 well">
       <h4>Please Enter Payment Details:</h4><br>
-      <!-- Display Fees Details -->
-      <%= form_tag do %>
-      
-        <%= label_tag :first_name %>
-        <%= text_field_tag :first_name, "", class: "form-control" %>
+      <%= form_tag '/payments/create' do %>
 
-        <%= label_tag :second_name %>
-        <%= text_field_tag :second_name, "", class: "form-control" %>
+        <%= label_tag 'first_name' %>
+        <%= text_field_tag 'first_name', "", class: "form-control" %>
 
-        <%= label_tag :card_type %><br />
-        <%= select_tag :card_type,
+        <%= label_tag 'last_name' %>
+        <%= text_field_tag 'last_name', "", class: "form-control" %>
+
+        <%= label_tag 'card_type' %><br />
+        <%= select_tag 'card_type',
                         options_for_select([["Visa", "visa"], ["MasterCard", "master"],
                         ["American Express", "american_express"]]),
                         { class: "form-control" } %>
 
-        <%= label_tag :credit_card_number %>
-        <%= text_field_tag :credit_card_number, "", class: "form-control" %>
+        <%= label_tag 'credit_card_number' %>
+        <%= text_field_tag 'credit_card_number', "", class: "form-control" %>
 
-        <%= label_tag :card_verification, "Card Verification Value (CVV)" %><br />
-        <%= text_field_tag :card_verification, "", class: "form-control" %>
+        <%= label_tag 'card_verification', "Card Verification Value (CVV)" %><br />
+        <%= text_field_tag 'card_verification', "", class: "form-control" %>
 
-        <%= label_tag :card_expires_on %>
-        <%= date_select :card_expires_on, :card_expires_on,
+        <%= label_tag 'card_expires_on' %>
+        <%= date_select 'card_expires_on', 'card_expires_on',
                         {:discard_day => true,
                         :order => [:month, :year],
                         :start_year => Date.today.year,
@@ -66,7 +75,9 @@
         <br>
         <%= link_to "Back", dashboard_path, class: "btn btn-default form-control" %>
         </section>
+
       <% end %>
     </div>
   </div>
+</div> -->
 </div>

@@ -3,7 +3,10 @@ class StudentFeesController < ApplicationController
   def index
     if current_user_type == "Student"
       # Display the fees that belong only the to the signed in student
-      @student_fees = current_user.student_fees.paginate(page: params[:page])
+      @student_fees = current_user.student_fees.paginate(page: params[:page]).order(:due_date)
+      @recent_fees = current_user.student_fees.where("due_date < ?", DateTime.now + 1.month).order(:due_date)
+      @outstanding_fees = current_user.student_fees.where("due_date < ?", DateTime.now).order(:due_date)
+
     elsif current_user_type == "Staff"
       # Display the all the fees in the system for the signed in staff.
       @student_fees = StudentFee.paginate(page: params[:page])
@@ -19,12 +22,4 @@ class StudentFeesController < ApplicationController
       @student_fee = StudentFee.find(params[:id])
     end
   end
-
-  # def pay
-  #   # To be implemented.
-  #   if current_user_type == "Student"
-  #     # Display the fees that belong only the to the signed in student
-  #     @student_fees = current_user.student_fees.find(params[:id])
-  #   end
-  # end
 end

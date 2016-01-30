@@ -54,7 +54,7 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
     @current_user_type = nil
-    @selected_student = nil
+    @selected_student_fee = nil
   end
 
   # Friendly Forwarding
@@ -78,6 +78,14 @@ module SessionsHelper
   def selected_programme
     @current_programme ||= Programme.find_by(id: session[:programme_id])
   end
+
+  # def select_student_fee(student_fee)
+  #   session[:student_fee_id] = student_fee.id
+  # end
+  #
+  # def selected_student_fee
+  #   @selected_student_fee ||= StudentFee.find_by(id: session[:student_fee_id])
+  # end
 
   # # Store the selected student that the staff currently viewing
   # def select_student(student)

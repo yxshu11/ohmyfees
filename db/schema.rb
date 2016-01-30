@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20160112055229) do
     t.datetime "updated_at",     null: false
   end
 
+  add_index "fines", ["student_fee_id"], name: "index_fines_on_student_fee_id", using: :btree
+
   create_table "intakes", force: :cascade do |t|
     t.string   "intake_code"
     t.date     "starting_date"
@@ -34,15 +36,20 @@ ActiveRecord::Schema.define(version: 20160112055229) do
     t.datetime "updated_at",                null: false
   end
 
+  add_index "intakes", ["programme_id"], name: "index_intakes_on_programme_id", using: :btree
+
   create_table "payments", force: :cascade do |t|
-    t.string   "name"
-    t.float    "amount"
+    t.string   "ip"
+    t.string   "express_token"
+    t.string   "express_payer_id"
     t.string   "paid_by"
-    t.string   "paying_method"
+    t.string   "payment_method"
     t.integer  "student_fee_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
+
+  add_index "payments", ["student_fee_id"], name: "index_payments_on_student_fee_id", using: :btree
 
   create_table "programmes", force: :cascade do |t|
     t.string   "programme_type"
@@ -63,6 +70,8 @@ ActiveRecord::Schema.define(version: 20160112055229) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "student_fees", ["user_id"], name: "index_student_fees_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

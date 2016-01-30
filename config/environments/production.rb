@@ -89,14 +89,15 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # For ActiveMerchant
+  # For ActiveMerchant and PayPal Express Gateway configuration (Sandbox Account)
   config.after_initialize do
-    ActiveMerchant::Billing::Base.mode = :production
-    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+    ActiveMerchant::Billing::Base.mode = :test # :production
+    paypal_options = {
       :login => "paypal_api1.apu.edu.my",
       :password => "N4K7XZSTXYA3DME8",
       :signature => "AqM4W0w.qtbE6sZ7oZRZDEFrMqHWAFb5gCeFms6QZXOCZ63Tc8IH.y5J"
-    )
+    }
+    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
   end
 
 end

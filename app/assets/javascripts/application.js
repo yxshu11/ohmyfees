@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require turbolinks
+//= require tablesaw-init
+//= require tablesaw
 //= require_tree .

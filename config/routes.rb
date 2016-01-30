@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   # get     'pay'                   =>    'payments#new'
   get     'history'               =>    'payments#index'
-
+  get     'pay'                   =>    'payments#pay'
 
   # Staff Controller
 
@@ -40,6 +40,9 @@ Rails.application.routes.draw do
 
   get     'password_resets/edit'
 
+  # Mapping for pay function to the new in payments controller
+  # map.resources :payments, :new => { :pay => :get }
+
   # Resources
   resources :programmes do
     resources :intakes
@@ -47,7 +50,11 @@ Rails.application.routes.draw do
 
   resources :students do
     resources :student_fees do
-      resources :payments
+      resources :payments do
+        collection do
+          post 'pay'
+        end
+      end
       resources :fines
     end
   end

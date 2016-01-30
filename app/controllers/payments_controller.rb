@@ -1,33 +1,47 @@
 class PaymentsController < ApplicationController
 
-  def new
-    if current_user_type == "Student"
-      # Display the fees that belong only the to the signed in student
-      @student_fee = current_user.student_fees.find_by(id: params[:student_id])
-      # @payment = current_user.payments.build
+  def pay
+    @student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
+    amount = (@student_fee.amount*100).round
+    response = EXPRESS_GATEWAY.setup_purchase(amount,{
+                                              :ip                   => request.remote_ip,
+                                              :currency             => 'MYR',
+                                              :return_url           => student_fees_url,
+                                              :cancel_return_url    => student_fees_url,
+                                              :allow_guest_checkout => true,
+                                              :no_shipping           => 1,
+                                              :items                => [{
+                                                                          :name => @student_fee.name,
+                                                                          :description => @student_fee.description,
+                                                                          :amount => amount,
+                                                                       }]
+                                              })
+    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+  end
 
-    elsif current_user_type == "Staff"
-      # For staff to help student to pay.
-      # To be implemented
-    end
+  def new
+    @student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
+    # @payment = @student_fee.payment.build(:express_token => params[:token])
   end
 
   def create
-    student = Student.find(params[:student_id])
-    # Validation for the credit card details
-    if credit_card.validate.empty?
-      # Send the request to the payment gateway
-      response = gateway.purchase(amount, credit_card)
-      # Determine the response of the request is success or not
-      if response.success?
-        # Handle the success payment
-        @payment = student.student_fee.payment.build()
-      else
-        # Handle the unsucessful payment method
-        render 'new'
-      end
+    student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
+    @payment = student_fee.payment.build(payment_params)
+    @payment.ip = request.remote_ip
+
+    if response.success?
+      flash[:success] = "Your transaction was successfully completed"
+    else
+      flash[:error] = "Your transaction could not be compelted"
     end
 
+    if @payment.save
+      flash[:notice] = "Payment Done Successfully"
+      redirect_to violation_url(@violation)
+    else
+      flash[:notice] = "Payment Unsuccesfull"
+      render :action => 'new'
+    end
   end
 
   def index
