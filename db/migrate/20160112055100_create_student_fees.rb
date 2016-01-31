@@ -5,6 +5,7 @@ class CreateStudentFees < ActiveRecord::Migration
       t.float   :amount
       t.date    :due_date
       t.text    :description
+      t.boolean :paid, default: false
       t.integer :user_id, index: true
 
       t.timestamps null: false

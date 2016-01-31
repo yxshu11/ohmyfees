@@ -31,6 +31,7 @@ class PaymentsController < ApplicationController
                                            student_fee_id: current_user.id)
 
     if @payment.purchase(student_fee.amount)
+      student_fee.update_attribute(:paid, true)
       @payment.save
       flash[:success] = "Payment Done Successfully"
       redirect_to student_fee

@@ -66,9 +66,10 @@ ActiveRecord::Schema.define(version: 20160112055229) do
     t.float    "amount"
     t.date     "due_date"
     t.text     "description"
+    t.boolean  "paid",        default: false
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "student_fees", ["user_id"], name: "index_student_fees_on_user_id", using: :btree

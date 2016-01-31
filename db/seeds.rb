@@ -18,7 +18,7 @@ Staff.create!(name: "John NonAdmin",
 4.times do |n|
   name = Faker::Name.name
   staff_number = "SA#{100000+(n+1)}"
-  email = "#{name.delete " "}@apu.edu.my"
+  email = "#{name.delete ". "}@apu.edu.my"
   contact_number = "011123#{1000+(n+1)}"
   password = "password"
   Staff.create!(name: name,
@@ -120,8 +120,8 @@ Student.create!(name: "Shu Yee Xen",
                  activated_at: Time.zone.now)
 
 Student.create!(name: "John Appleseed",
-                student_number: "TP028819",
-                email: "TP028819@mail.apu.edu.my",
+                student_number: "TP028888",
+                email: "TP028888@mail.apu.edu.my",
                 intake: "UC1F1601SE",
                 international: true,
                 contact_number: "0123456789",
@@ -132,8 +132,8 @@ Student.create!(name: "John Appleseed",
                 activated_at: Time.zone.now)
 
 Student.create!(name: "Lily Appleseed",
-                student_number: "TP028820",
-                email: "TP028820@mail.apu.edu.my",
+                student_number: "TP028899",
+                email: "TP028899@mail.apu.edu.my",
                 intake: "UC1F1601SE",
                 international: false,
                 contact_number: "0123456789",
@@ -169,4 +169,5 @@ StudentFee.create!(name: "Outstanding Fee (Testing)",
                     amount: 500,
                     due_date: DateTime.new(2016,1,20),
                     description: "Testing the outstanding fees.",
-                    user_id: 7)
+                    user_id: 7,
+                    paid: false)

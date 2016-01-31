@@ -44,8 +44,10 @@
 			</table>
 			</h4>
 				<section class="center">
-				<%= link_to "Pay", pay_student_student_fee_payments_path(current_user, @student_fee), :method => 'post', multipart: true, class: "btn btn-primary form-control" %>
-        <br><br>
+          <% if @student_fee.paid == false %>
+            <%= link_to "Pay", pay_student_student_fee_payments_path(current_user, @student_fee), :method => 'post', multipart: true, class: "btn btn-primary form-control" %>
+            <br><br>
+          <% end %>
 				<%= link_to "Back", student_fees_path, class: "btn btn-default form-control" %>
 			</section>
 		</div>

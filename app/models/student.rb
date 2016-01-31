@@ -90,7 +90,8 @@ class Student < User
         self.student_fees.create!(name: "Course Fees",
                                   amount: amount,
                                   due_date: due_date,
-                                  description: "Course Fees for Semester #{counter}")
+                                  description: "Course Fees for Semester #{counter}",
+                                  paid: false)
         due_date = due_date + semester_duration.weeks
       end
 
@@ -104,7 +105,8 @@ class Student < User
             self.student_fees.create!(name: "#{uf.name} for year #{(n+1)}",
                                       amount: uf.amount,
                                       due_date: repetitive_due_date,
-                                      description: uf.description)
+                                      description: uf.description,
+                                      paid: false)
             repetitive_due_date = repetitive_due_date + 1.year
           end
         else
