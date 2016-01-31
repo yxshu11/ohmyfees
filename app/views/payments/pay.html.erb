@@ -28,17 +28,12 @@
     </div>
   </div>
 
-<%= console %>
-
   <div class="row center">
     <div class="col-md-6 col-md-offset-3 well">
-      <form action="/students/<%= current_user.id %>/student_fees/<%= @student_fee.id %>/payments" accept-charset="UTF-8" method="post">
-        <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <input type="hidden" name="express_token" value="<%= @payment.express_token %>" id="express_token">
-        <input type="hidden" name="student_fee_id" value="<%= @student_fee.id %>" id="student_fee_id" >
-        <input type="hidden" name="express_payer_id" value="<%= @payment.express_payer_id %>" id="express_payer_id">
-        <input type="submit" name="commit" value="Confirm" class="btn btn-primary">
-      </form>
+      <%= form_tag(pay_student_student_fee_payments_path, :method => 'post', :multipart => true) do %>
+        <!-- <%= image_submit_tag "btn_xpressCheckout.gif", class: "btn btn-default" %> -->
+        <%= submit_tag "Pay", class: "btn btn-primary" %>
+      <% end %>
       <br>
       <%= link_to "Back", student_fees_path, class: "btn btn-default form-control" %>
 

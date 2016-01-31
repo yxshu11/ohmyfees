@@ -16,7 +16,7 @@
 				</tr>
 				<tr>
           <td><b>Amount:</b></td>
-					<td>RM&nbsp;<%= @student_fee.amount %></td>
+					<td>RM&nbsp;<%= number_with_precision(@student_fee.amount, :precision => 2) %></td>
         </tr>
         <tr>
           <td><b>Due Date:</b></td>
@@ -24,7 +24,14 @@
         </tr>
         <tr>
           <td><b>Outstanding:</b></td>
-					<td>#</td>
+					<td><% if @student_fee.due_date < DateTime.now %>
+              <div class="outstanding">
+                RM&nbsp;<%= number_with_precision(@student_fee.amount, :precision => 2) %>
+              </div>
+              <% else %>
+                  -
+              <% end %>
+          </td>
         </tr>
         <tr>
           <td><b>Fine:</b></td>
@@ -37,8 +44,9 @@
 			</table>
 			</h4>
 				<section class="center">
-				<%= link_to "Pay", '#', class: "btn btn-primary" %>  &nbsp;
-				<%= link_to "Back", dashboard_path, class: "btn btn-default" %>
+				<%= link_to "Pay", pay_student_student_fee_payments_path(current_user, @student_fee), :method => 'post', multipart: true, class: "btn btn-primary form-control" %>
+        <br><br>
+				<%= link_to "Back", student_fees_path, class: "btn btn-default form-control" %>
 			</section>
 		</div>
 	</div>

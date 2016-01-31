@@ -3,10 +3,8 @@ class Payment < ActiveRecord::Base
   belongs_to :student_fee
 
   # Functions for the Active Merchant and PayPal Express Checkout gateway
-
-  def purchase
-    amount = (@student_fee.amount*100).round
-    response = EXPRESS_GATEWAY.purchase(amount, express_purchase_options)
+  def purchase(amount)
+    response = EXPRESS_GATEWAY.purchase((amount*100).round, express_purchase_options)
     response.success?
   end
 
@@ -22,10 +20,10 @@ class Payment < ActiveRecord::Base
 
     def express_purchase_options
       {
-        :ip => ip,
-        :token => express_token,
-        :express_payer_id => express_payer_id,
-        :student_fee_id => student_fee_id
+        :ip => self.ip,
+        :currency => 'MYR',
+        :token => self.express_token,
+        :payer_id => self.express_payer_id
       }
     end
 

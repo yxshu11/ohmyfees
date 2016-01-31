@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
     response = EXPRESS_GATEWAY.setup_purchase(amount,{
                                               :ip                   => request.remote_ip,
                                               :currency             => 'MYR',
-                                              :return_url           => student_fees_url,
+                                              :return_url           => new_student_student_fee_payment_url,
                                               :cancel_return_url    => student_fees_url,
                                               :allow_guest_checkout => true,
                                               :no_shipping           => 1,
@@ -21,26 +21,22 @@ class PaymentsController < ApplicationController
 
   def new
     @student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
-    # @payment = @student_fee.payment.build(:express_token => params[:token])
+    @payment = current_user.payments.build(:express_token => params[:token])
   end
 
   def create
     student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
-    @payment = student_fee.payment.build(payment_params)
-    @payment.ip = request.remote_ip
+    @payment = current_user.payments.build(ip: request.remote_ip,
+                                           express_token: params[:express_token],
+                                           student_fee_id: current_user.id)
 
-    if response.success?
-      flash[:success] = "Your transaction was successfully completed"
+    if @payment.purchase(student_fee.amount)
+      @payment.save
+      flash[:success] = "Payment Done Successfully"
+      redirect_to student_fee
     else
-      flash[:error] = "Your transaction could not be compelted"
-    end
-
-    if @payment.save
-      flash[:notice] = "Payment Done Successfully"
-      redirect_to violation_url(@violation)
-    else
-      flash[:notice] = "Payment Unsuccesfull"
-      render :action => 'new'
+      flash[:danger] = "Payment Unsuccesfull"
+      redirect_to student_fee
     end
   end
 

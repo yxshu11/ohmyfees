@@ -27,7 +27,7 @@
                   <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="5">Outstanding</th>
                   <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="6">Fine</th>
                   <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
-                  <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
+                  <!-- <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th> -->
         				</tr>
         			</thead>
         			<tbody>
@@ -53,7 +53,7 @@
                     </td>
                     <td> - </td>
                     <td><%= link_to "View", rf %></td>
-                    <td><%= link_to "Pay", new_student_student_fee_payment_path(current_user,rf) %></td>
+                    <!-- <td><%= link_to "Pay", pay_student_student_fee_payments_path(current_user, rf), :method => 'get' %></td> -->
                     <!-- <td><%= check_box_tag :name, value = "1", checked = false, options = { :disabled => true }%></td> -->
         			    </tr>
                   <% end %>
@@ -74,7 +74,7 @@
                   <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="5">Outstanding</th>
                   <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="6">Fine</th>
                   <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
-                  <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
+                  <!-- <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th> -->
         				</tr>
         			</thead>
         			<tbody>
@@ -100,7 +100,7 @@
                     </td>
                     <td> - </td>
                     <td><%= link_to "View", o %></td>
-                    <td><%= link_to "Pay", new_student_student_fee_payment_path(current_user,o) %></td>
+                    <!-- <td><%= link_to "Pay", new_student_student_fee_payment_path(current_user,o) %></td> -->
                     <!-- <td><%= check_box_tag :name, value = "1", checked = false, options = { :disabled => true }%></td> -->
         			    </tr>
                   <% end %>
@@ -122,7 +122,7 @@
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="5">Outstanding</th>
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="6">Fine</th>
                     <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
-                    <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
+                    <!-- <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -148,7 +148,7 @@
                       </td>
                       <td> - </td>
                       <td><%= link_to "View", sf %></td>
-                      <td><%= link_to "Pay", new_student_student_fee_payment_path(current_user,sf) %></td>
+                      <!-- <td><%= link_to "Pay", new_student_student_fee_payment_path(current_user,sf) %></td> -->
                       <!-- <td><%= check_box_tag :name, value = "1", checked = false, options = { :disabled => true }%></td> -->
                     </tr>
                     <% end %>

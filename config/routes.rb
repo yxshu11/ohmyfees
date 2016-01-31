@@ -13,9 +13,7 @@ Rails.application.routes.draw do
 
   get     'student_fees'          =>    'student_fees#index'
 
-  # get     'pay'                   =>    'payments#new'
   get     'history'               =>    'payments#index'
-  get     'pay'                   =>    'payments#pay'
 
   # Staff Controller
 

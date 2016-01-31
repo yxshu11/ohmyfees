@@ -119,6 +119,30 @@ Student.create!(name: "Shu Yee Xen",
                  activated: true,
                  activated_at: Time.zone.now)
 
+Student.create!(name: "John Appleseed",
+                student_number: "TP028819",
+                email: "TP028819@mail.apu.edu.my",
+                intake: "UC1F1601SE",
+                international: true,
+                contact_number: "0123456789",
+                password: "111111",
+                password_confirmation: "111111",
+                admin: false,
+                activated: true,
+                activated_at: Time.zone.now)
+
+Student.create!(name: "Lily Appleseed",
+                student_number: "TP028820",
+                email: "TP028820@mail.apu.edu.my",
+                intake: "UC1F1601SE",
+                international: false,
+                contact_number: "0123456789",
+                password: "111111",
+                password_confirmation: "111111",
+                admin: false,
+                activated: true,
+                activated_at: Time.zone.now)
+
 # Faker Gem generates dummy Student account in the database
 # 99.times do |n|
 #    name = Faker::Name.name
