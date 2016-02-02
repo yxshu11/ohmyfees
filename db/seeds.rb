@@ -119,23 +119,11 @@ Student.create!(name: "Shu Yee Xen",
                  activated: true,
                  activated_at: Time.zone.now)
 
-Student.create!(name: "John Appleseed",
-                student_number: "TP028888",
-                email: "TP028888@mail.apu.edu.my",
+Student.create!(name: "Jaemy Ho",
+                student_number: "TP028816",
+                email: "TP028816@mail.apu.edu.my",
                 intake: "UC1F1601SE",
                 international: true,
-                contact_number: "0123456789",
-                password: "111111",
-                password_confirmation: "111111",
-                admin: false,
-                activated: true,
-                activated_at: Time.zone.now)
-
-Student.create!(name: "Lily Appleseed",
-                student_number: "TP028899",
-                email: "TP028899@mail.apu.edu.my",
-                intake: "UC1F1601SE",
-                international: false,
                 contact_number: "0123456789",
                 password: "111111",
                 password_confirmation: "111111",
@@ -166,8 +154,8 @@ Student.create!(name: "Lily Appleseed",
 # end
 
 StudentFee.create!(name: "Outstanding Fee (Testing)",
-                    amount: 500,
-                    due_date: DateTime.new(2016,1,20),
+                    amount: 10,
+                    due_date: DateTime.new(2016,1,31),
                     description: "Testing the outstanding fees.",
                     user_id: 7,
                     paid: false)

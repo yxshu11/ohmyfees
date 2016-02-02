@@ -28,7 +28,7 @@ class PaymentsController < ApplicationController
     student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
     @payment = current_user.payments.build(ip: request.remote_ip,
                                            express_token: params[:express_token],
-                                           student_fee_id: current_user.id)
+                                           student_fee_id: student_fee.id)
 
     if @payment.purchase(student_fee.amount)
       student_fee.update_attribute(:paid, true)
@@ -42,6 +42,11 @@ class PaymentsController < ApplicationController
   end
 
   def index
+    if current_user.type == "Student"
+      @student_fee = current_user.student_fees.where("paid = ?", true).order(:updated_at)
+      @payments = current_user.student_fees.where("paid = ?", true).paginate(page: params[:page]).order(:updated_at)
+    else current_user.type == "Staff"
+    end
   end
 
   def show

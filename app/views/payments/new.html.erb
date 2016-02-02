@@ -17,7 +17,7 @@
           </tr>
           <tr>
             <td><b>Amount (Included Fine):</b></td>
-            <td>RM&nbsp;<%= @student_fee.amount %></td>
+            <td>RM&nbsp;<%= number_with_precision(@student_fee.amount, :precision => 2) %></td>
           </tr>
           <tr>
             <td><b>Due Date:</b></td>
@@ -39,7 +39,6 @@
       </form>
       <br>
       <%= link_to "Back", student_fees_path, class: "btn btn-default form-control" %>
-
     </div>
   </div>
 </div>

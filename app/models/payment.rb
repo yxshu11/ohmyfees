@@ -13,6 +13,7 @@ class Payment < ActiveRecord::Base
     if new_record? && !token.blank?
       details = EXPRESS_GATEWAY.details_for(token)
       self.express_payer_id = details.payer_id
+      self.amount = details.params["amount"]
     end
   end
 

@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160112055229) do
     t.string   "ip"
     t.string   "express_token"
     t.string   "express_payer_id"
+    t.string   "amount"
     t.string   "paid_by"
     t.string   "payment_method"
     t.integer  "student_fee_id"
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160112055229) do
     t.date     "due_date"
     t.text     "description"
     t.boolean  "paid",        default: false
+    t.datetime "notify"
     t.integer  "user_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false

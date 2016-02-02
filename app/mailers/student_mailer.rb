@@ -15,15 +15,15 @@ class StudentMailer < ApplicationMailer
   def due_payment(student, fee_details)
     @student = student
     @fee_details = fee_details
-    
+
     mail to: @student.email, subject: "Due Payment | OHMYFEES"
   end
 
-  def outstanding_payment(student)
-
+  def outstanding_payment(student, fee_details)
+    @student = student
+    @fee_details = fee_details
+    
+    mail to: @student.email, subject: "Outstanding Payment | OHMYFEES"
   end
 
-  def fine_payment(student)
-
-  end
 end

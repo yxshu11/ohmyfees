@@ -6,6 +6,7 @@ class CreateStudentFees < ActiveRecord::Migration
       t.date    :due_date
       t.text    :description
       t.boolean :paid, default: false
+      t.datetime :notify 
       t.integer :user_id, index: true
 
       t.timestamps null: false
