@@ -155,7 +155,7 @@ Student.create!(name: "Jaemy Ho",
 
 StudentFee.create!(name: "Outstanding Fee (Testing)",
                     amount: 10,
-                    due_date: DateTime.new(2016,1,31),
+                    due_date: DateTime.new(2016,1,20),
                     description: "Testing the outstanding fees.",
                     user_id: 7,
                     paid: false)

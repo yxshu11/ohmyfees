@@ -2,7 +2,17 @@ class PaymentsController < ApplicationController
 
   def pay
     @student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
-    amount = (@student_fee.amount*100).round
+
+    fine = @student_fee.fines.all
+
+    total_fine_amount = 0
+
+    fine.each do |f|
+      total_fine_amount = total_fine_amount + f.amount
+    end
+
+    amount = ((@student_fee.amount + total_fine_amount)*100).round
+    
     response = EXPRESS_GATEWAY.setup_purchase(amount,{
                                               :ip                   => request.remote_ip,
                                               :currency             => 'MYR',

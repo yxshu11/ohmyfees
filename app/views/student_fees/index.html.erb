@@ -51,7 +51,15 @@
                               -
                           <% end %>
                     </td>
-                    <td> - </td>
+                    <td>
+                      <% if rf.fines.sum(:amount) <= 0 %>
+                        -
+                      <% else %>
+                        <div class="outstanding">
+                          RM&nbsp;<%= number_with_precision(rf.fines.sum(:amount), :precision => 2) %>
+                        </div>
+                      <% end %>
+                    </td>
                     <td><%= link_to "View", rf %></td>
                     <!-- <td><%= link_to "Pay", pay_student_student_fee_payments_path(current_user, rf), :method => 'get' %></td> -->
                     <!-- <td><%= check_box_tag :name, value = "1", checked = false, options = { :disabled => true }%></td> -->
@@ -98,7 +106,15 @@
                               -
                           <% end %>
                     </td>
-                    <td> - </td>
+                    <td>
+                      <% if o.fines.sum(:amount) <= 0 %>
+                        -
+                      <% else %>
+                        <div class="outstanding">
+                          RM&nbsp;<%= number_with_precision(o.fines.sum(:amount), :precision => 2) %>
+                        </div>
+                      <% end %>
+                    </td>
                     <td><%= link_to "View", o %></td>
                     <!-- <td><%= link_to "Pay", new_student_student_fee_payment_path(current_user,o) %></td> -->
                     <!-- <td><%= check_box_tag :name, value = "1", checked = false, options = { :disabled => true }%></td> -->
@@ -146,7 +162,15 @@
                                 -
                             <% end %>
                       </td>
-                      <td> - </td>
+                      <td>
+                        <% if sf.fines.sum(:amount) <= 0 %>
+                          -
+                        <% else %>
+                          <div class="outstanding">
+                            RM&nbsp;<%= number_with_precision(sf.fines.sum(:amount), :precision => 2) %>
+                          </div>
+                        <% end %>
+                      </td>
                       <td><%= link_to "View", sf %></td>
                       <!-- <td><%= link_to "Pay", new_student_student_fee_payment_path(current_user,sf) %></td> -->
                       <!-- <td><%= check_box_tag :name, value = "1", checked = false, options = { :disabled => true }%></td> -->

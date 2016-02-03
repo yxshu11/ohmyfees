@@ -35,9 +35,23 @@
         </tr>
         <tr>
           <td><b>Fine:</b></td>
-					<td>#</td>
+					<td>
+            <% if @fine.empty? %>
+              -
+            <% elsif %>
+              <% @fine.each do |f| %>
+                <%= f.name %> | RM&nbsp;<%= number_with_precision(f.amount, :precision => 2) %><br>
+              <% end %>
+              <hr>
+              Total Fine amount: RM&nbsp;<%= number_with_precision(@total_fine_amount, :precision => 2) %>
+            <% end %>
+          </td>
         </tr>
 				<tr>
+					<td><b>Payable:</b></td>
+					<td>RM&nbsp;<%= number_with_precision(@student_fee.amount + @total_fine_amount, :precision => 2) %></td>
+				</tr>
+        <tr>
 					<td></td>
 					<td></td>
 				</tr>

@@ -40,29 +40,33 @@ end
 
 task :check_fine_fees => :environment do
   puts "Checking the fine that have not been paid yet..."
+
   StudentFee.all.each do |sf|
     # If the payment is outstanding for a period of time, fine will be added based on the condition
-    if sf.due_date < DateTime.now + 1.week && Payment.find_by(student_fee_id: sf.id).nil?
+    if sf.due_date + 7.days < DateTime.now && Payment.find_by(student_fee_id: sf.id).nil?
       fine = Fine.where("student_fee_id = ?", sf.id)
       if fine.empty?
-        Fine.create!(name: "Fine for" + sf.name,
+        Fine.create!(name: "Fine for " + sf.name,
                      amount: 20,
                      student_fee_id: sf.id)
       else
-        if fine.order(created_at: :desc).first.created_at + 1.week == DateTime.now
+        if fine.order(created_at: :desc).first.created_at + 7.days < DateTime.now
           total_amount = 0
+
           fine.each do |f|
-            total_amount = total_amount + fine.amount
+            total_amount = total_amount + f.amount
           end
+          puts total_amount
+
           if total_amount < 60
-            Fine.create!(name: "Fine for" + sf.name,
+            Fine.create!(name: "Fine for " + sf.name,
                          amount: 20,
                          student_fee_id: sf.id)
           elsif total_amount == 60
-            Fine.create!(name: "Fine for" + sf.name,
+            Fine.create!(name: "Fine for " + sf.name,
                          amount: 10,
                          student_fee_id: sf.id)
-          elsif total_amount == 70
+          else
             puts "Maximum fine reached!"
           end
         end
