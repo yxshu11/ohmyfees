@@ -9,7 +9,14 @@ class StudentFeesController < ApplicationController
 
     elsif current_user_type == "Staff"
       # Display the all the fees in the system for the signed in staff.
-      @student_fees = StudentFee.paginate(page: params[:page])
+      if params[:search]
+        @student = Student.find_by(student_number: params[:search])
+        if !@student.nil?
+          @searched_student_fee = StudentFee.where(user_id: @student.id, paid: false).order(:due_date)
+        end
+      else
+        @student_fees = StudentFee.paginate(page: params[:page])
+      end
     end
   end
 
