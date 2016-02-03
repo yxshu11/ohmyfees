@@ -12,6 +12,10 @@ task :check_due_fees => :environment do
         StudentMailer.due_payment(s, sf).deliver_now
         puts "Mail sent"
         # SMS the student about the the payment is about to due soon.
+        client = Twilio::REST::Client.new ENV["acc_SID"], ENV["auth_token"]
+				client.messages.create(from: ENV["twi_from"],
+                                to: ENV["twi_to"],
+                                body: "OHMYFEES \nDear student, kindly be reminded that you are having an fee payment that going to be due soon. \nName: #{sf.name} \nDescription: #{sf.description} \nAmount: RM #{sf.amount} \nDue Date: #{sf.due_date} \nKindly make your payment as soon as possible. Thank you.")
         sf.update_attribute(:notify, DateTime.now)
       end
     end
@@ -30,7 +34,11 @@ task :check_outstanding_fees => :environment do
         # Email the student about the payment is about to due soon.
         StudentMailer.outstanding_payment(s, sf).deliver_now
         # SMS the student about the the payment is about to due soon.
-        sf.update_attribute(notify: DateTime.now)
+        client = Twilio::REST::Client.new ENV["acc_SID"], ENV["auth_token"]
+				client.messages.create(from: ENV["twi_from"],
+                                to: ENV["twi_to"],
+                                body: "OHMYFEES \nDear student, kindly be reminded that you are having an outstanding fee. \nName: #{sf.name} \nDescription: #{sf.description} \nAmount: RM#{sf.amount} \nDue Date: #{sf.due_date} \nKindly make your payment as soon as possible. Thank you.")
+        sf.update_attribute(:notify, DateTime.now)
       end
     end
 
