@@ -1,2 +1,40 @@
-<h1>Payments#show</h1>
-<p>Find me in app/views/payments/show.html.erb</p>
+<% provide(:title, 'Paid Fees Details') %>
+
+<div class="container">
+<h1>Paid Fee Information:</h1>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+			<h5>
+			<table class="table noborder">
+        <tr>
+          <td><b>Name:</b></td>
+          <td><%= @student_fee.name %></td>
+				</tr>
+				<tr>
+          <td><b>Description:</b></td>
+					<td><%= @student_fee.description %></td>
+				</tr>
+				<tr>
+          <td><b>Amount (Included Fine):</b></td>
+					<td>RM&nbsp;<%= number_with_precision(@payment.amount, :precision => 2) %></td>
+        </tr>
+        <tr>
+          <td><b>Due Date:</b></td>
+					<td><%= @student_fee.due_date %></td>
+        </tr>
+        <tr>
+          <td><b>Payment Method:</b></td>
+					<td><%= @payment.payment_method %></td>
+        </tr>
+        <tr>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+    </h5>
+			<section class="center">
+				<%= link_to "Back", history_path, class: "btn btn-default form-control" %>
+			</section>
+		</div>
+	</div>
+</div>

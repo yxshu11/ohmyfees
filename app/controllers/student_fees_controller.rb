@@ -11,7 +11,7 @@ class StudentFeesController < ApplicationController
       # Display the all the fees in the system for the signed in staff.
       if params[:search]
         @student = Student.find_by(student_number: params[:search])
-        if !@student.nil?
+        if !(@student.nil?)
           @searched_student_fee = StudentFee.where(user_id: @student.id, paid: false).order(:due_date)
         end
       else
@@ -32,6 +32,9 @@ class StudentFeesController < ApplicationController
     elsif current_user_type == "Staff"
       # Display the all the fees in the system for the signed in staff.
       @student_fee = StudentFee.find(params[:id])
+      @current_student = Student.find(@student_fee.user_id)
+      @fine = @student_fee.fines.all
+      @total_fine_amount = @student_fee.fines.sum(:amount)
     end
   end
 end
