@@ -27,7 +27,7 @@
                     <tr>
                       <td><%= link_to sf.name, sf %></td>
                       <td><%= sf.description %></td>
-                      <td><%= sf.due_date %></td>
+                      <td><%= sf.due_date.strftime('%d/%m/%Y') %></td>
                     </tr>
                   <% end %>
                 </tbody>

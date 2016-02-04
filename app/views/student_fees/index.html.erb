@@ -50,7 +50,7 @@
                       <td><%= ssf.name %></td>
                       <td><%= ssf.description %></td>
                       <td>RM&nbsp;<%= number_with_precision(ssf.amount, :precision => 2) %></td>
-                      <td><%= ssf.due_date %></td>
+                      <td><%= ssf.due_date.strftime('%d/%m/%Y') %></td>
                       <td><% if ssf.due_date < DateTime.now %>
                           <div class="outstanding">
                             RM&nbsp;<%= number_with_precision(ssf.amount, :precision => 2) %>
@@ -115,7 +115,7 @@
                         <td><%= rf.name %></td>
                         <td><%= rf.description %></td>
                         <td>RM&nbsp;<%= number_with_precision(rf.amount, :precision => 2) %></td>
-                        <td><%= rf.due_date %></td>
+                        <td><%= rf.due_date.strftime('%d/%m/%Y') %></td>
                         <td><% if rf.due_date < DateTime.now %>
                             <div class="outstanding">
                               RM&nbsp;<%= number_with_precision(rf.amount, :precision => 2) %>
@@ -170,7 +170,7 @@
                         <td><%= o.name %></td>
                         <td><%= o.description %></td>
                         <td>RM&nbsp;<%= number_with_precision(o.amount, :precision => 2) %></td>
-                        <td><%= o.due_date %></td>
+                        <td><%= o.due_date.strftime('%d/%m/%Y') %></td>
                         <td><% if o.due_date < DateTime.now %>
                             <div class="outstanding">
                               RM&nbsp;<%= number_with_precision(o.amount, :precision => 2) %>
@@ -226,7 +226,7 @@
                           <td><%= sf.name %></td>
                           <td><%= sf.description %></td>
                           <td>RM&nbsp;<%= number_with_precision(sf.amount, :precision => 2) %></td>
-                          <td><%= sf.due_date %></td>
+                          <td><%= sf.due_date.strftime('%d/%m/%Y') %></td>
                           <td><% if sf.due_date < DateTime.now %>
                               <div class="outstanding">
                                 RM&nbsp;<%= number_with_precision(sf.amount, :precision => 2) %>

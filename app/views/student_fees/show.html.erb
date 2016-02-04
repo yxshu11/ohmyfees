@@ -20,7 +20,7 @@
         </tr>
         <tr>
           <td><b>Due Date:</b></td>
-					<td><%= @student_fee.due_date %></td>
+					<td><%= @student_fee.due_date.strftime('%d/%m/%Y') %></td>
         </tr>
         <tr>
           <td><b>Outstanding:</b></td>
