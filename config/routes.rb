@@ -38,6 +38,11 @@ Rails.application.routes.draw do
 
   get     'password_resets/edit'
 
+  # Statistic controller
+  get     'statistics'              =>      'statistics#index'
+  get     'student_stats'           =>      'statistics#student'
+  get     'payment_stats'           =>      'statistics#payment'
+
   # Mapping for pay function to the new in payments controller
   # map.resources :payments, :new => { :pay => :get }
 
