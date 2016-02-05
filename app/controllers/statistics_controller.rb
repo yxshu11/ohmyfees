@@ -5,11 +5,11 @@ class StatisticsController < ApplicationController
   end
 
   def student
-
+    @students = Student
   end
 
   def payment
-
+    @payments = Payment
   end
-  
+
 end

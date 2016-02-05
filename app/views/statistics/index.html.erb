@@ -1,0 +1,27 @@
+<% provide(:title, 'Statistics') %>
+
+<div class="container">
+<h1>Statistics</h1>
+  <div class="row">
+      <div class="col-md-6 col-md-offset-3 well center">
+        <a href="<%= student_stats_path %>">
+          <div class="card">
+            <div class="header">
+              <span class="fa fa-graduation-cap fa-3x" aria-hidden="true"></span>
+            </div>
+            <div class="content">Student Statistics</div>
+          </div>
+        </a>
+        <a href="<%= payment_stats_path %>">
+          <div class="card">
+            <div class="header">
+              <span class="fa fa-credit-card fa-3x" aria-hidden="true"></span>
+            </div>
+            <div class="content">Payment Statistics</div>
+          </div>
+        </a>
+
+        <%= link_to "Back", dashboard_path, class: "btn btn-default form-control" %>
+      </div>
+    </div>
+</div>

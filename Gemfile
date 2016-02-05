@@ -27,8 +27,9 @@ gem 'figaro'
 # Chart and Table Gems
 gem 'googlecharts'
 gem 'chartkick'
-gem 'dateslices'
 gem 'table-for'
+gem 'groupdate'
+gem 'active_median'
 
 # Payment Gateway Gem
 gem 'activemerchant'

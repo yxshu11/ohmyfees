@@ -15,4 +15,6 @@
 //= require bootstrap
 //= require tablesaw-init
 //= require tablesaw
+//= require jsapi
+//= require chartkick
 //= require_tree .
