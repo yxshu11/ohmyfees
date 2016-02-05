@@ -1,6 +1,6 @@
 class IntakesController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :show, :index, :edit, :update, :destroy]
-  before_action :correct_user_type, only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  before_action :staff_user_type, only: [:new, :create, :show, :index, :edit, :update, :destroy]
 
   def new
     @intake = selected_programme.intakes.build
@@ -62,7 +62,7 @@ class IntakesController < ApplicationController
       end
     end
 
-    def correct_user_type
+    def staff_user_type
       unless @current_user.type == "Staff"
         flash[:danger] = "Access Denied."
         redirect_to(root_path)

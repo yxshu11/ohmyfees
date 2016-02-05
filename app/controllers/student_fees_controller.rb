@@ -1,4 +1,6 @@
 class StudentFeesController < ApplicationController
+  before_action :logged_in_user, only: [:index, :show]
+  before_action :correct_student, only: [:show]
 
   def index
     if current_user_type == "Student"
@@ -37,4 +39,25 @@ class StudentFeesController < ApplicationController
       @total_fine_amount = @student_fee.fines.sum(:amount)
     end
   end
+
+  private
+
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_path
+      end
+    end
+
+    def correct_student
+      if current_user_type == "Student"
+        student_fee = StudentFee.find(params[:id])
+        @student = Student.find(student_fee.user_id)
+        unless current_user?(@student)
+          flash[:danger] = "Access Denied."
+          redirect_to(dashboard_path)
+        end
+      end
+    end
 end

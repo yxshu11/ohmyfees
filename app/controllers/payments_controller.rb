@@ -1,4 +1,6 @@
 class PaymentsController < ApplicationController
+  before_action :logged_in_user, only: [:pay, :new, :create, :index, :show]
+  before_action :correct_student, only: [:pay, :new, :create, :show]
 
   def pay
     @student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
@@ -88,4 +90,24 @@ class PaymentsController < ApplicationController
     @student_fee = current_user.student_fees.find(params[:student_fee_id])
     @payment = @student_fee.payment
   end
+
+  private
+
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_path
+      end
+    end
+
+    def correct_student
+      if current_user_type == "Student"
+        @student = Student.find(params[:student_id])
+        unless current_user?(@student)
+          flash[:danger] = "Access Denied."
+          redirect_to(dashboard_path)
+        end
+      end
+    end
 end

@@ -4,17 +4,16 @@
 <h1>Payment Statistics</h1>
   <div class="row">
     <div class="col-md-12 well center">
-      <form action="/statistics/student" accept-charset="UTF-8" method="get">
-        <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <form action="/payment_stats" accept-charset="UTF-8" method="get">
         <div class="col-md-2">
           <h4>Grouping type:</h4>
         </div>
         <div class="col-md-8">
           <select class="form-control" id="period" name="period">
-            <option>Hour</option>
-            <option>Day</option>
-            <option>Week</option>
-            <option>Year</option>
+            <option selected="selected" value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
           </select>
         </div>
         <div class="col-md-2">
@@ -25,21 +24,19 @@
   </div>
 
   <div class="row">
-      <div class="col-md-12 well center">
-        <!-- Chartkick will be placed here -->
-        <div class="col-md-10 col-md-offset-1">
-          <h4>Statistics show the payment made by the student in daily, monthly, and yearly basics</h4>
-          <%= pie_chart @payments.group_by_day(:created_at, format: "%d %b %Y").count %>
-          <br>
-          <%= column_chart @payments.group_by_month(:created_at, format: "%b %Y").count %>
-          <br>
-          <%= area_chart @payments.group_by_year(:created_at, format: "%Y").count %>
-        </div>
-
-      <section class="col-md-6 col-md-offset-3">
+    <div class="col-md-12 well center">
+      <!-- Chartkick will be placed here -->
+      <div class="col-md-10 col-md-offset-1">
+        <h4>Payment Behaviors by A.P.U Student</h4>
+        <%= pie_chart @chart %>
         <br>
-        <%= link_to "Back", statistics_path, class: "btn btn-default form-control" %>
-      </section>
+
       </div>
+
+    <section class="col-md-6 col-md-offset-3">
+      <br>
+      <%= link_to "Back", statistics_path, class: "btn btn-default form-control" %>
+    </section>
     </div>
+  </div>
 </div>

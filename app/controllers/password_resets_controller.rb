@@ -1,5 +1,4 @@
 class PasswordResetsController < ApplicationController
-
   before_action :get_user, only: [:edit, :update]
   before_action :valid_user, only: [:edit, :update]
   before_action :check_expiration, only: [:edit, :update]
@@ -16,7 +15,7 @@ class PasswordResetsController < ApplicationController
       elsif user.type == "Staff"
         @user = Staff.find(user.id)
       end
-      
+
       @user.create_reset_digest
       @user.send_password_reset_email
       flash[:info] = "Email sent with password reset instructions"
