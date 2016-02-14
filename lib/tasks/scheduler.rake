@@ -5,9 +5,9 @@ task :check_due_fees => :environment do
   StudentFee.all.each do |sf|
     # If the fees' due date is less than 2 days,
     # email the student and notify then about the payment.
-    if  sf.due_date < DateTime.now - 1.days && Payment.find_by(student_fee_id: sf.id).nil?
+    if  sf.due_date < DateTime.now - 2.days && Payment.find_by(student_fee_id: sf.id).nil?
       s = Student.find_by(id: sf.user_id)
-      if sf.notify == nil || sf.notify > DateTime.now + 5.days
+      if sf.notify == nil || sf.notify < DateTime.now - 5.days
         # Email the student about the payment is about to due soon.
         StudentMailer.due_payment(s, sf).deliver_now
         puts "Mail sent"
@@ -30,9 +30,10 @@ task :check_outstanding_fees => :environment do
     # If the payment is outstanding for a period of time, fine will be added based on the condition
     if sf.due_date < DateTime.now && Payment.find_by(student_fee_id: sf.id).nil?
       s = Student.find_by(id: sf.user_id)
-      if sf.notify == nil || sf.notify > DateTime.now + 5.days
+      if sf.notify == nil || sf.notify < DateTime.now - 5.days
         # Email the student about the payment is about to due soon.
         StudentMailer.outstanding_payment(s, sf).deliver_now
+        puts "Mail Sent"
         # SMS the student about the the payment is about to due soon.
         client = Twilio::REST::Client.new ENV["acc_SID"], ENV["auth_token"]
 				client.messages.create(from: ENV["twi_from"],
