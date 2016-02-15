@@ -195,7 +195,7 @@ Student.create!(name: "Shu Yee Xen",
 #                 activated_at: Time.zone.now)
 
 # Faker Gem generates dummy Student account in the database
-all_intake = ["UCFF1601IT","UC1F1601CGD","UC1F1601IS"]
+# all_intake = ["UCFF1601IT","UC1F1601CGD","UC1F1601IS", "UC1F1601SE"]
 # 99.times do |n|
 #    name = Faker::Name.name
 #    student_number = "TP#{100000+(n+1)}"
@@ -216,9 +216,16 @@ all_intake = ["UCFF1601IT","UC1F1601CGD","UC1F1601IS"]
 #                    activated_at: Time.zone.now)
 # end
 
-StudentFee.create!(name: "Outstanding Fee (Testing)",
+StudentFee.create!(name: "Outstanding Fee 1",
                     amount: 10,
-                    due_date: DateTime.new(2016,1,20),
-                    description: "Testing the outstanding fees.",
+                    due_date: DateTime.new(2016,1,25),
+                    description: "Testing the outstanding fees 1.",
+                    user_id: 7,
+                    paid: false)
+
+StudentFee.create!(name: "Outstanding Fee 2",
+                    amount: 20,
+                    due_date: DateTime.new(2016,2,1),
+                    description: "Testing the outstanding fees 2.",
                     user_id: 7,
                     paid: false)
