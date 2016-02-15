@@ -5,7 +5,7 @@ task :check_due_fees => :environment do
   StudentFee.all.each do |sf|
     # If the fees' due date is less than 2 days,
     # email the student and notify then about the payment.
-    if  sf.due_date < DateTime.now - 2.days && Payment.find_by(student_fee_id: sf.id).nil?
+    if  sf.due_date.to_date - 2.days = Date.today && Payment.find_by(student_fee_id: sf.id).nil?
       s = Student.find_by(id: sf.user_id)
       if sf.notify == nil || sf.notify < DateTime.now - 5.days
         # Email the student about the payment is about to due soon.

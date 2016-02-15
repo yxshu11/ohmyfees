@@ -195,18 +195,18 @@ Student.create!(name: "Shu Yee Xen",
 #                 activated_at: Time.zone.now)
 
 # Faker Gem generates dummy Student account in the database
+all_intake = ["UCFF1601IT","UC1F1601CGD","UC1F1601IS"]
 # 99.times do |n|
 #    name = Faker::Name.name
 #    student_number = "TP#{100000+(n+1)}"
 #    email = "TP#{100000+(n+1)}@mail.apu.edu.my"
-#    intake = "UCFF1601IT"
 #    contact_number = "016123#{1000+(n+1)}"
 #    password = "password"
 #    international = true
 #    Student.create!(name: name,
 #                    student_number: student_number,
 #                    email: email,
-#                    intake: intake,
+#                    intake: all_intake.sample,
 #                    international: international,
 #                    contact_number: contact_number,
 #                    password: password,
