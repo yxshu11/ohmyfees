@@ -4,7 +4,7 @@
 <h1>Account Information:</h1>
   <div class="row">
     <div class="col-md-6 col-md-offset-3 well">
-			<h4>
+			<h5>
 			<table class="table noborder">
         <tr>
           <td class="center" colspan="2">
@@ -46,7 +46,7 @@
 					<td></td>
 				</tr>
 			</table>
-			</h4>
+      </h5>
 				<section class="center">
         <% if current_user_type == "Student" %>
           <%= link_to "Edit", edit_student_path(current_user), class: "btn btn-primary" %>  &nbsp;

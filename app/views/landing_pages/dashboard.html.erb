@@ -27,7 +27,14 @@
                     <tr>
                       <td><%= link_to sf.name, sf %></td>
                       <td><%= sf.description %></td>
-                      <td><%= sf.due_date.strftime('%d/%m/%Y') %></td>
+                      <td>
+                        <% if sf.due_date < DateTime.now %>
+                          <div class="outstanding">
+                            <b><%= sf.due_date.strftime('%d/%m/%Y') %></b>
+                          </div>
+                        <% else %>
+                          <%= sf.due_date.strftime('%d/%m/%Y') %></td>
+                        <% end %>
                     </tr>
                   <% end %>
                 </tbody>
