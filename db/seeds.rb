@@ -182,6 +182,18 @@ Student.create!(name: "Shu Yee Xen",
                  activated: true,
                  activated_at: Time.zone.now)
 
+Student.create!(name: "Homer Simpson",
+                student_number: "TP099999",
+                email: "TP099999@mail.apu.edu.my",
+                intake: "UC1F1601SE",
+                international: false,
+                contact_number: "0123456789",
+                password: "111111",
+                password_confirmation: "111111",
+                admin: false,
+                activated: true,
+                activated_at: Time.zone.now)
+                
 # Student.create!(name: "Jaemy Ho",
 #                 student_number: "TP028816",
 #                 email: "TP028816@mail.apu.edu.my",

@@ -9,11 +9,15 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   version :standard do
     process :eager => true
-    process :resize_to_fill => [120, 160, :north]
+    cloudinary_transformation :radius => :max, :border=>"2px_solid_grey",
+                              :crop => :thumb, :gravity => :face,
+                              :width => 150, :height => 150
   end
 
   version :thumbnail do
     eager
-    resize_to_fit(100, 100)
+    cloudinary_transformation :radius => :max, :border=>"1px_solid_grey",
+                              :crop => :thumb, :gravity => :face,
+                              :width => 100, :height => 100
   end
 end
