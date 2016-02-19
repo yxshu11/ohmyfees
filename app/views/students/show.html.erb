@@ -7,6 +7,15 @@
 			<h4>
 			<table class="table noborder">
         <tr>
+          <td class="center" colspan="2">
+            <% if @student.picture.blank? %>
+              <%= image_tag("default_profile_picture.png", width: '100') %>
+            <% else %>
+              <%= image_tag(@student.picture_url(:standard)) %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
           <td class="no-repeat-header"><b>Name:</b></td>
           <td><%= @student.name %></td>
 				</tr>

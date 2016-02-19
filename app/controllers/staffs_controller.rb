@@ -62,7 +62,7 @@ class StaffsController < ApplicationController
     # Define the strog parameters (params) for the staff account for security purpose in the views
     def staff_params
       params.require(:staff).permit(:name, :staff_number, :contact_number, :email,
-                                      :password, :password_confirmation)
+                                    :picture, :password, :password_confirmation)
     end
 
     # Before Filters for User access control.

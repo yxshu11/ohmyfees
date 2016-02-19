@@ -4,11 +4,12 @@ class User < ActiveRecord::Base
   # Convert the email addresses into small capital letter before saving into database.
   before_save :downcase_email
 
-
   # Name of the User must be presented and the length not more than 100 chars
   validates :name,  presence: true, length: { maximum: 100 }
   # Phone of the user must be presented and the length not more than 11 chars
   validates :contact_number, presence: true, length: { maximum: 11 }
+  # Picture Uploader for the User profile
+  mount_uploader :picture, PictureUploader
   # User account has secure password
   has_secure_password
   # Password must be presented and the minumum length is 6
