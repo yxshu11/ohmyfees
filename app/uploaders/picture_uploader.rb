@@ -9,7 +9,7 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   version :standard do
     process :eager => true
-    process :resize_to_fill => [140, 180, :north]
+    process :resize_to_fill => [120, 160, :north]
   end
 
   version :thumbnail do
