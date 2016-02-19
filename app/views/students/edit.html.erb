@@ -6,7 +6,7 @@
     <div class="col-md-6 col-md-offset-3 well">
       <section class="center">
           <% if @student.picture.blank? %>
-            <%= image_tag("default_profile_picture.png", width: '100') %>
+            <%= image_tag("default_profile_picture.png", width: '100', :class => "img-circle") %>
           <% else %>
             <%= image_tag(@student.picture_url(:standard)) %>
           <% end %>

@@ -7,9 +7,9 @@
 			<h5>
       <section class="center">
         <% if @student.picture.blank? %>
-          <%= image_tag("default_profile_picture.png", width: '100') %>
-          <br>
-          <small><%= link_to "Update your profile picture", edit_student_path(current_user) %></small>
+          <%= image_tag("default_profile_picture.png", width: '150', :class => "img-circle") %>
+          <br><br>
+          <%= link_to "Update your profile picture", edit_student_path(current_user) %>
         <% else %>
           <%= image_tag(@student.picture_url(:standard)) %>
         <% end %>
