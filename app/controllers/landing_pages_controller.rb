@@ -3,7 +3,9 @@ class LandingPagesController < ApplicationController
   before_action :logged_in_user, only: [:dashboard]
 
   def home
-
+    if logged_in?
+      redirect_to dashboard_path
+    end
   end
 
   def help
