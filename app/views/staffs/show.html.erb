@@ -12,6 +12,8 @@
               <%= image_tag("default_profile_picture.png", width: '100') %>
             <% else %>
               <%= image_tag(@staff.picture_url(:standard)) %>
+              <br>
+              <small><%= link_to "Update your profile picture", edit_staff_path(current_user) %></small>
             <% end %>
           </td>
         </tr>
