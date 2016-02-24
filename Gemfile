@@ -33,6 +33,7 @@ gem 'chartkick'
 gem 'table-for'
 gem 'groupdate'
 gem 'active_median'
+gem 'prawn'
 
 # Payment Gateway Gem
 gem 'activemerchant'

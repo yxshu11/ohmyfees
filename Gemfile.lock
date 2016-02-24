@@ -270,7 +270,11 @@ GEM
       multi_json (~> 1.0)
       uuidtools (~> 2.1)
       xml-simple
+    pdf-core (0.6.1)
     pg (0.17.1)
+    prawn (2.0.2)
+      pdf-core (~> 0.6.0)
+      ttfunk (~> 1.4.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -353,6 +357,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    ttfunk (1.4.0)
     turbolinks (2.3.0)
       coffee-rails
     twilio-ruby (4.2.1)
@@ -411,6 +416,7 @@ DEPENDENCIES
   minitest-reporters (= 1.0.5)
   paypal-sdk-rest
   pg (= 0.17.1)
+  prawn
   puma (= 2.11.1)
   rails (= 4.2.0)
   rails_12factor (= 0.0.2)
