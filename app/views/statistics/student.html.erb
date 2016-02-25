@@ -2,17 +2,86 @@
 
 <div class="container">
 <h1>Student Statistics</h1>
-  <div class="row">
-    <div class="col-md-12 well center">
-      <!-- Chartkick will be placed here -->
-      <div class="col-md-10 col-md-offset-1">
-        <h4>Statistics show the student join APU based on programme and intake specific.</h4>
-        <%= pie_chart @students.group(:intake).count %>
+
+  <div class="container-fluid col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body center">
+        <div class="row">
+          <form action="/student_stats" accept-charset="UTF-8" method="get">
+            <div class="col-md-3"><h4>Select Year:</h4></div>
+            <div class="col-md-6">
+              <%= collection_select :intake_year, nil, @year, :to_s, :to_s,
+                                    { include_blank: false },
+                                    class: 'form-control' %>
+            </div>
+            <div class="col-md-3">
+              <input type="submit" name="commit" value="Select" class="btn btn-success">
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <%= pie_chart @intake_chart %>
+          <p>Statistics show the number of student in APU based on intake specific.</p>
+        </div>
       </div>
-    <section class="col-md-6 col-md-offset-3">
-      <br>
-      <%= link_to "Back", statistics_path, class: "btn btn-default form-control" %>
-    </section>
     </div>
+  </div>
+
+  <div class="container-fluid col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body center">
+        <div class="row">
+          <form action="/student_stats" accept-charset="UTF-8" method="get">
+            <div class="col-md-3"><h4>Select Year:</h4></div>
+            <div class="col-md-6">
+              <%= collection_select :programme_year, nil, @year, :to_s, :to_s,
+                                    { include_blank: false },
+                                    class: 'form-control' %>
+            </div>
+            <div class="col-md-3">
+              <input type="submit" name="commit" value="Select" class="btn btn-success">
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <%= pie_chart @programme_chart %>
+          <p>Statistics show the number of student in APU based on programme specific.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body center">
+        <div class="row">
+          <form action="/student_stats" accept-charset="UTF-8" method="get">
+            <div class="col-md-3"><h4>Select Year:</h4></div>
+            <div class="col-md-6">
+              <%= collection_select :student_year, nil, @year, :to_s, :to_s,
+                                    { include_blank: false },
+                                    class: 'form-control' %>
+            </div>
+            <div class="col-md-3">
+              <input type="submit" name="commit" value="Select" class="btn btn-success">
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <%= column_chart @year_chart, xtitle: "Month",
+                                        ytitle: "Number of Student",
+                                        library: {
+                                          animation: {
+                                            duration: 1000,
+                                            easing: 'out'}
+                                          } %>
+          <p>Statistics show the number of student joined APU based on selected yaer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-md-offset-3 well">
+    <%= link_to "Back", statistics_path, class: "btn btn-default form-control" %>
   </div>
 </div>
