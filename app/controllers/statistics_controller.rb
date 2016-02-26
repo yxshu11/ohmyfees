@@ -68,8 +68,8 @@ class StatisticsController < ApplicationController
 
     # Data for Number of student based on that year
     year_students = Student.where(created_at: student_year_range.beginning_of_year..student_year_range.end_of_year)
-    @year_chart = year_students.group_by_month(:created_at,
-                                               format: "%b %Y").count
+    @year_chart = year_students.group_by_month(:created_at, format: "%b %Y").count
+    
   end
 
   def payment

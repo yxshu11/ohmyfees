@@ -10,6 +10,7 @@
           <form action="/student_stats" accept-charset="UTF-8" method="get">
             <div class="col-md-3"><h4>Select Year:</h4></div>
             <div class="col-md-6">
+              <!-- <%= hidden_field_tag :intake_year %> -->
               <%= collection_select :intake_year, nil, @year, :to_s, :to_s,
                                     { include_blank: false },
                                     class: 'form-control' %>
@@ -34,6 +35,7 @@
           <form action="/student_stats" accept-charset="UTF-8" method="get">
             <div class="col-md-3"><h4>Select Year:</h4></div>
             <div class="col-md-6">
+              <!-- <%= hidden_field_tag :programme_year %> -->
               <%= collection_select :programme_year, nil, @year, :to_s, :to_s,
                                     { include_blank: false },
                                     class: 'form-control' %>
@@ -58,6 +60,7 @@
           <form action="/student_stats" accept-charset="UTF-8" method="get">
             <div class="col-md-3"><h4>Select Year:</h4></div>
             <div class="col-md-6">
+              <!-- <%= hidden_field_tag :student_year %> -->
               <%= collection_select :student_year, nil, @year, :to_s, :to_s,
                                     { include_blank: false },
                                     class: 'form-control' %>
@@ -68,13 +71,7 @@
           </form>
         </div>
         <div class="row">
-          <%= column_chart @year_chart, xtitle: "Month",
-                                        ytitle: "Number of Student",
-                                        library: {
-                                          animation: {
-                                            duration: 1000,
-                                            easing: 'out'}
-                                          } %>
+          <%= column_chart @year_chart, xtitle: "Month", ytitle: "Number of Student" %>
           <p>Statistics show the number of student joined APU based on selected yaer.</p>
         </div>
       </div>

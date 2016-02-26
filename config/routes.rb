@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'reports/show'
+
   # Homepage
   root                                  'landing_pages#home'
 
@@ -43,6 +45,9 @@ Rails.application.routes.draw do
   get     'student_stats'           =>      'statistics#student'
   get     'payment_stats'           =>      'statistics#payment'
 
+  # Report controller
+  get     'reports'                 =>      'reports#show'
+  
   # Mapping for pay function to the new in payments controller
   # map.resources :payments, :new => { :pay => :get }
 

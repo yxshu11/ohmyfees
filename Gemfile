@@ -27,7 +27,7 @@ gem 'carrierwave',             '0.10.0'
 # Figaro Gem
 gem 'figaro'
 
-# Chart and Table Gems
+# Chart, PDF and Table Gems
 gem 'googlecharts'
 gem 'chartkick'
 gem 'table-for'
