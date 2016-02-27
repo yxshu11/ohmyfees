@@ -69,31 +69,69 @@ class StatisticsController < ApplicationController
     # Data for Number of student based on that year
     year_students = Student.where(created_at: student_year_range.beginning_of_year..student_year_range.end_of_year)
     @year_chart = year_students.group_by_month(:created_at, format: "%b %Y").count
-    
+
   end
 
   def payment
-    @payments = Payment
 
-    if params[:period].nil?
-      params[:period] = "day"
+    data = Student.group_by_year(:created_at).count
+
+    @year = Array.new
+    data.each do |k,v|
+      @year << k.strftime("%Y")
     end
 
-    if params[:period] == "day"
+    if params[:payment_period].nil?
+      params[:payment_period] = "day"
+    end
+
+    if params[:payment_period] == "day"
       date_format = "%d %b %Y"
-    elsif params[:period] == "month"
+    elsif params[:payment_period] == "month"
       date_format = "%b %Y"
-    elsif params[:period] == "week"
+    elsif params[:payment_period] == "week"
       date_format = "%d %b %Y"
-    elsif params[:period] == "year"
+    elsif params[:payment_period] == "year"
       date_format = "%Y"
     end
 
-    @chart = @payments.group_by_period(params[:period],
+    @payment_chart = Payment.group_by_period(params[:payment_period],
                                        :created_at,
                                        format: date_format,
                                        week_start: :mon,
                                        permit: %w[day month week year]).count
+
+    if params[:payment_mode_year] == nil
+     payment_mode_year_range = "01/01/2016"
+    else
+     payment_mode_year_range = "01/01/" << params[:payment_mode_year].first.to_s
+    end
+
+    payment_mode_year_range = payment_mode_year_range.to_datetime
+
+    payment_mode = Payment.where(created_at: payment_mode_year_range.beginning_of_year..payment_mode_year_range.end_of_year)
+    @payment_mode_chart = payment_mode.group(:paid_by).count
+
+    @payment_method_chart = Payment.group(:payment_method).count
+
+    data2 = StudentFee.group(:paid).count
+
+    @payment_status_chart = Hash.new ()
+    key = Array.new
+    value = Array.new
+
+    data2.each do |k,v|
+      if k == true
+        key << "Paid"
+      else
+        key << "Unpaid"
+      end
+      value << v
+    end
+
+    for i in 0..key.length-1 do
+      @payment_status_chart[key.at(i)] = value.at(i)
+    end
   end
 
   private

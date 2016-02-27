@@ -1,42 +1,77 @@
 <% provide(:title, 'Payment Statistics') %>
 
 <div class="container">
-<h1>Payment Statistics</h1>
-  <div class="row">
-    <div class="col-md-12 well center">
-      <form action="/payment_stats" accept-charset="UTF-8" method="get">
-        <div class="col-md-2">
-          <h4>Grouping type:</h4>
+  <h1>Payment Statistics</h1>
+  <div class="container-fluid col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body center">
+        <div class="row">
+          <form action="/payment_stats" accept-charset="UTF-8" method="get">
+            <div class="col-md-3"><h4>Select Type:</h4></div>
+            <div class="col-md-6">
+              <%= hidden_field_tag :payment_period, @selected_payment_period %>
+              <select class="form-control" id="payment_period" name="payment_period">
+                <option selected="selected" value="day">Day</option>
+                <option value="week">Week</option>
+                <option value="month">Month</option>
+                <option value="year">Year</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <input type="submit" name="commit" value="Select" class="btn btn-success">
+            </div>
+          </form>
         </div>
-        <div class="col-md-8">
-          <select class="form-control" id="period" name="period">
-            <option selected="selected" value="day">Day</option>
-            <option value="week">Week</option>
-            <option value="month">Month</option>
-            <option value="year">Year</option>
-          </select>
+        <div class="row">
+          <%= pie_chart @payment_chart %>
+          <p>Statistics show the payment made by the student in APU based on selected period.</p>
         </div>
-        <div class="col-md-2">
-          <input type="submit" name="commit" value="Select" class="btn btn-success">
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 well center">
-      <!-- Chartkick will be placed here -->
-      <div class="col-md-10 col-md-offset-1">
-        <h4>Payment Behaviors by A.P.U Student</h4>
-        <%= pie_chart @chart %>
-        <br>
-
       </div>
-
-    <section class="col-md-6 col-md-offset-3">
-      <br>
-      <%= link_to "Back", statistics_path, class: "btn btn-default form-control" %>
-    </section>
     </div>
   </div>
+
+  <div class="container-fluid col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body center">
+        <div class="row">
+          <form action="/payment_stats" accept-charset="UTF-8" method="get">
+            <div class="col-md-3"><h4>Select Year:</h4></div>
+            <div class="col-md-6">
+              <%= collection_select :payment_mode_year, nil, @year, :to_s, :to_s,
+                                    { include_blank: false }, class: 'form-control' %>
+            </div>
+            <div class="col-md-3">
+              <input type="submit" name="commit" value="Select" class="btn btn-success">
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <%= pie_chart @payment_mode_chart %>
+          <p>Statistics show the payment mode used by between the student and staff in APU.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body center">
+        <div class="row">
+          <div class="col-md-6">
+            <%= pie_chart @payment_status_chart %>
+            <p>Statistics show the student fees that has or has not been paid by the student in APU.</p>
+          </div>
+
+          <div class="col-md-6">
+            <%= bar_chart @payment_method_chart %>
+            <p>Statistics show the payment method used by the student in APU based on selected period.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="col-md-6 col-md-offset-3 well">
+    <%= link_to "Back", statistics_path, class: "btn btn-default form-control" %>
+  </section>
 </div>
