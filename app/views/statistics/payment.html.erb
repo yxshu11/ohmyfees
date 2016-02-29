@@ -9,7 +9,6 @@
           <form action="/payment_stats" accept-charset="UTF-8" method="get">
             <div class="col-md-3"><h4>Select Type:</h4></div>
             <div class="col-md-6">
-              <%= hidden_field_tag :payment_period, @selected_payment_period %>
               <select class="form-control" id="payment_period" name="payment_period">
                 <option selected="selected" value="day">Day</option>
                 <option value="week">Week</option>

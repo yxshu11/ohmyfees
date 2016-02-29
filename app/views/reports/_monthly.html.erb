@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-md-12 well center">
+    <form action="/payment_stats" accept-charset="UTF-8" method="get">
+      <div class="col-md-2"><h4>Select Month:</h4></div>
+      <div class="col-md-8">
+        <select class="form-control" id="payment_period" name="payment_period">
+          <option selected="selected" value="day">Day</option>
+          <option value="week">Week</option>
+          <option value="month">Month</option>
+          <option value="year">Year</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <input type="submit" name="commit" value="Select" class="btn btn-success">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 well">
+      <table class="table table-striped tablesaw tabler-tablesaw-stack" data-tablesaw-mode="stack">
+        <thead>
+          <tr>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">ID</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Payment Name</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Paid On</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Paid By</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @payments.each do |payment| %>
+          <tr>
+            <td><%= payment.id %></td>
+            <td><%= StudentFee.find_by(id: payment.student_fee_id).name %></td>
+            <td><%= payment.created_at.strftime("%d/%m/%Y") %></td>
+            <td><%= payment.paid_by %> - <%= payment.payment_method %></td>
+            <td>RM&nbsp;<%= number_with_precision(payment.amount, :precision => 2) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <%= will_paginate @payments %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 well">
+    <table class="table table-striped tablesaw tabler-tablesaw-stack" data-tablesaw-mode="stack">
+      <thead>
+        <tr>
+          <th scope="col">Total Payment Received</th>
+          <th scope="col">Total Amount Received</th>
+          <th scope="col">Timeframe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @total_payments_received %><br>100% of total payment</td>
+          <td>RM&nbsp;<%= number_with_precision(@total, :precision => 2) %></td>
+          <td>February 2016</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="col-md-6 col-md-offset-3">
+
+      <%= link_to "Generate PDF", '#', class: "btn btn-primary form-control" %>
+    </div>
+  </div>
+</div>
