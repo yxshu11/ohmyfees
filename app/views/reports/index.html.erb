@@ -1,0 +1,27 @@
+<% provide(:title, 'Reports') %>
+
+<div class="container">
+<h1>Reports</h1>
+  <div class="row">
+      <div class="col-md-6 col-md-offset-3 well center">
+        <a href="<%= monthly_report_path %>">
+          <div class="card">
+            <div class="header">
+              <span class="fa fa-flag-checkered fa-3x" aria-hidden="true"></span>
+            </div>
+            <div class="content">Monthly Report</div>
+          </div>
+        </a>
+        <a href="<%= annual_report_path %>">
+          <div class="card">
+            <div class="header">
+              <span class="fa fa-flag fa-3x" aria-hidden="true"></span>
+            </div>
+            <div class="content">Annual Report</div>
+          </div>
+        </a>
+
+        <%= link_to "Back", dashboard_path, class: "btn btn-default form-control" %>
+      </div>
+    </div>
+</div>

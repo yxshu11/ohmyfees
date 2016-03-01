@@ -1,0 +1,94 @@
+<% provide(:title, 'Monthly Report') %>
+
+<div class="container">
+  <h1>Monthly Report</h1>
+  <div class="row">
+    <div class="col-md-12 well center">
+      <form action="/monthly_report" accept-charset="UTF-8" method="get">
+        <div class="col-md-2"><h4>Select Month:</h4></div>
+        <div class="col-md-8">
+          <%= collection_select :monthly_period, nil, @monthly, :to_s, :to_s,
+                                { include_blank: false }, class: 'form-control' %>
+        </div>
+        <div class="col-md-2">
+          <input type="submit" name="commit" value="Select" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 well">
+      <%= will_paginate @monthly_payment %>
+        <table class="table table-striped tablesaw tabler-tablesaw-stack" data-tablesaw-mode="stack">
+          <thead>
+            <tr>
+              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">ID</th>
+              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Payment Name</th>
+              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Paid On</th>
+              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Paid By</th>
+              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @monthly_payment.each do |payment| %>
+            <tr>
+              <td><%= payment.id %></td>
+              <td><%= StudentFee.find_by(id: payment.student_fee_id).name %></td>
+              <td><%= payment.created_at.strftime("%d/%m/%Y") %></td>
+              <td><%= payment.paid_by %> - <%= payment.payment_method %></td>
+              <td>RM&nbsp;<%= number_with_precision(payment.amount, :precision => 2) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <%= will_paginate @monthly_payment %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 well center">
+      <b>Number of payment received within this month in each day</b>
+      <%= area_chart @mon_chart, xtitle: "Days", ytitle: "Number of Payment",
+                                 library: {
+                                   backgroundColor: "#f5f5f5"} %>
+      <hr>
+      <table class="table table-striped tablesaw tabler-tablesaw-stack" data-tablesaw-mode="stack">
+        <thead>
+          <tr>
+            <th scope="col">Total Payment Received</th>
+            <th scope="col">Total Amount Received</th>
+            <th scope="col">Timeframe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= @mon_total_payments_received %>
+              <p><span class="label label-success">100% out of total payment</span></p>
+            </td>
+            <td>
+              RM&nbsp;<%= number_with_precision(@mon_total_amount_received, :precision => 2) %>
+              <p><span class="label label-success">100% out of total payment</span></p>
+            </td>
+            <td>
+              Montly
+              <p>
+                <span class="label label-danger">
+                  <%= @monthly_period_range.beginning_of_month.strftime("%d-%m-%Y") %> to
+                  <%= @monthly_period_range.end_of_month.strftime("%d-%m-%Y") %>
+                </span>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <div class="col-md-6 col-md-offset-3">
+        <%= link_to "Generate PDF Report", '#', class: "btn btn-primary form-control" %>
+        <br><br>
+        <%= link_to "Back", reports_path, class: "btn btn-default form-control" %>
+      </div>
+    </div>
+  </div>
+</div>

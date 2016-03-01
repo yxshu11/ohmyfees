@@ -46,7 +46,9 @@ Rails.application.routes.draw do
   get     'payment_stats'           =>      'statistics#payment'
 
   # Report controller
-  get     'reports'                 =>      'reports#show'
+  get     'reports'                 =>      'reports#index'
+  get     'monthly_report'          =>      'reports#monthly'
+  get     'annual_report'           =>      'reports#annual'
   
   # Mapping for pay function to the new in payments controller
   # map.resources :payments, :new => { :pay => :get }

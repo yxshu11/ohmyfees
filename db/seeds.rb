@@ -213,7 +213,8 @@ Student.create!(name: "Jaemy Ho",
 
 # Faker Gem generates dummy Student account in the database
 all_intake = ["UCFF1601","UC1F1601CGD","UC1F1601IS", "UC1F1601SE"]
-
+s_date = DateTime.now
+s_date = s_date.beginning_of_year..s_date.end_of_year
 99.times do |n|
    name = Faker::Name.name
    student_number = "TP#{100000+(n+1)}"
@@ -231,7 +232,8 @@ all_intake = ["UCFF1601","UC1F1601CGD","UC1F1601IS", "UC1F1601SE"]
                    password_confirmation: password,
                    admin: false,
                    activated: true,
-                   activated_at: Time.zone.now)
+                   activated_at: Time.zone.now,
+                   created_at: rand(s_date))
 end
 
 StudentFee.create!(name: "Outstanding Fee 1",
@@ -247,3 +249,16 @@ StudentFee.create!(name: "Outstanding Fee 2",
                     description: "Testing the outstanding fees 2.",
                     user_id: 7,
                     paid: false)
+
+amount = [100, 30, 400, 12388, 3359]
+paid_by = ["Student", "Staff"]
+payment_method = ["Cash", "Online", "Cheque", "Bank Transfer"]
+date = DateTime.now
+date = date.beginning_of_year..date.end_of_year
+150.times do |n|
+  Payment.create!(amount: amount.sample,
+                  paid_by: paid_by.sample,
+                  payment_method: payment_method.sample,
+                  student_fee_id: "7",
+                  created_at: rand(date))
+end
