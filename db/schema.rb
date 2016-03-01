@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160112055229) do
     t.string   "ip"
     t.string   "express_token"
     t.string   "express_payer_id"
-    t.string   "amount"
+    t.float    "amount"
     t.string   "paid_by"
     t.string   "payment_method"
     t.integer  "student_fee_id"

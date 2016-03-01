@@ -65,11 +65,14 @@
           <tr>
             <td>
               <%= @mon_total_payments_received %>
-              <p><span class="label label-success">100% out of total payment</span></p>
+              <p><span class="label label-success">
+                  <%= number_with_precision(@mon_total_payment_received_percentage, :precision => 2) %>% out of total payment</span></p>
             </td>
             <td>
               RM&nbsp;<%= number_with_precision(@mon_total_amount_received, :precision => 2) %>
-              <p><span class="label label-success">100% out of total payment</span></p>
+              <p><span class="label label-success">
+                  <%= number_with_precision(@mon_total_amount_received_percentage, :precision => 2) %>% out of total amount
+                 </span></p>
             </td>
             <td>
               Montly
