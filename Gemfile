@@ -35,6 +35,9 @@ gem 'groupdate'
 gem 'active_median'
 gem 'prawn'
 
+# GeoCoder Gem for location service
+gem 'geocoder'
+
 # Payment Gateway Gem
 gem 'activemerchant'
 gem 'paypal-sdk-rest'
