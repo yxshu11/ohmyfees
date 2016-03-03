@@ -77,5 +77,4 @@ class ReportsController < ApplicationController
     # Getting the data for the chart to show each month how many payment is made
     @annual_chart = annual_data.group_by_month(:created_at).count
   end
-
 end
