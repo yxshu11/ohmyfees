@@ -34,7 +34,6 @@ gem 'table-for'
 gem 'groupdate'
 gem 'active_median'
 gem 'prawn'
-gem "prawnto_2", :require => "prawnto"
 
 # Payment Gateway Gem
 gem 'activemerchant'
