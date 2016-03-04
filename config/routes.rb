@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'reports/show'
-
   # Homepage
   root                                  'landing_pages#home'
 
@@ -76,5 +74,6 @@ Rails.application.routes.draw do
   resources :payments
   resources :intakes
   resources :staffs
+  resources :locations
 
 end

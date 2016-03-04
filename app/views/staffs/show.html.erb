@@ -5,18 +5,16 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3 well">
 			<h5>
+      <section class="center">
+        <% if @staff.picture.blank? %>
+          <%= image_tag("default_profile_picture.png", width: '100', :class => "img-circle") %>
+          <br><br>
+          <%= link_to "Update your profile picture", edit_staff_path(current_user) %>
+        <% else %>
+          <%= image_tag(@staff.picture_url(:standard)) %>
+        <% end %>
+      </section>
 			<table class="table noborder">
-        <tr>
-          <td class="center" colspan="2">
-            <% if @staff.picture.blank? %>
-              <%= image_tag("default_profile_picture.png", width: '100', :class => "img-circle") %>
-            <% else %>
-              <%= image_tag(@staff.picture_url(:standard)) %>
-              <br>
-              <small><%= link_to "Update your profile picture", edit_staff_path(current_user) %></small>
-            <% end %>
-          </td>
-        </tr>
         <tr>
           <td class="no-repeat-header"><b>Name:</b></td>
           <td><%= @staff.name %></td>

@@ -1,0 +1,33 @@
+<% provide(:title, 'Location Information') %>
+
+<div class="container">
+<h1>Location Information:</h1>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+			<h5>
+        <br>
+			<table class="table noborder">
+        <tr>
+          <td class="no-repeat-header"><b>Name:</b></td>
+          <td><%= @location.name %></td>
+				</tr>
+				<tr>
+          <td><b>Latitude:</b></td>
+					<td><%= @location.latitude %></td>
+				</tr>
+        <tr>
+          <td><b>Longitude:</b></td>
+					<td><%= @location.longitude %></td>
+        </tr>
+				<tr>
+					<td><b>Nearby Places:</b></td>
+					<td><%= @my_location_ip %></td>
+				</tr>
+			</table>
+      </h5>
+				<section class="center">
+				  <%= link_to "Back", locations_path, class: "btn btn-default" %>
+			</section>
+		</div>
+	</div>
+</div>

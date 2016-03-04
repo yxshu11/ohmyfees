@@ -221,6 +221,31 @@
 
     <p><b>Profile Management</b></p>
     <div class="row center">
+
+      <% if @current_user.type == "Staff" && @current_user.admin? %> <!-- Authenticate User Access Level -->
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= new_location_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-plus fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">Add Sign In Location</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <a href="<%= locations_path %>">
+            <div class="card">
+              <div class="header">
+                <span class="fa fa-map-marker fa-3x" aria-hidden="true"></span>
+              </div>
+              <div class="content">View Sign In Location</div>
+            </div>
+          </a>
+        </div>
+      <% end %>
+
       <div class="col-xs-6 col-sm-4 col-md-3">
         <a href="<%= @current_user.type == "Student" ? student_path(@current_user) : staff_path(@current_user) %>">
           <div class="card">
