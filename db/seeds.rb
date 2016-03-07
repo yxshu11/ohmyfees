@@ -262,3 +262,19 @@ date = date.beginning_of_year..date.end_of_year
                   student_fee_id: "7",
                   created_at: rand(date))
 end
+
+Location.create!(name: "Asia Pacific Institute Of Information Technology @ TPM",
+                 latitude: 3.047882,
+                 longitude: 101.692862)
+
+Location.create!(name: "Asia Pacific Institute Of Information Technology @ ENT3",
+                 latitude: 3.048416,
+                 longitude: 101.690815)
+
+Location.create!(name: "Asia Pacific Institute Of Information Technology @ MINES",
+                 latitude: 3.042048,
+                 longitude: 101.708975)
+
+Location.create!(name: "Vista Komanwel A",
+                 latitude: 3.059975,
+                 longitude: 101.685526)

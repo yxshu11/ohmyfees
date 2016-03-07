@@ -20,13 +20,20 @@
 					<td><%= @location.longitude %></td>
         </tr>
 				<tr>
-					<td><b>Nearby Places:</b></td>
-					<td><%= @my_location_ip %></td>
+					<td></td>
+					<td></td>
 				</tr>
 			</table>
       </h5>
 				<section class="center">
-				  <%= link_to "Back", locations_path, class: "btn btn-default" %>
+          <%= link_to "Edit", edit_location_path(@location), class: "btn btn-primary" %>
+          &nbsp;
+          <%= link_to "Delete", @location,
+                                method: :delete,
+                                data: { confirm: "Confirm to remove this location?" },
+                                class: "btn btn-danger" %>
+          &nbsp;
+          <%= link_to "Back", locations_path, class: "btn btn-default" %>
 			</section>
 		</div>
 	</div>

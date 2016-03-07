@@ -7,9 +7,9 @@
 			<h5>
       <section class="center">
         <% if @staff.picture.blank? %>
-          <%= image_tag("default_profile_picture.png", width: '100', :class => "img-circle") %>
+          <%= image_tag("default_profile_picture.png", width: '120', :class => "img-circle") %>
           <br><br>
-          <%= link_to "Update your profile picture", edit_staff_path(current_user) %>
+          <%= link_to "Update your profile picture", edit_staff_path(current_user) %><br><br>
         <% else %>
           <%= image_tag(@staff.picture_url(:standard)) %>
         <% end %>

@@ -1,14 +1,9 @@
 <% provide(:title, 'Add Location') %>
 
 <div class="container">
-<h1>Add Sign-in Location</h1>
+<h1>Edit Sign-in Location</h1>
   <div class="row">
     <div class="col-md-6 col-md-offset-3 well">
-      <section class="alert alert-info">
-        <p>Please verify the location address with
-        <a href="http://www.latlong.net/convert-address-to-lat-long.html" target="new"><b>LatLong.net</b></a></p>
-        <p>and obtain the latitude and longitude for the location address. </p>
-      </section>
       <%= form_for(@location) do |f| %>
 
         <%= render 'shared/error_messages', object: f.object %>
@@ -22,11 +17,11 @@
         <%= f.label :longitude %>
         <%= f.number_field :longitude, :class => 'form-control', :step => 'any' %>
 
-        <%= f.submit "Add", class: "btn btn-primary" %>
+        <%= f.submit "Update", class: "btn btn-primary" %>
 
         <br><br>
 
-        <%= link_to "Back", dashboard_path, class: "btn btn-default form-control" %>
+        <%= link_to "Back", @location, class: "btn btn-default form-control" %>
       <% end %>
     </div>
   </div>
