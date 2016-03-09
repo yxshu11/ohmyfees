@@ -1,38 +1,39 @@
-<% provide(:title, 'Login') %>
+<% provide(:title, 'TFA') %>
 
 <div class="container">
-<h1>Two-factors authentication</h1>
+<h1>Before signing you in ...</h1>
   <div class="row">
-    <div class="col-md-6 col-md-offset-3 well">
-      <div class="col-md-8 col-md-offset-2 center">
-        <p>
-          <b>
-            Scan QR-Code below with Google Authenticator or Authy
-            <a href="#" data-toggle="tooltip" title="Google Authenticator and Authy Apps is available in Apple App Store and Google Play Store.">
-              <i class="fa fa-question-circle fa-1x"></i>
-            </a>
-          </b>
-        </p>
+    <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 well">
+      <p class="center">
+        <b>
+          Scan QR-Code below with Google Authenticator or Authy to receive OHMYCode.
+          <br>
+          <a href="#" data-toggle="tooltip" title="Google Authenticator and Authy Apps is available on Apple App Store and Google Play Store.">
+            <i class="fa fa-question-circle fa-2x"></i>
+          </a>
+        </b>
+      </p>
+      <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 center">
 
         <%= image_tag @qr %>
 
         <p><b>OR<b></p>
         <form action="/tfa" accept-charset="UTF-8" method="get">
           <%= hidden_field_tag :sms_otp, true %>
-          <input type="submit" name="commit" value="Send OTP Code via SMS" class="btn btn-success">
+          <input type="submit" name="commit" value="Send OHMYCode via SMS" class="btn btn-success">
         </form>
       </div>
 
-      <div class="col-md-12">
+      <div class="col-md-12 col-sm-12">
         <hr>
         <form action="/tfa" accept-charset="UTF-8" method="get">
-          <%= label_tag :otp_code, "Enter OTP code:" %>
+          <%= label_tag :otp_code, "Enter OHMYCode code:" %>
           <%= password_field_tag :otp_code, nil, { class: 'form-control'} %>
 
           <input type="submit" name="commit" value="Validate" class="btn btn-primary">
         </form>
         <br>
-        <%= link_to "Back", login_path, class: 'form-control center' %>
+        <%= link_to "Cancel", login_path, class: 'form-control center' %>
       </div>
     </div>
   </div>

@@ -37,18 +37,6 @@ class SessionsController < ApplicationController
     # Get the student obj by searching the email
     @user = User.find_by(email: params[:session][:email].downcase)
     if @user && @user.authenticate(params[:session][:password])
-      # Log In and Handle something
-      # if @user.type == "Staff" || @user.activated?
-      #   # If the user is activated!
-      #   if @user.admin == true || @authentication == true || @user.type == "Student"
-      #
-      #   else
-      #
-      #   end
-      #
-      # else
-      #
-      # end
       if @user.type == "Staff" # If it's staff account
         if @user.admin == true || @authentication == true
           log_in @user
@@ -95,7 +83,7 @@ class SessionsController < ApplicationController
       client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
       client.messages.create(from: ENV["twi_from"],
                               to: ENV["twi_to"],
-                              body: "OHMYFEES \nOne Time Password (OTP Code): #{@user.otp_code}. \nThank you.")
+                              body: "OHMYFEES \nYour one time password (OHMYCode) is: #{@user.otp_code}. \nThank you.")
       flash.now[:success] = "OTP Code has been sent, please check your phone."
     end
 
