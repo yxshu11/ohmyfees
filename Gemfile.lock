@@ -23,6 +23,9 @@ GEM
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
     active_median (0.1.2)
       activerecord
+    active_model_otp (1.2.0)
+      activemodel
+      rotp
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -60,6 +63,7 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-switch-rails (3.3.3)
     bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.2.2)
@@ -75,6 +79,7 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
     chartkick (1.3.2)
+    chunky_png (1.3.5)
     cloudinary (1.1.2)
       aws_cf_signer
       rest-client
@@ -271,11 +276,7 @@ GEM
       multi_json (~> 1.0)
       uuidtools (~> 2.1)
       xml-simple
-    pdf-core (0.6.1)
     pg (0.17.1)
-    prawn (2.0.2)
-      pdf-core (~> 0.6.0)
-      ttfunk (~> 1.4.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -326,6 +327,12 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rotp (2.1.1)
+    rqrcode (0.10.1)
+      chunky_png (~> 1.0)
+    rqrcode_png (0.1.5)
+      chunky_png
+      rqrcode
     ruby-progressbar (1.7.5)
     sass (3.4.18)
     sass-rails (5.0.2)
@@ -358,7 +365,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
-    ttfunk (1.4.0)
     turbolinks (2.3.0)
       coffee-rails
     twilio-ruby (4.2.1)
@@ -394,9 +400,11 @@ PLATFORMS
 
 DEPENDENCIES
   active_median
+  active_model_otp
   activemerchant
   bcrypt (= 3.1.7)
   bootstrap-sass (~> 3.3.6)
+  bootstrap-switch-rails
   bootstrap-will_paginate (= 0.0.10)
   byebug (= 3.4.0)
   carrierwave (= 0.10.0)
@@ -418,11 +426,11 @@ DEPENDENCIES
   minitest-reporters (= 1.0.5)
   paypal-sdk-rest
   pg (= 0.17.1)
-  prawn
   puma (= 2.11.1)
   rails (= 4.2.0)
   rails_12factor (= 0.0.2)
   rails_layout
+  rqrcode_png
   sass-rails (>= 3.2)
   sdoc (= 0.4.0)
   sidekiq

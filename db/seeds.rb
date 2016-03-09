@@ -181,6 +181,7 @@ Student.create!(name: "Shu Yee Xen",
                  intake: "UC1F1601SE",
                  international: false,
                  contact_number: "0123456789",
+                 tfa: true,
                  password: "111111",
                  password_confirmation: "111111",
                  admin: false,
@@ -193,11 +194,11 @@ Student.create!(name: "Homer Simpson",
                 intake: "UCFF1601",
                 international: false,
                 contact_number: "0123456789",
+                tfa: false,
                 password: "111111",
                 password_confirmation: "111111",
                 admin: false,
-                activated: true,
-                activated_at: Time.zone.now)
+                activated: false)
 
 Student.create!(name: "Jaemy Ho",
                 student_number: "TP028816",
@@ -205,6 +206,7 @@ Student.create!(name: "Jaemy Ho",
                 intake: "UC1F1601CGD",
                 international: true,
                 contact_number: "0123456789",
+                tfa: false,
                 password: "111111",
                 password_confirmation: "111111",
                 admin: false,
@@ -212,29 +214,30 @@ Student.create!(name: "Jaemy Ho",
                 activated_at: Time.zone.now)
 
 # Faker Gem generates dummy Student account in the database
-all_intake = ["UCFF1601","UC1F1601CGD","UC1F1601IS", "UC1F1601SE"]
-s_date = DateTime.now
-s_date = s_date.beginning_of_year..s_date.end_of_year
-99.times do |n|
-   name = Faker::Name.name
-   student_number = "TP#{100000+(n+1)}"
-   email = "TP#{100000+(n+1)}@mail.apu.edu.my"
-   contact_number = "016123#{1000+(n+1)}"
-   password = "password"
-   international = true
-   Student.create!(name: name,
-                   student_number: student_number,
-                   email: email,
-                   intake: all_intake.sample,
-                   international: international,
-                   contact_number: contact_number,
-                   password: password,
-                   password_confirmation: password,
-                   admin: false,
-                   activated: true,
-                   activated_at: Time.zone.now,
-                   created_at: rand(s_date))
-end
+# all_intake = ["UCFF1601","UC1F1601CGD","UC1F1601IS", "UC1F1601SE"]
+# s_date = DateTime.now
+# s_date = s_date.beginning_of_year..s_date.end_of_year
+# 99.times do |n|
+#    name = Faker::Name.name
+#    student_number = "TP#{100000+(n+1)}"
+#    email = "TP#{100000+(n+1)}@mail.apu.edu.my"
+#    contact_number = "016123#{1000+(n+1)}"
+#    password = "password"
+#    international = true
+#    Student.create!(name: name,
+#                    student_number: student_number,
+#                    email: email,
+#                    intake: all_intake.sample,
+#                    international: international,
+#                    contact_number: contact_number,
+#                    tfa: false
+#                    password: password,
+#                    password_confirmation: password,
+#                    admin: false,
+#                    activated: true,
+#                    activated_at: Time.zone.now,
+#                    created_at: rand(s_date))
+# end
 
 StudentFee.create!(name: "Outstanding Fee 1",
                     amount: 10,

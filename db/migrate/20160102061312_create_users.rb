@@ -9,6 +9,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string  :intake
       t.boolean :international
       t.string  :type
+      t.string  :picture
+      t.boolean :tfa
+      t.string  :otp_secret_key
       t.string  :password_digest
       t.string  :remember_digest
       t.boolean :admin, default: false
@@ -17,7 +20,7 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime :activated_at
       t.string  :reset_digest
       t.datetime :reset_sent_at
-      t.string  :picture
+
 
       t.timestamps null: false
     end

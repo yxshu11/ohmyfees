@@ -4,6 +4,8 @@ class Student < User
   has_many :payments, through: :student_fees
   has_many :fines, through: :student_fees
 
+  # Enable one time password to make it use TFA
+  has_one_time_password
   # Before create the student account, create the account activation token for the student for account activation purpose.
   before_create :create_activation_digest
   # After the account is created, assign the desired fees to the student account.
@@ -17,8 +19,10 @@ class Student < User
             uniqueness:  {case_sensitive: false}
   # The student intake code must be present with the maximum length of 15 chars
   validates :intake, presence: true, length: { maximum: 15 }
-  # The check whether the student is international student or not
+  # Check whether the student is international student or not
   validates :international, :inclusion => {:in => [true, false]}
+  # Check whether the student turn on the two-factor authentication or not
+  validates :tfa, :inclusion => {:in => [true, false]}
   # The REGEX for the Student TP Number.
   VALID_TP_REGEX = /\ATP+[\d]{6}\z/i
   # Student number must be presented and the length not more than 8 and it is unique

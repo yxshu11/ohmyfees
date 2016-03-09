@@ -30,7 +30,12 @@
         </tr>
         <tr>
           <td><b>International Student:</b></td>
-					<td><%= @student.international.to_s.titleize %></td>
+					<td><% if @student.international == true %>
+              Yes
+              <% else %>
+              No
+              <% end %>
+          </td>
         </tr>
 				<tr>
           <td><b>Email:</b></td>
@@ -40,6 +45,15 @@
           <td><b>Contact Number:</b></td>
 					<td><%= @student.contact_number %></td>
         </tr>
+        <tr>
+					<td><b>Two-factor Authentication:</b></td>
+					<td><% if @student.tfa == true %>
+              On
+              <% else %>
+              Off
+              <% end %>
+          </td>
+				</tr>
 				<tr>
 					<td></td>
 					<td></td>

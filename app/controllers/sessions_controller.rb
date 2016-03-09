@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
-  # before_action :logged_in? only: [:new, :create]
+  before_action :always_clear_tfa, except: [:create, :tfa]
+  before_action :already_logged_in, except: [:destroy]
+  before_action :check_logged_in_tfa, only: [:tfa]
+
   def new
+
   end
 
   def create
@@ -34,9 +38,19 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:session][:email].downcase)
     if @user && @user.authenticate(params[:session][:password])
       # Log In and Handle something
-      if @user.type == "Staff" || @user.activated?
-        # If the user is activated!
-        if @user.admin == true || @authentication == true || @user.type == "Student"
+      # if @user.type == "Staff" || @user.activated?
+      #   # If the user is activated!
+      #   if @user.admin == true || @authentication == true || @user.type == "Student"
+      #
+      #   else
+      #
+      #   end
+      #
+      # else
+      #
+      # end
+      if @user.type == "Staff" # If it's staff account
+        if @user.admin == true || @authentication == true
           log_in @user
           flash[:success] = "Log In Successfully!"
           params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
@@ -45,19 +59,57 @@ class SessionsController < ApplicationController
           flash[:warning] = "Please enable your service location and sign-in within specified location(s). Contact the administrator for information."
           render 'new'
         end
-
-      else
-        message = "Account not activated. "
-        message += "Check your email for the activation link."
-        flash[:warning] = message
-        redirect_to root_path
+      else # @user.type == "Student" If it's student account
+        if @user.activated? # If the student account is activated
+          if @user.tfa == true # If the student turn on two factor authentication
+            tfa_user @user
+            redirect_to tfa_path
+          else # If the student do not turn on tfa
+            log_in @user
+            flash[:success] = "Log In Successfully!"
+            params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
+            redirect_back_or dashboard_path
+          end
+        else # If the student account is not activated
+          message = "Account not activated. "
+          message += "Check your email for the activation link."
+          flash[:warning] = message
+          redirect_to root_path
+        end
       end
     else
       # Create an Error Message
       flash.now[:danger] = 'Invalid email/password combination.'
       render 'new'
     end
+  end
 
+  def tfa
+    @user = User.find(tfa_user_id)
+
+    @otpauth = @user.provisioning_uri(nil, issuer: 'OHMYFEES')
+
+    @qr = RQRCode::QRCode.new(@otpauth).to_img.resize(250, 250).to_data_url
+
+    if !params[:sms_otp].nil?
+      client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
+      client.messages.create(from: ENV["twi_from"],
+                              to: ENV["twi_to"],
+                              body: "OHMYFEES \nOne Time Password (OTP Code): #{@user.otp_code}. \nThank you.")
+      flash.now[:success] = "OTP Code has been sent, please check your phone."
+    end
+
+    if !params[:otp_code].nil?
+      otp_code = params[:otp_code]
+      if @user.authenticate_otp(otp_code, drift: 60)
+        log_in @user
+        flash[:success] = "Log In Successfully!"
+        redirect_back_or dashboard_path
+      else
+        flash.now[:danger] = "Invalid OTP Code. Please try again."
+        render 'tfa'
+      end
+    end
   end
 
   def destroy
@@ -67,5 +119,25 @@ class SessionsController < ApplicationController
     end
     redirect_to root_path
   end
+
+  private
+
+    def already_logged_in
+      if logged_in?
+        flash[:warning] = "You have already logged in."
+        redirect_to dashboard_path
+      end
+    end
+
+    def check_logged_in_tfa
+      if tfa_user_id.nil?
+        flash[:warning] = "Please log in."
+        redirect_to login_path
+      end
+    end
+
+    def always_clear_tfa
+      clear_tfa
+    end
 
 end

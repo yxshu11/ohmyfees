@@ -17,4 +17,6 @@
 //= require tablesaw
 //= require jsapi
 //= require chartkick
+//= require bootstrap-switch
+//= require tooltip
 //= require_tree .

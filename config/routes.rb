@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   # Session Controller
   get     'login'                 =>    'sessions#new'
   post    'login'                 =>    'sessions#create'
+  get     'tfa'                   =>    'sessions#tfa'
   delete  'logout'                =>    'sessions#destroy'
 
   # Programme Controller

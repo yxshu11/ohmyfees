@@ -18,6 +18,7 @@ gem 'sdoc',                    '0.4.0', group: :doc
 gem 'twilio-ruby',             '4.2.1'
 gem 'unicorn'
 gem 'font-awesome-sass'
+gem 'bootstrap-switch-rails'
 gem 'sidekiq'
 
 # Profile picture management gems
@@ -33,8 +34,11 @@ gem 'chartkick'
 gem 'table-for'
 gem 'groupdate'
 gem 'active_median'
-gem 'prawn'
 
+# Active OTP Gem for Two factors authentication
+gem 'active_model_otp'
+gem 'rqrcode_png'
+ 
 # GeoCoder Gem for location service
 gem 'geocoder'
 

@@ -67,7 +67,7 @@ class StudentsController < ApplicationController
     # Define the Strong Parameters (Params) for the student for security purpose in the views.
     def student_params
       params.require(:student).permit(:name, :student_number, :contact_number, :intake, :international,
-                                      :picture, :email, :password, :password_confirmation)
+                                      :picture, :tfa, :email, :password, :password_confirmation)
     end
 
     # Before Filters for User access control

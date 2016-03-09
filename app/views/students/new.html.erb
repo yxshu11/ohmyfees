@@ -1,5 +1,11 @@
 <% provide(:title, 'Student Registration') %>
 
+<script type="text/javascript">
+$(document).ready(function() {
+  $('input:checkbox').bootstrapSwitch();
+});
+</script>
+
 <div class="container">
 <h1>Student Sign Up</h1>
   <div class="row">
@@ -21,13 +27,22 @@
         <!-- <%= f.text_field :intake, class: 'form-control' %> -->
 
         <%= f.label :international, "International Student?" %>
-        <%= f.select(:international, [['True',true], ['False',false]],
+        <br>
+        <%= f.check_box :international,
+                        :data => { 'on-text'=>'YES', 'off-text'=>'NO' } %>
+        <br><br>
+        <!-- <%= f.select(:international, [['True',true], ['False',false]],
                     { include_blank: true},
-                    { class: 'form-control'}) %>
+                    { class: 'form-control'}) %> -->
 
         <%= f.label :contact_number %>
         <%= f.phone_field :contact_number, :maxlength => "11", class: 'form-control' %>
 
+        <%= f.label :tfa, "Two-Factor Authentication"%>
+        <br>
+        <%= f.check_box :tfa %>
+        <br><br>
+        
         <%= f.label :email, "Email (@mail.apu.edu.my)"%>
         <%= f.email_field :email, class: 'form-control' %>
 
