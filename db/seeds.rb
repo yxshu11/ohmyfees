@@ -200,18 +200,18 @@ Student.create!(name: "Homer Simpson",
                 admin: false,
                 activated: false)
 
-Student.create!(name: "Jaemy Ho",
-                student_number: "TP028816",
-                email: "TP028816@mail.apu.edu.my",
-                intake: "UC1F1601CGD",
-                international: true,
-                contact_number: "0123456789",
-                tfa: false,
-                password: "111111",
-                password_confirmation: "111111",
-                admin: false,
-                activated: true,
-                activated_at: Time.zone.now)
+# Student.create!(name: "Jaemy Ho",
+#                 student_number: "TP028816",
+#                 email: "TP028816@mail.apu.edu.my",
+#                 intake: "UC1F1601CGD",
+#                 international: true,
+#                 contact_number: "0123456789",
+#                 tfa: false,
+#                 password: "111111",
+#                 password_confirmation: "111111",
+#                 admin: false,
+#                 activated: true,
+#                 activated_at: Time.zone.now)
 
 # Faker Gem generates dummy Student account in the database
 # all_intake = ["UCFF1601","UC1F1601CGD","UC1F1601IS", "UC1F1601SE"]
