@@ -1,15 +1,15 @@
 # Generate Staff Account (Admin)
-Staff.create!(name: "John Testing",
+Staff.create!(name: "Johnny Appleseed",
               staff_number: "SA000238",
-              email: "testing@apu.edu.my",
+              email: "admin@apu.edu.my",
               contact_number: "0123456789",
               password: "111111",
               password_confirmation: "111111",
               admin: true)
 
-Staff.create!(name: "John NonAdmin",
+Staff.create!(name: "John Appleseed",
               staff_number: "SA000239",
-              email: "testing2@apu.edu.my",
+              email: "nonadmin@apu.edu.my",
               contact_number: "0123456789",
               password: "111111",
               password_confirmation: "111111",
