@@ -8,16 +8,10 @@ Rails.application.routes.draw do
   get     'dashboard'             =>    'landing_pages#dashboard'
 
   # Student Controller
-  get     'students'              =>    'students#index'
   get     'student_registration'  =>    'students#new'
-
-  get     'student_fees'          =>    'student_fees#index'
-
-  get     'history'               =>    'payments#index'
+  get     'history'               =>    'payments#index' # For Payment History
 
   # Staff Controller
-
-  get     'staffs'                =>    'staffs#index'
   get     'staff_registration'    =>    'staffs#new'
 
   # Session Controller
@@ -29,10 +23,6 @@ Rails.application.routes.draw do
 
   # Programme Controller
   get     'programme_registration'  =>    'programmes#new'
-  get     'programmes'              =>    'programmes#index'
-
-  # Intake Controller
-  get     'intakes'                 =>    'intakes#index'
 
   # Utility Fees Controller
   get     'utility_fee_registration' =>    'utility_fees#new'

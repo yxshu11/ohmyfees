@@ -4,7 +4,7 @@
 <h1>Programme Information:</h1>
   <div class="row">
     <div class="col-md-6 col-md-offset-3 well">
-			<h4>
+			<h5>
 			<table class="table noborder">
         <tr>
           <td class="no-repeat-header"><b>Programme Name:</b></td>
@@ -30,20 +30,14 @@
             <% end %>
           </td>
         </tr>
-        <tr>
-          <td><b>Utility Fee(s):</b></td>
-					<td>
-          </td>
-        </tr>
 				<tr>
 					<td></td>
 					<td></td>
 				</tr>
 			</table>
-			</h4>
+    </h5>
 				<section class="center">
         <%= link_to "Add Intake", new_programme_intake_path(@programme), class: "btn btn-primary" %> &nbsp;
-        <%= link_to "Add Utility Fees", '#', class: "btn btn-primary" %> &nbsp;
 				<%= link_to "Edit", edit_programme_path(@programme), class: "btn btn-primary" %>  &nbsp;
 				<%= link_to "Back", programmes_path, class: "btn btn-default" %>
 			</section>
