@@ -6,12 +6,15 @@
     <div class="panel panel-default">
       <div class="panel-body center">
         <div class="row">
-          <form action="/student_stats" accept-charset="UTF-8" method="get">
+          <form action="/student_stats" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <div class="col-md-3"><h4>Select Year:</h4></div>
             <div class="col-md-6">
               <!-- <%= hidden_field_tag :intake_year %> -->
               <%= collection_select :intake_year, nil, @year, :to_s, :to_s,
-                                    { include_blank: false }, class: 'form-control' %>
+                                    { include_blank: false,
+                                      :selected => params[:intake_year] },
+                                    class: 'form-control' %>
             </div>
             <div class="col-md-3">
               <input type="submit" name="commit" value="Select" class="btn btn-success">
@@ -30,12 +33,15 @@
     <div class="panel panel-default">
       <div class="panel-body center">
         <div class="row">
-          <form action="/student_stats" accept-charset="UTF-8" method="get">
+          <form action="/student_stats" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <div class="col-md-3"><h4>Select Year:</h4></div>
             <div class="col-md-6">
               <!-- <%= hidden_field_tag :programme_year %> -->
               <%= collection_select :programme_year, nil, @year, :to_s, :to_s,
-                                    { include_blank: false }, class: 'form-control' %>
+                                    { include_blank: false,
+                                      :selected => params[:programme_year]},
+                                    class: 'form-control' %>
             </div>
             <div class="col-md-3">
               <input type="submit" name="commit" value="Select" class="btn btn-success">
@@ -54,12 +60,15 @@
     <div class="panel panel-default">
       <div class="panel-body center">
         <div class="row">
-          <form action="/student_stats" accept-charset="UTF-8" method="get">
+          <form action="/student_stats" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <div class="col-md-3"><h4>Select Year:</h4></div>
             <div class="col-md-6">
               <!-- <%= hidden_field_tag :student_year %> -->
               <%= collection_select :student_year, nil, @year, :to_s, :to_s,
-                                    { include_blank: false }, class: 'form-control' %>
+                                    { include_blank: false,
+                                      :selected => params[:student_year]},
+                                    class: 'form-control' %>
             </div>
             <div class="col-md-3">
               <input type="submit" name="commit" value="Select" class="btn btn-success">

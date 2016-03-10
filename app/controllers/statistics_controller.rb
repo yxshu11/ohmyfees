@@ -74,7 +74,7 @@ class StatisticsController < ApplicationController
 
   def payment
 
-    data = Student.group_by_year(:created_at).count
+    data = Payment.group_by_year(:created_at).count
 
     @year = Array.new
     data.each do |k,v|

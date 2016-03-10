@@ -44,7 +44,7 @@ class SessionsController < ApplicationController
           params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
           redirect_back_or dashboard_path
         else
-          flash[:warning] = "Please enable your service location and sign-in within specified location(s). Contact the administrator for information."
+          flash.now[:warning] = "Please enable your service location and sign-in within specified location(s). Contact the administrator for information."
           render 'new'
         end
       else # @user.type == "Student" If it's student account
@@ -61,7 +61,7 @@ class SessionsController < ApplicationController
         else # If the student account is not activated
           message = "Account not activated. "
           message += "Check your email for the activation link."
-          flash[:warning] = message
+          flash.now[:warning] = message
           redirect_to root_path
         end
       end

@@ -6,14 +6,15 @@
     <div class="panel panel-default">
       <div class="panel-body center">
         <div class="row">
-          <form action="/payment_stats" accept-charset="UTF-8" method="get">
+          <form action="/payment_stats" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <div class="col-md-3"><h4>Select Type:</h4></div>
             <div class="col-md-6">
               <select class="form-control" id="payment_period" name="payment_period">
-                <option selected="selected" value="day">Day</option>
-                <option value="week">Week</option>
-                <option value="month">Month</option>
-                <option value="year">Year</option>
+                <option <%= selected='selected' if params[:payment_period] == 'day' %> value="day">Day</option>
+                <option <%= selected='selected' if params[:payment_period] == 'week' %> value="week">Week</option>
+                <option <%= selected='selected' if params[:payment_period] == 'month' %> value="month">Month</option>
+                <option <%= selected='selected' if params[:payment_period] == 'year' %> value="year">Year</option>
               </select>
             </div>
             <div class="col-md-3">
@@ -33,11 +34,14 @@
     <div class="panel panel-default">
       <div class="panel-body center">
         <div class="row">
-          <form action="/payment_stats" accept-charset="UTF-8" method="get">
+          <form action="/payment_stats" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <div class="col-md-3"><h4>Select Year:</h4></div>
             <div class="col-md-6">
               <%= collection_select :payment_mode_year, nil, @year, :to_s, :to_s,
-                                    { include_blank: false }, class: 'form-control' %>
+                                    { include_blank: false,
+                                      :selected => params[:payment_mode_year] },
+                                    class: 'form-control' %>
             </div>
             <div class="col-md-3">
               <input type="submit" name="commit" value="Select" class="btn btn-success">

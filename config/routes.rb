@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get     'login'                 =>    'sessions#new'
   post    'login'                 =>    'sessions#create'
   get     'tfa'                   =>    'sessions#tfa'
+  post    'tfa'                   =>    'sessions#tfa'
   delete  'logout'                =>    'sessions#destroy'
 
   # Programme Controller
@@ -42,12 +43,16 @@ Rails.application.routes.draw do
   # Statistic controller
   get     'statistics'              =>      'statistics#index'
   get     'student_stats'           =>      'statistics#student'
+  post    'student_stats'           =>      'statistics#student'
   get     'payment_stats'           =>      'statistics#payment'
+  post    'payment_stats'           =>      'statistics#payment'
 
   # Report controller
   get     'reports'                 =>      'reports#index'
   get     'monthly_report'          =>      'reports#monthly'
+  post    'monthly_report'          =>      'reports#monthly'
   get     'annual_report'           =>      'reports#annual'
+  post    'annual_report'           =>      'reports#annual'
 
   # Mapping for pay function to the new in payments controller
   # map.resources :payments, :new => { :pay => :get }

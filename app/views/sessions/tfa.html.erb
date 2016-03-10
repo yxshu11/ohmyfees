@@ -18,7 +18,8 @@
         <%= image_tag @qr %>
 
         <p><b>OR<b></p>
-        <form action="/tfa" accept-charset="UTF-8" method="get">
+        <form action="/tfa" accept-charset="UTF-8" method="post">
+          <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
           <%= hidden_field_tag :sms_otp, true %>
           <input type="submit" name="commit" value="Send OHMYCode via SMS" class="btn btn-success">
         </form>
@@ -26,7 +27,8 @@
 
       <div class="col-md-12 col-sm-12">
         <hr>
-        <form action="/tfa" accept-charset="UTF-8" method="get">
+        <form action="/tfa" accept-charset="UTF-8" method="post">
+          <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
           <%= label_tag :otp_code, "Enter OHMYCode code:" %>
           <%= password_field_tag :otp_code, nil, { class: 'form-control'} %>
 
