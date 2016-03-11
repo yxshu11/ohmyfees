@@ -1,9 +1,1 @@
-mac:
-  name: Mac Shu
-  email: TP028815@mail.apu.edu.my
-  student_number: TP028815
-  contact_number: 0123456789
-  intake: UC3F1608SE
-  international: false
-  tfa: false
-  password_digest: <%= Student.digest('password') %>
+

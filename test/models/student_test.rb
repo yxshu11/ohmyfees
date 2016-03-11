@@ -43,12 +43,47 @@ class StudentTest < ActiveSupport::TestCase
     end
   end
 
-  # test "email addresses should be unique" do
-  #   duplicate_student = @student.dup
-  #   duplicate_student.email = @student.email.downcase
-  #   @student.save
-  #   assert_not duplicate_student.valid?
-  # end
+  test "email addresses should be unique" do
+    duplicate_student = @student.dup
+    duplicate_student.email = @student.email.downcase
+    @student.save
+    assert_not duplicate_student.valid?
+  end
+
+  test "student number should be presented" do
+    @student.student_number = " "
+    assert_not @student.valid?
+  end
+
+  test "student number should be not too long" do
+    @student.student_number = "TP0288111"
+    assert_not @student.valid?
+  end
+
+  test "student number should be unique" do
+    duplicate_student = @student.dup
+    duplicate_student.student_number = @student.student_number.downcase
+    @student.save
+    assert_not duplicate_student.valid?
+  end
+
+  test "student number should be in TPXXXXXX format" do
+    invalid_tp_number = %w[TP0288111 TP0288 NUMBER028811 SN012345]
+    invalid_tp_number.each do |invalid_tp_number|
+      @student.student_number = invalid_tp_number
+      assert_not @student.valid?, "#{invalid_tp_number.inspect} should be valid"
+    end
+  end
+
+  test "intake should be presented" do
+    @student.intake = " "
+    assert_not @student.valid?
+  end
+
+  test "intake should not be too long" do
+    @student.intake = "U" * 16
+    assert_not @student.valid?
+  end
 
   test "contact_number should be presented" do
     @student.contact_number = " "
@@ -72,4 +107,7 @@ class StudentTest < ActiveSupport::TestCase
     assert_not @student.valid?
   end
 
+  test "authenticated? should return false for a user with nil digest" do
+    assert_not @student.authenticated?(:remember, '')
+  end
 end
