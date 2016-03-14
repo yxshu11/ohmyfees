@@ -8,9 +8,9 @@ class Intake < ActiveRecord::Base
   validates :intake_code, presence: true
   # Check the starting date must be presented
   validates :starting_date, presence: true
-  # Check the local student fee must be presented
-  validates :local_student_fee, presence: true
-  # Check the international student fee must be presented
-  validates :international_student_fee, presence: true
+  # Check the local student fee must be presented and in number format
+  validates :local_student_fee, presence: true, numericality: { greater_than: 0 }
+  # Check the international student fee must be presented and in number format
+  validates :international_student_fee, presence: true, numericality: { greater_than: 0 }
 
 end

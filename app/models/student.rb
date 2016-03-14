@@ -26,9 +26,10 @@ class Student < User
   # The REGEX for the Student TP Number.
   VALID_TP_REGEX = /\ATP+[\d]{6}\z/i
   # Student number must be presented and the length not more than 8 and it is unique
-  validates :student_number, presence: true, length: { maximum: 8 },
-            format: { with: VALID_TP_REGEX },
-            uniqueness: { case_sensitive: false}
+  validates :student_number, presence: true,
+                             length: { maximum: 8 },
+                             format: { with: VALID_TP_REGEX },
+                             uniqueness: { case_sensitive: false}
 
   # Function for sending the activation email to the student account
   def send_activation_mail
@@ -65,7 +66,7 @@ class Student < User
 
     # Assign the fees to the student based on their intake code
     def assign_fee
-      if Intake.count != 0
+      if Intake.find_by(intake_code: self.intake) != nil
         # Fetch intake code
         m_intake = Intake.find_by(intake_code: self.intake)
         # Fetch the programme obj based on the intake code

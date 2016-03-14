@@ -1,0 +1,6 @@
+intake_a:
+  intake_code: UC1F1601IT
+  starting_date: <%= DateTime.now %>
+  local_student_fee: 16000
+  international_student_fee: 13000
+  programme: programme_a

@@ -1,0 +1,5 @@
+payment:
+  amount: 100
+  paid_by: Student
+  payment_method: Online
+  student_fee: student_fee

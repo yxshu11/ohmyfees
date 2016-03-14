@@ -4,10 +4,10 @@ class ProgrammeTest < ActiveSupport::TestCase
 
   def setup
     @programme = Programme.new(name: "Foundation Programme",
-                      programme_type: "Foundation Programme",
-                      year: 1,
-                      semester: 3,
-                      description: "This is a description.")
+                               programme_type: "Foundation Programme",
+                               year: 1,
+                               semester: 3,
+                               description: "This is a description.")
   end
 
   test "programme should be valid" do
@@ -21,6 +21,7 @@ class ProgrammeTest < ActiveSupport::TestCase
 
   test "name should not be too long" do
     @programme.name = "a" * 101
+    assert_not @programme.valid?
   end
 
   test "programme type should be presented" do
@@ -33,8 +34,18 @@ class ProgrammeTest < ActiveSupport::TestCase
     assert_not @programme.valid?
   end
 
+  test "year should be in integer format" do
+    @programme.year = 1.2
+    assert_not @programme.valid?
+  end
+
   test "semester should be presented" do
     @programme.semester = " "
     assert_not @programme. valid?
+  end
+
+  test "semester should be in integer format" do
+    @programme.semester = 1.2
+    assert_not @programme.valid?
   end
 end
