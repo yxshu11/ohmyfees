@@ -4,4 +4,4 @@ student_fee:
   due_date: <%= DateTime.now %>
   description: This is a description.
   paid: false
-  user_id: student
+  user_id: activated_student

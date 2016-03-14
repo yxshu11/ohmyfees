@@ -1,15 +1,43 @@
 # Student Account Fixture
-student:
+activated_student:
   name: FirstName SecondName
-  email: TP012345@mail.apu.edu.my
+  email: tp012345@mail.apu.edu.my
   student_number: TP012345
   contact_number: 0123456789
   intake: UC3F1608SE
   international: false
   tfa: false
+  type: Student
   admin: false
   activated: true
   activated_at: <%= Time.zone.now %>
+  password_digest: <%= User.digest('111111') %>
+
+tfa_student:
+  name: FirstName SecondName
+  email: tp012346@mail.apu.edu.my
+  student_number: TP012346
+  contact_number: 0123456789
+  intake: UC3F1608SE
+  international: false
+  tfa: true
+  type: Student
+  admin: false
+  activated: true
+  activated_at: <%= Time.zone.now %>
+  password_digest: <%= User.digest('111111') %>
+
+nonactivated_student:
+  name: FirstName SecondName
+  email: tp054321@mail.apu.edu.my
+  student_number: TP054321
+  contact_number: 0123456789
+  intake: UC3F1608SE
+  international: false
+  tfa: false
+  type: Student
+  admin: false
+  activated: false
   password_digest: <%= User.digest('111111') %>
 
 # Staff Account Fixture
@@ -19,4 +47,5 @@ admin_staff:
   staff_number: SA012345
   contact_number: 0123456789
   admin: true
+  type: Staff
   password_digest: <%= User.digest('111111') %>

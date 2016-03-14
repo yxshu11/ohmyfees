@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class LandingPagesControllerTest < ActionController::TestCase
+
   def setup
     @base_title = "OHMYFEES"
+    @activated_student = users(:activated_student)
   end
 
   test "should get home" do
@@ -24,7 +26,7 @@ class LandingPagesControllerTest < ActionController::TestCase
   end
 
   test "should get dashboard" do
-    # log_in
+    log_in_as(@activated_student, remember_me: '1')
     get :dashboard
     assert_response :success
     assert_select "title", "Dashboard | #{@base_title}"

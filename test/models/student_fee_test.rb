@@ -3,7 +3,7 @@ require 'test_helper'
 class StudentFeeTest < ActiveSupport::TestCase
 
   def setup
-    @student = users(:student)
+    @student = users(:activated_student)
     @student_fee = StudentFee.new(name: "Student Fee 1",
                                   amount: 100,
                                   due_date: DateTime.now,
