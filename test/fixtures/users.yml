@@ -49,3 +49,12 @@ admin_staff:
   admin: true
   type: Staff
   password_digest: <%= User.digest('111111') %>
+
+nonadmin_staff:
+  name: FirstName SecondName
+  email: nonadmin@apu.edu.my
+  staff_number: SA012346
+  contact_number: 0123456789
+  admin: false
+  type: Staff
+  password_digest: <%= User.digest('111111') %>

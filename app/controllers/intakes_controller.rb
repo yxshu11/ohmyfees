@@ -9,7 +9,7 @@ class IntakesController < ApplicationController
   def create
     @intake = selected_programme.intakes.build(intake_params)
     if @intake.save
-      flash[:success] = "Intake added!"
+      flash[:success] = "Intake added."
       redirect_to selected_programme
     else
       render 'new'
@@ -18,14 +18,11 @@ class IntakesController < ApplicationController
   end
 
   def show
-    # programme = Programme.find(params[:programme_id])
     @intake = Intake.find(params[:id])
   end
 
   def index
     @intakes = Intake.paginate(page: params[:page])
-    # programme = Programme.find(params[:programme_id])
-    # @intake = programme.intakes.paginate(page: params[:page])
   end
 
   def edit
@@ -44,7 +41,7 @@ class IntakesController < ApplicationController
 
   def destroy
     @intake = Intake.find(params[:id]).destroy
-    flash[:success] = "Selected Intake deleted."
+    flash[:success] = "Selected intake deleted."
     redirect_to intakes_path
   end
 

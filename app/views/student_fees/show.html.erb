@@ -61,11 +61,12 @@
           <% if current_user.type == "Student" && @student_fee.paid == false %>
             <%= link_to "Pay", pay_student_student_fee_payments_path(current_user, @student_fee), :method => 'post', multipart: true, class: "btn btn-primary form-control" %>
             <br><br>
+            <%= link_to "Back", student_fees_path, class: "btn btn-default form-control" %>
           <% elsif current_user.type == "Staff" %>
             <%= link_to "Pay", new_student_student_fee_payment_path(@current_student, @student_fee), class: "btn btn-primary form-control" %>
             <br><br>
+            <%= link_to "Back", request.referrer, class: "btn btn-default form-control" %>
           <% end %>
-				<%= link_to "Back", student_fees_path, class: "btn btn-default form-control" %>
 			</section>
 		</div>
 	</div>

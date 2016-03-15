@@ -33,5 +33,20 @@ class StudentsSignupTest < ActionDispatch::IntegrationTest
     assert_equal 1, ActionMailer::Base.deliveries.size
     student = assigns(:student)
     assert_not student.activated?
+    # Try to log in before activation.
+    log_in_as(student)
+    assert_not is_logged_in?
+    # Invalid activation token
+    get edit_account_activation_path("invalid token")
+    assert_not is_logged_in?
+    # Valid token, wrong email
+    get edit_account_activation_path(student.activation_token, email: 'wrong')
+    assert_not is_logged_in?
+    # Valid activation token
+    get edit_account_activation_path(student.activation_token, email: student.email)
+    assert student.reload.activated?
+    follow_redirect!
+    assert_template root_path
+    assert is_logged_in?
   end
 end

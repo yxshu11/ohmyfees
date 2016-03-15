@@ -13,7 +13,7 @@ class ProgrammesController < ApplicationController
   def create
     @programme = Programme.new(programme_params)
       if @programme.save
-        flash[:success] = "Programme Saved!"
+        flash[:success] = "Programme saved."
         redirect_to @programme
       else
         render 'new'
@@ -33,7 +33,7 @@ class ProgrammesController < ApplicationController
   def update
     @programme = Programme.find(params[:id])
       if @programme.update_attributes(programme_params)
-        flash[:success] = "Programme Details Updated!"
+        flash[:success] = "Programme details updated."
         redirect_to @programme
       else
         render 'edit'
@@ -42,7 +42,7 @@ class ProgrammesController < ApplicationController
 
   def destroy
     Programme.find(params[:id]).destroy
-    flash[:success] = "Programme Deleted"
+    flash[:success] = "Programme deleted."
     redirect_to programmes_path
   end
 
@@ -62,7 +62,7 @@ class ProgrammesController < ApplicationController
 
     def correct_user_type
       unless @current_user.type == "Staff"
-        flash[:danger] = "Access Denied."
+        flash[:danger] = "Access denied."
         redirect_to(root_path)
       end
     end
