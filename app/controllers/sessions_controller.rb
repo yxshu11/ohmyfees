@@ -40,7 +40,7 @@ class SessionsController < ApplicationController
       if @user.type == "Staff" # If it's staff account
         if @user.admin == true || @authentication == true
           log_in @user
-          flash[:success] = "Log In Successfully!"
+          flash[:success] = "Log in successfully!"
           params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
           redirect_back_or dashboard_path
         else
@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
             redirect_to tfa_path
           else # If the student do not turn on tfa
             log_in @user
-            flash[:success] = "Log In Successfully!"
+            flash[:success] = "Log in successfully!"
             params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
             redirect_back_or dashboard_path
           end
@@ -91,7 +91,7 @@ class SessionsController < ApplicationController
       otp_code = params[:otp_code]
       if @user.authenticate_otp(otp_code, drift: 60)
         log_in @user
-        flash[:success] = "Log In Successfully!"
+        flash[:success] = "Log in successfully!"
         redirect_back_or dashboard_path
       else
         flash.now[:danger] = "Invalid OTP Code. Please try again."
@@ -103,7 +103,7 @@ class SessionsController < ApplicationController
   def destroy
     if logged_in?
       log_out
-      flash[:success] = "Log Out Sucessfully!"
+      flash[:success] = "Log out sucessfully!"
     end
     redirect_to root_path
   end
