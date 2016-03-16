@@ -12,6 +12,7 @@ module SessionsHelper
   def clear_tfa
     session[:tfa_user_id] = nil
   end
+  
   # Logs in the given users
   def log_in(user)
     session[:user_id] = user.id

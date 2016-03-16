@@ -13,7 +13,7 @@ class UtilityFeesController < ApplicationController
   def create
     @utility_fee = UtilityFee.new(fee_params)
       if @utility_fee.save
-        flash[:success] = "Utility Fee saved."
+        flash[:success] = "Utility fee saved."
         redirect_to utility_fees_path
       else
         render 'new'
@@ -31,7 +31,7 @@ class UtilityFeesController < ApplicationController
   def update
     @utility_fee = UtilityFee.find(params[:id])
       if @utility_fee.update_attributes(fee_params)
-        flash[:success] = "Utility Fee details updated."
+        flash[:success] = "Utility fee details updated."
         redirect_to @utility_fee
       else
         render 'edit'
@@ -60,7 +60,7 @@ class UtilityFeesController < ApplicationController
 
     def correct_user_type
       unless @current_user.type == "Staff"
-        flash[:danger] = "Access Denied."
+        flash[:danger] = "Access denied."
         redirect_to(root_path)
       end
     end

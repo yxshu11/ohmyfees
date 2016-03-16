@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  before_action :logged_in_user, only: [:index, :monthly, :annual]
+  before_action :staff_user_type, only: [:index, :monthly, :annual]
 
   def index
 
@@ -77,4 +79,21 @@ class ReportsController < ApplicationController
     # Getting the data for the chart to show each month how many payment is made
     @annual_chart = annual_data.group_by_month(:created_at).count
   end
+
+  private
+
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_path
+      end
+    end
+
+    def staff_user_type
+      unless @current_user.type == "Staff"
+        flash[:danger] = "Access Denied."
+        redirect_to root_path
+      end
+    end
 end

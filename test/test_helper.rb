@@ -28,6 +28,10 @@ class ActiveSupport::TestCase
     end
   end
 
+  def tfa_user(user)
+    session[:tfa_user_id] = user.id
+  end
+
   private
 
     # Returns true inside an integration test.

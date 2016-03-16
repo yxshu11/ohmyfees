@@ -1,0 +1,5 @@
+utility_fee:
+  name: Utility Fee
+  amount: 100
+  repetitive_payment: false
+  description: This is a description

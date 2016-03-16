@@ -61,7 +61,7 @@ class SessionsController < ApplicationController
         else # If the student account is not activated
           message = "Account not activated. "
           message += "Check your email for the activation link."
-          flash.now[:warning] = message
+          flash[:warning] = message
           redirect_to root_path
         end
       end
@@ -73,7 +73,7 @@ class SessionsController < ApplicationController
   end
 
   def tfa
-    @user = User.find(tfa_user_id)
+    @user = User.find_by(id: tfa_user_id)
 
     @otpauth = @user.provisioning_uri(nil, issuer: 'OHMYFEES')
 

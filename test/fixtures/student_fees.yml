@@ -1,7 +1,15 @@
 student_fee:
   name: Student Fee 1
   amount: 100
-  due_date: <%= DateTime.now %>
+  due_date: <%= DateTime.now + 7.days %>
   description: This is a description.
   paid: false
+  user_id: activated_student
+
+paid_student_fee:
+  name: Student Fee 2
+  amount: 100
+  due_date: <%= DateTime.now - 7.days %>
+  description: This is a description.
+  paid: true
   user_id: activated_student

@@ -87,7 +87,7 @@ class PaymentsController < ApplicationController
   end
 
   def show
-    @student_fee = current_user.student_fees.find(params[:student_fee_id])
+    @student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
     @payment = @student_fee.payment
   end
 
@@ -102,11 +102,11 @@ class PaymentsController < ApplicationController
     end
 
     def correct_student
-      if current_user_type == "Student"
-        @student = Student.find(params[:student_id])
+      if current_user.type == "Student"
+        @student = Student.find_by(id: params[:student_id])
         unless current_user?(@student)
           flash[:danger] = "Access Denied."
-          redirect_to(dashboard_path)
+          redirect_to dashboard_path
         end
       end
     end
