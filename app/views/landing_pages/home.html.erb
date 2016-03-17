@@ -1,49 +1,54 @@
-<div class="center panel col-md-12 main_header">
-    <br><h1>OHMYFEES</h1><br>
-    <p>Hassle-free experience with your school fees.</p>
+<div class="container-fluid">
+  <div class="col-md-12 panel main_header center", style="background-image: url('assets/background_<%= rand(4) %>.png')">
+
+
+    <!-- Page Title -->
+    <p>&nbsp;</p>
+    <h1>OHMYFEES</h1>
+    <p>Fee management at your finger tips</p>
     <hr>
-
-    <div class="row">
-      <br>
-        <!-- Secure Section -->
-        <div class="center col-md-3">
-          <div class="panel panel-body my-inner section-sizing prop">
-            <br><br>
-            <%= image_tag("secure.png", :size => "100x100")%>
-            <br><br>
-            <h4>Secured Payment Gateway.</h4>
-          </div>
-        </div>
-
-        <!-- Time Section -->
-        <div class="center col-md-3 ">
-          <div class="my-inner panel panel-body section-sizing dashboard-panel prop">
-            <br><br>
-            <%= image_tag("time.png", :size => "100x100")%>
-            <br><br>
-            <h4>Quick and Easy.</h4>
-          </div>
-        </div>
-
-        <!-- Location Section -->
-        <div class="center col-md-3 ">
-          <div class="my-inner panel panel-body section-sizing dashboard-panel prop">
-            <br><br>
-            <%= image_tag("location.png", :size => "100x100")%>
-            <br><br>
-            <h4>Anytime, Anywhere.</h4>
-          </div>
-        </div>
-
-        <!-- Notification Section -->
-        <div class="center col-md-3 ">
-          <div class="my-inner panel panel-body section-sizing dashboard-panel prop">
-            <br><br>
-            <%= image_tag("notification.png", :size => "100x100")%>
-            <br><br>
-            <h4>Get Notified.</h4>
-          </div>
-        </div>
-    </div>
     <br>
+    <!-- Secure Section -->
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="panel panel-body my-inner section-sizing prop">
+          <br><br>
+          <%= image_tag("secure.png", :size => "100x100", :alt => "Secure")%>
+          <br><br>
+          <p>Secured Payment Gateway</p>
+        </div>
+      </div>
+
+      <!-- Time Section -->
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="my-inner panel panel-body section-sizing dashboard-panel prop">
+          <br><br>
+          <%= image_tag("time.png", :size => "100x100", :alt => "Quick and Easy")%>
+          <br><br>
+          <p>Quick and Easy</p>
+        </div>
+      </div>
+
+      <!-- Location Section -->
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="my-inner panel panel-body section-sizing dashboard-panel prop">
+          <br><br>
+          <%= image_tag("location.png", :size => "100x100")%>
+          <br><br>
+          <p>Anytime, Anywhere</p>
+        </div>
+      </div>
+
+      <!-- Notification Section -->
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="my-inner panel panel-body section-sizing dashboard-panel prop">
+          <br><br>
+          <%= image_tag("notification.png", :size => "100x100")%>
+          <br><br>
+          <p>Get Notified</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>

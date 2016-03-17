@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get     'help'                  =>    'landing_pages#help'
   get     'contact'               =>    'landing_pages#contact'
   get     'dashboard'             =>    'landing_pages#dashboard'
-
+  
   # Student Controller
   get     'student_registration'  =>    'students#new'
   get     'history'               =>    'payments#index' # For Payment History
