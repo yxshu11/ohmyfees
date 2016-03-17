@@ -61,9 +61,9 @@
 			</table>
       </h5>
 				<section class="center">
-        <% if current_user_type == "Student" %>
+        <% if current_user.type == "Student" %>
           <%= link_to "Edit", edit_student_path(current_user), class: "btn btn-primary" %>  &nbsp;
-        <% elsif current_user_type == "Staff" %>
+        <% elsif current_user.type == "Staff" %>
           <%= link_to "Edit", edit_student_path, class: "btn btn-primary" %> &nbsp;
         <% end %>
 				<%= link_to "Back", dashboard_path, class: "btn btn-default" %>

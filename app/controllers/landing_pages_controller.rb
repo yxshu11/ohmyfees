@@ -17,7 +17,7 @@ class LandingPagesController < ApplicationController
   end
 
   def dashboard
-    if current_user_type == "Student"
+    if current_user.type == "Student"
       # Display the fees that belong only the to the signed in student
       @student_fees = current_user.student_fees.where("due_date < ? AND paid = ?", DateTime.now + 1.month, false).order(:due_date)
     end

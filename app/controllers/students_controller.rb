@@ -13,7 +13,6 @@ class StudentsController < ApplicationController
   def new
     @student = Student.new
     @intakes = Intake.all
-    # (Cause error for now)
   end
 
   # POST for student_registration
@@ -82,8 +81,8 @@ class StudentsController < ApplicationController
 
     # Confirms the correct user. (Staff is under exception)
     def correct_user
-      if current_user_type == "Student"
-        @student = Student.find(params[:id])
+      if current_user.type == "Student"
+        @student = Student.find_by(id: params[:id])
         unless current_user?(@student)
           flash[:danger] = "Access Denied."
           redirect_to(root_path)
@@ -93,7 +92,7 @@ class StudentsController < ApplicationController
 
     # Confirms an Staff user.
     def staff_user
-      unless current_user_type == "Staff"
+      unless current_user.type == "Staff"
         flash[:danger] = "Access Denied."
         redirect_to(root_path)
       end
