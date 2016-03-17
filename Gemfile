@@ -38,7 +38,7 @@ gem 'active_median'
 # Active OTP Gem for Two factors authentication
 gem 'active_model_otp'
 gem 'rqrcode_png'
- 
+
 # GeoCoder Gem for location service
 gem 'geocoder'
 
@@ -65,4 +65,5 @@ group :production do
   gem 'pg',             '0.17.1'
   gem 'rails_12factor', '0.0.2'
   gem 'puma',           '2.11.1'
+  gem 'heroku-deflater'
 end
