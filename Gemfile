@@ -46,6 +46,9 @@ gem 'geocoder'
 gem 'activemerchant'
 gem 'paypal-sdk-rest'
 
+# Image Loseless compression for performance
+gem 'sprockets-image_compressor'
+
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
   gem 'byebug',      '3.4.0'
