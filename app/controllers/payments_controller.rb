@@ -70,7 +70,11 @@ class PaymentsController < ApplicationController
       Payment.create!(paid_by: "Staff",
                       student_fee_id: student_fee.id,
                       amount: total_amount,
-                      payment_method: params[:payment_method])
+                      payment_method: params[:payment_method],
+                      cheque_bank_name: params[:cheque_bank_name],
+                      cheque_id: params[:cheque_id],
+                      transfer_bank_name: params[:transfer_bank_name],
+                      bank_transfer_id: params[:bank_transfer_id])
       student_fee.update_attribute(:paid, true)
       flash[:success] = "Payment Done Successfully"
       redirect_to dashboard_path

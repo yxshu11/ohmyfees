@@ -26,6 +26,26 @@
           <td><b>Payment Method:</b></td>
 					<td><%= @payment.payment_method %></td>
         </tr>
+        <% if @payment.payment_method == "Cheque" %>
+          <tr>
+            <td><b>Bank:</b></td>
+  					<td><%= @payment.cheque_bank_name %></td>
+          </tr>
+          <tr>
+            <td><b>Cheque ID:</b></td>
+  					<td><%= @payment.cheque_id %></td>
+          </tr>
+        <% end %>
+        <% if @payment.payment_method == "Bank Transfer" %>
+          <tr>
+            <td><b>Bank:</b></td>
+  					<td><%= @payment.transfer_bank_name %></td>
+          </tr>
+          <tr>
+            <td><b>Reference ID:</b></td>
+  					<td><%= @payment.bank_transfer_id %></td>
+          </tr>
+        <% end %>
         <tr>
 					<td></td>
 					<td></td>

@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div class="row center">
+  <div class="row">
     <div class="col-md-6 col-md-offset-3 well">
       <% if current_user.type == "Student" %>
         <form action="/students/<%= current_user.id %>/student_fees/<%= @student_fee.id %>/payments" accept-charset="UTF-8" method="post">
@@ -42,11 +42,27 @@
         <form action="/students/<%= @current_student.id %>/student_fees/<%= @student_fee.id %>/payments" accept-charset="UTF-8" method="post">
           <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
           <input type="hidden" name="student_fee_id" value="<%= @student_fee.id %>" id="student_fee_id" >
+          <label for="payment_method">Payment Method:</label>
           <select class="form-control" id="payment_method" name="payment_method">
-            <option>Cash</option>
-            <option>Cheque</option>
-            <option>Bank Transfer</option>
+            <option id="payment_method_cash">Cash</option>
+            <option id="payment_method_cheque">Cheque</option>
+            <option id="payment_method_bank_transfer">Bank Transfer</option>
           </select>
+
+          <fieldset id="cheque_fieldset" style="display: none;">
+            <label for="cheque_bank_name">Issueing bank:</label>
+            <input class="form-control" type="text" name="cheque_bank_name" id="cheque_bank_name">
+            <label for="cheque_id">Cheque ID:</label>
+            <input class="form-control" type="text" name="cheque_id" id="cheque_id">
+          </fieldset>
+
+          <fieldset id="bank_fieldset" style="display: none;">
+            <label for="trasnfer_bank_name">Name of bank:</label>
+            <input class="form-control" type="text" name="transfer_bank_name" id="transfer_bank_name">
+            <label for="bank_transfer_id">Bank transfer reference ID:</label>
+            <input class="form-control" type="text" name="bank_transfer_id" id="bank_transfer_id">
+          </fieldset>
+
           <input type="submit" name="commit" value="Confirm" class="btn btn-primary">
         </form>
       <% end %>
@@ -55,3 +71,21 @@
     </div>
   </div>
 </div>
+
+<!-- jQuery for the payment methods to trigger the text field -->
+<script type="text/javascript">
+  $('#payment_method').change(function() {
+    if ($(this).find(':selected').attr('id') == 'payment_method_cash') {
+      $('#bank_fieldset').hide();
+      $('#cheque_fieldset').hide();
+    }
+    if ($(this).find(':selected').attr('id') == 'payment_method_cheque') {
+      $('#bank_fieldset').hide();
+      $('#cheque_fieldset').show();
+    }
+    if ($(this).find(':selected').attr('id') == 'payment_method_bank_transfer') {
+      $('#bank_fieldset').show();
+      $('#cheque_fieldset').hide();
+    }
+  });
+</script>

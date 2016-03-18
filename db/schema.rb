@@ -53,9 +53,13 @@ ActiveRecord::Schema.define(version: 20160304012625) do
     t.float    "amount"
     t.string   "paid_by"
     t.string   "payment_method"
+    t.string   "cheque_bank_name"
+    t.string   "cheque_id"
+    t.string   "transfer_bank_name"
+    t.string   "bank_transfer_id"
     t.integer  "student_fee_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_index "payments", ["student_fee_id"], name: "index_payments_on_student_fee_id", using: :btree
