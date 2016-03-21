@@ -80,10 +80,8 @@ class SessionsController < ApplicationController
     @qr = RQRCode::QRCode.new(@otpauth).to_img.resize(250, 250).to_data_url
 
     if !params[:sms_otp].nil?
-      client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
-      client.messages.create(from: ENV["twi_from"],
-                              to: ENV["twi_to"],
-                              body: "OHMYFEES \nYour one time password (OHMYCode) is: #{@user.otp_code}. \nThank you.")
+      message = "OHMYFEES \nYour one time password (OHMYCode) is: #{@user.otp_code}. \nThank you."
+      send_message message
       flash.now[:success] = "OTP Code has been sent, please check your phone."
     end
 

@@ -86,11 +86,12 @@ class Student < User
           course_fee = m_intake.international_student_fee
         end
         # Set the due date (For 1 week duration of the intake starts)
-        due_date = DateTime.now + 1.week
+        due_date = m_intake.starting_date + 1.week
         # Calculate the amount for the course fee
         amount = course_fee/semester
         # Create Course Fees
         counter = 0
+
         semester.times do
           counter += 1
           self.student_fees.create!(name: "Course Fees",
@@ -100,28 +101,28 @@ class Student < User
                                     paid: false)
           due_date = due_date + semester_duration.weeks
         end
-      end
 
-      if UtilityFee.count != 0
-        # Create Utility Fees
-        nonrepetitive_due_date = Date.today() + 1.week
+        if UtilityFee.count != 0
+          # Create Utility Fees
+          nonrepetitive_due_date = m_intake.starting_date + 1.week
 
-        UtilityFee.all.each do |uf|
-          if(uf.repetitive_payment == true)
-            repetitive_due_date = Date.today() + 1.week
-            year.times do |n|
-              self.student_fees.create!(name: "#{uf.name} for year #{(n+1)}",
+          UtilityFee.all.each do |uf|
+            if(uf.repetitive_payment == true)
+              repetitive_due_date = m_intake.starting_date + 1.week
+              year.times do |n|
+                self.student_fees.create!(name: "#{uf.name} for year #{(n+1)}",
+                                          amount: uf.amount,
+                                          due_date: repetitive_due_date,
+                                          description: uf.description,
+                                          paid: false)
+                repetitive_due_date = repetitive_due_date + 1.year
+              end
+            else
+              self.student_fees.create!(name: uf.name,
                                         amount: uf.amount,
-                                        due_date: repetitive_due_date,
-                                        description: uf.description,
-                                        paid: false)
-              repetitive_due_date = repetitive_due_date + 1.year
+                                        due_date: nonrepetitive_due_date,
+                                        description: uf.description)
             end
-          else
-            self.student_fees.create!(name: uf.name,
-                                      amount: uf.amount,
-                                      due_date: nonrepetitive_due_date,
-                                      description: uf.description)
           end
         end
       end
