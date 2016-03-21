@@ -1,5 +1,6 @@
 <% provide(:title, 'Student Registration') %>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   $('input:checkbox').bootstrapSwitch();
@@ -42,7 +43,7 @@ $(document).ready(function() {
         <br>
         <%= f.check_box :tfa %>
         <br><br>
-        
+
         <%= f.label :email, "Email (@mail.apu.edu.my)"%>
         <%= f.email_field :email, class: 'form-control' %>
 
