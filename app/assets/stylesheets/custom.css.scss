@@ -94,14 +94,6 @@ input {
   }
 }
 
-.checkbox {
-  margin-bottom: 20px;
-  span {
-    margin-left: 20px;
-    font-weight: normal;
-  }
-}
-
 #session_remember_me {
   width: auto;
   margin-left: 0;
@@ -183,8 +175,8 @@ p {
 }
 
 .main_header {
-  background-image: image-url('background.png');
-
+  // background-image: image-url('background.png');
+  background-color: #333333;
   background-position: center center;
   color: white;
   display:block;

@@ -1,5 +1,12 @@
 <% provide(:title, 'Staff Registration') %>
 
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+<script type="text/javascript">
+$(document).ready(function() {
+  $('input:checkbox').bootstrapSwitch();
+});
+</script>
+
 <div class="container">
 <h1>Add Staff Profile</h1>
   <div class="row">
@@ -27,9 +34,15 @@
         <%= f.password_field :password_confirmation, class: 'form-control' %>
 
         <%= f.label :admin, "Admin Account?" %>
+        <br>
+        <%= f.check_box :admin,
+                        :data => { 'on-text'=>'YES', 'off-text'=>'NO' } %>
+        <br><br>
+
+        <!-- <%= f.label :admin, "Admin Account?" %>
         <%= f.select(:admin, [['True',true], ['False',false]],
                     { include_blank: false},
-                    { class: 'form-control'}) %>
+                    { class: 'form-control'}) %> -->
 
         <%= f.submit "Create Account", class: "btn btn-primary" %>
 
