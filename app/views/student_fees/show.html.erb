@@ -67,6 +67,10 @@
             <br><br>
             <%= link_to "Back", request.referrer, class: "btn btn-default form-control" %>
           <% end %>
+
+          <% if current_user.type == "Student" && @student_fee.paid == true %>
+            <%= link_to "Back", student_fees_path, class: "btn btn-default form-control" %>
+          <% end %>
 			</section>
 		</div>
 	</div>
