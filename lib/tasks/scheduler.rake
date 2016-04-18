@@ -3,7 +3,6 @@ desc "This task is called by the Heroku scheduler add-on"
 task :check_due_fees => :environment do
   puts "Checking fees that going to be due"
   # Check the fees that going to be due.
-
   studentFees = StudentFee.where(paid: false).where("due_date = ?", Date.today + 2.days).where("notify = ? OR notify IS NULL", Date.today - 7.days)
 
   gsf = studentFees.group(:user_id).count
@@ -39,6 +38,7 @@ task :check_due_fees => :environment do
   puts "Task Done."
 end
 
+# Old Checking mechanism (Will sent the message for each single due fees)
 # task :check_due_fees => :environment do
 #   puts "Checking fees that going to be due..."
 #   # Check the fees that going to be due.
@@ -64,28 +64,67 @@ end
 # end
 
 task :check_outstanding_fees => :environment do
-  puts "Checking the outstanding fees that have not been paid yet..."
+  puts "Checking the outstanding fees that have not been paid yet"
   # Check the outstanding fees for the students.
-  StudentFee.all.each do |sf|
-    # If the payment is outstanding for a period of time, fine will be added based on the condition
-    if sf.due_date < DateTime.now && Payment.find_by(student_fee_id: sf.id).nil?
-      s = Student.find_by(id: sf.user_id)
-      if sf.notify == nil || sf.notify < DateTime.now - 5.days
-        # Email the student about the payment is about to due soon.
-        StudentMailer.outstanding_payment(s, sf).deliver_now
-        puts "Mail Sent"
-        # SMS the student about the the payment is about to due soon.
-        client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
-				client.messages.create(from: ENV["twi_from"],
-                                to: ENV["twi_to"],
-                                body: "OHMYFEES \nDear student, kindly be reminded that you are having an outstanding fee. \nName: #{sf.name} \nDescription: #{sf.description} \nAmount: RM#{sprintf('%.2f', sf.amount)} \nDue Date: #{sf.due_date} \nKindly make your payment as soon as possible. Thank you.")
-        sf.update_attribute(:notify, DateTime.now)
-      end
-    end
+  studentFees = StudentFee.where(paid: false).where("due_date < ?", Date.today).where("notify = ? OR notify IS NULL", Date.today - 7.days)
 
+  gsf = studentFees.group(:user_id).count
+
+  gsf.each do |sid,dp|
+    s = Student.find_by(id: sid)
+    sf = studentFees.where(user_id: sid)
+
+    if dp > 1
+      StudentMailer.outstanding_payment(s, sf.first, dp).deliver_now
+      puts "Mail sent"
+      client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
+      client.messages.create(from: ENV["twi_from"],
+                             to: ENV["twi_to"],
+                             body: "OHMYFEES \nDear student, kindly be reminded that you are having #{dp} outstanding fees. \nLogin to OHMYFEES for more information. Thank you.")
+      puts "SMS sent"
+      sf.each do |f|
+        f.update_attribute(:notify, Date.today)
+      end
+    else
+      # Email the student about having the outstanding payment.
+      StudentMailer.due_payment(s, sf.first, dp).deliver_now
+      puts "Mail sent"
+      # SMS the student about having the outstanding payment.
+      client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
+      client.messages.create(from: ENV["twi_from"],
+                              to: ENV["twi_to"],
+                              body: "OHMYFEES \nDear student, kindly be reminded that you are having an outstanding fee. \nName: #{sf.first.name} \nDescription: #{sf.first.description} \nAmount: RM#{sprintf('%.2f', sf.first.amount)} \nDue Date: #{sf.first.due_date} \nKindly make your payment as soon as possible. Thank you.")
+      puts "SMS sent"
+      sf.first.update_attribute(:notify, Date.today)
+    end
   end
-  puts "Task done."
+  puts "Task Done."
 end
+
+# Old tast for checking outstanding fees
+# task :check_outstanding_fees => :environment do
+#   puts "Checking the outstanding fees that have not been paid yet..."
+#   # Check the outstanding fees for the students.
+#   StudentFee.all.each do |sf|
+#     # If the payment is outstanding for a period of time, fine will be added based on the condition
+#     if sf.due_date < DateTime.now && Payment.find_by(student_fee_id: sf.id).nil?
+#       s = Student.find_by(id: sf.user_id)
+#       if sf.notify == nil || sf.notify < DateTime.now - 5.days
+#         # Email the student about the payment is about to due soon.
+#         StudentMailer.outstanding_payment(s, sf).deliver_now
+#         puts "Mail Sent"
+#         # SMS the student about the the payment is about to due soon.
+#         client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
+# 				client.messages.create(from: ENV["twi_from"],
+#                                 to: ENV["twi_to"],
+#                                 body: "OHMYFEES \nDear student, kindly be reminded that you are having an outstanding fee. \nName: #{sf.name} \nDescription: #{sf.description} \nAmount: RM#{sprintf('%.2f', sf.amount)} \nDue Date: #{sf.due_date} \nKindly make your payment as soon as possible. Thank you.")
+#         sf.update_attribute(:notify, DateTime.now)
+#       end
+#     end
+#
+#   end
+#   puts "Task done."
+# end
 
 task :check_fine_fees => :environment do
   puts "Checking the fine that have not been paid yet..."

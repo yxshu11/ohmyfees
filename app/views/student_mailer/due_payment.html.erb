@@ -8,13 +8,13 @@
         <div class="panel-body">
           <p>Good day, <b><%= @student.name %></b>&nbsp;!</p>
           <% if @payment_number > 1 %>
-          <p>Kindly to inform that, you're having an outstanding payment:</p>
-          <p>Name: <%= @fee_details.name %></p>
-          <p>Description: <%= @fee_details.description %></p>
-          <p>Amount: RM&nbsp;<%= number_with_precision(@fee_details.amount, :precision => 2) %></p>
-          <p>Due on: <%= @fee_details.due_date %></p>
+            <p>Kindly to inform that, you're having <%= @payment_number %> payment going to be due.</p>
           <% else %>
-            <p>Kindly to inform that, you're having <%= @payment_number %> outstanding payment:</p>
+            <p>Kindly to inform that, you're having an outstanding payment:</p>
+            <p>Name: <%= @fee_details.name %></p>
+            <p>Description: <%= @fee_details.description %></p>
+            <p>Amount: RM&nbsp;<%= number_with_precision(@fee_details.amount, :precision => 2) %></p>
+            <p>Due on: <%= @fee_details.due_date %></p>
           <% end %>
           <p>Please make the payment online using OHMYFEES or pay in the cashier counter as soon as possible
             to avoid the outstanding fine.</p>

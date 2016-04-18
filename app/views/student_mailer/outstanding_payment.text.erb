@@ -1,4 +1,10 @@
-Good day, <%= @student.name %> !
+Good day, <%= @student.name %>
+
+<% if @payment_number > 1 %>
+
+Kindly to inform that, you're having <%= @payment_number %> outstanding payments.
+
+<% else %>
 
 Kindly to inform that, you're having an outstanding payment:
 
@@ -6,9 +12,11 @@ Name: <%= @fee_details.name %>
 
 Description: <%= @fee_details.description %>
 
-Amount: RM&nbsp;<%= number_with_precision(@fee_details.amount, :precision => 2) %>
+Amount: RM <%= number_with_precision(@fee_details.amount, :precision => 2) %>
 
 Due on: <%= @fee_details.due_date %>
+
+<% end %>
 
 Please make the payment online using OHMYFEES or pay in the cashier counter as soon as possible to avoid the outstanding fine.
 
