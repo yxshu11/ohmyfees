@@ -1,51 +1,9 @@
 <% provide(:title, 'Update Profile') %>
 
 <div class="container">
-<h1>Update Profile</h1>
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3 well">
-      <section class="center">
-          <% if @staff.picture.blank? %>
-            <%= image_tag("default_profile_picture.png", width: '100', :class => "img-circle") %>
-          <% else %>
-            <%= image_tag(@staff.picture_url(:standard)) %>
-          <% end %>
-      </section>
-      <br>
-      <%= form_for(@staff, html: { multipart: true }) do |f| %>
-
-        <%= render 'shared/error_messages', object: f.object %>
-
-        <%= f.label :picture, "Update Profile Picture:" %>
-        <%= f.hidden_field :picture_cache %>
-        <%= f.file_field :picture, class: 'form-control' %>
-
-        <%= f.label :name %>
-        <%= f.text_field :name, :readonly => true, class: 'form-control' %>
-
-        <%= f.label :staff_number %>
-        <%= f.text_field :staff_number, :readonly => true, class: 'form-control' %>
-
-        <%= f.label :contact_number %>
-        <%= f.phone_field :contact_number, :maxlength => "11", class: 'form-control' %>
-
-        <%= f.label :email, "Email (@apu.edu.my)"%>
-        <%= f.email_field :email, :readonly => true, class: 'form-control' %>
-
-        <%= f.label :password %>
-        <%= f.password_field :password, class: 'form-control' %>
-
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-        <%= f.submit "Update", class: "btn btn-primary" %>
-
-        <section class="center">
-        <br>
-        <%= link_to "Back", dashboard_path, class: "btn btn-default form-control" %>
-        </section>
-
-      <% end %>
-    </div>
-  </div>
+  <% if current_user.admin == false %>
+    <%= render 'staff_field' %>
+  <% else %>
+    <%= render 'admin_field' %>
+  <% end %>
 </div>

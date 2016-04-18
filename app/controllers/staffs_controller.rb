@@ -76,10 +76,12 @@ class StaffsController < ApplicationController
 
     # Confirms the correct user.
     def correct_user
-      @staff = Staff.find(params[:id])
-      unless current_user?(@staff)
-        flash[:danger] = "Access Denied."
-        redirect_to(root_path)
+      if current_user.admin == false
+        @staff = Staff.find(params[:id])
+        unless current_user?(@staff)
+          flash[:danger] = "Access Denied."
+          redirect_to(root_path)
+        end
       end
     end
 
