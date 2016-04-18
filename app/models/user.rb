@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   # User account has secure password
   has_secure_password
   # Password must be presented and the minumum length is 6
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
 
   # Returns the hash digest of the given string

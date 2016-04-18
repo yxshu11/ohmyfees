@@ -241,17 +241,17 @@ Student.create!(name: "Homer Simpson",
 
 StudentFee.create!(name: "Outstanding Fee 1",
                     amount: 10,
-                    due_date: DateTime.new(2016,1,25),
+                    due_date: DateTime.new(2016,4,20),
                     description: "Testing the outstanding fees 1.",
                     user_id: 7,
                     paid: false)
 
 StudentFee.create!(name: "Outstanding Fee 2",
                     amount: 20,
-                    due_date: DateTime.new(2016,2,1),
+                    due_date: Date.new(2016,4,20),
                     description: "Testing the outstanding fees 2.",
                     user_id: 7,
-                    paid: false)
+                  paid: false)
 
 amount = [100, 30, 400, 12388, 3359]
 paid_by = ["Student", "Staff"]

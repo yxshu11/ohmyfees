@@ -6,8 +6,8 @@ class StudentFeesController < ApplicationController
     if current_user.type == "Student"
       # Display the fees that belong only the to the signed in student
       @student_fees = current_user.student_fees.where("paid = ?", false).paginate(page: params[:page]).order(:due_date)
-      @recent_fees = current_user.student_fees.where("due_date < ? AND paid = ?", DateTime.now + 1.month, false).order(:due_date)
-      @outstanding_fees = current_user.student_fees.where("due_date < ? AND paid = ?", DateTime.now, false).order(:due_date)
+      @recent_fees = current_user.student_fees.where("due_date < ? AND paid = ?", Date.now + 1.month, false).order(:due_date)
+      @outstanding_fees = current_user.student_fees.where("due_date < ? AND paid = ?", Date.now, false).order(:due_date)
 
     elsif current_user.type == "Staff"
       # Display the all the fees in the system for the signed in staff.

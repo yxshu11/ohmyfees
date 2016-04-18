@@ -1,27 +1,67 @@
 desc "This task is called by the Heroku scheduler add-on"
+
 task :check_due_fees => :environment do
-  puts "Checking fees that going to be due..."
+  puts "Checking fees that going to be due"
   # Check the fees that going to be due.
-  StudentFee.all.each do |sf|
-    # If the fees' due date is less than 2 days,
-    # email the student and notify then about the payment.
-    if  sf.due_date.to_date - 2.days == Date.today && Payment.find_by(student_fee_id: sf.id).nil?
-      s = Student.find_by(id: sf.user_id)
-      if sf.notify == nil || sf.notify < DateTime.now - 5.days
-        # Email the student about the payment is about to due soon.
-        StudentMailer.due_payment(s, sf).deliver_now
-        puts "Mail sent"
-        # SMS the student about the the payment is about to due soon.
-        client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
-				client.messages.create(from: ENV["twi_from"],
-                                to: ENV["twi_to"],
-                                body: "OHMYFEES \nDear student, kindly be reminded that you are having an fee payment that going to be due soon. \nName: #{sf.name} \nDescription: #{sf.description} \nAmount: RM #{sprintf('%.2f', sf.amount)} \nDue Date: #{sf.due_date} \nKindly make your payment as soon as possible. Thank you.")
-        sf.update_attribute(:notify, DateTime.now)
+
+  studentFees = StudentFee.where(paid: false).where("due_date = ?", Date.today + 2.days).where("notify = ? OR notify IS NULL", Date.today - 7.days)
+
+  gsf = studentFees.group(:user_id).count
+
+  gsf.each do |sid,dp|
+    s = Student.find_by(id: sid)
+    sf = studentFees.where(user_id: sid)
+
+    if dp > 1
+      StudentMailer.due_payment(s, sf.first, dp).deliver_now
+      puts "Mail sent"
+      client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
+      client.messages.create(from: ENV["twi_from"],
+                             to: ENV["twi_to"],
+                             body: "OHMYFEES \nDear student, kindly be reminded that you are having #{dp} fees statement that going to be due soon. \nLogin to OHMYFEES for more information. Thank you.")
+      puts "SMS sent"
+      sf.each do |f|
+        f.update_attribute(:notify, Date.today)
       end
+    else
+      # Email the student about the payment is about to due soon.
+      StudentMailer.due_payment(s, sf.first, dp).deliver_now
+      puts "Mail sent"
+      # SMS the student about the the payment is about to due soon.
+      client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
+      client.messages.create(from: ENV["twi_from"],
+                              to: ENV["twi_to"],
+                              body: "OHMYFEES \nDear student, kindly be reminded that you are having an fee payment that going to be due soon. \nName: #{sf.first.name} \nDescription: #{sf.first.description} \nAmount: RM #{sprintf('%.2f', sf.first.amount)} \nDue Date: #{sf.first.due_date} \nKindly make your payment as soon as possible. Thank you.")
+      puts "SMS sent"
+      sf.first.update_attribute(:notify, Date.today)
     end
   end
-  puts "Task done."
+  puts "Task Done."
 end
+
+# task :check_due_fees => :environment do
+#   puts "Checking fees that going to be due..."
+#   # Check the fees that going to be due.
+#   StudentFee.all.each do |sf|
+#     # If the fees' due date is less than 2 days,
+#     # email the student and notify then about the payment.
+#     if  sf.due_date.to_date - 2.days == Date.today && Payment.find_by(student_fee_id: sf.id).nil?
+#       s = Student.find_by(id: sf.user_id)
+#       if sf.notify == nil || sf.notify < DateTime.now - 5.days
+#         # Email the student about the payment is about to due soon.
+#         StudentMailer.due_payment(s, sf).deliver_now
+#         puts "Mail sent"
+#         # SMS the student about the the payment is about to due soon.
+#         client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
+# 				client.messages.create(from: ENV["twi_from"],
+#                                 to: ENV["twi_to"],
+#                                 body: "OHMYFEES \nDear student, kindly be reminded that you are having an fee payment that going to be due soon. \nName: #{sf.name} \nDescription: #{sf.description} \nAmount: RM #{sprintf('%.2f', sf.amount)} \nDue Date: #{sf.due_date} \nKindly make your payment as soon as possible. Thank you.")
+#         sf.update_attribute(:notify, DateTime.now)
+#       end
+#     end
+#   end
+#   puts "Task done."
+# end
 
 task :check_outstanding_fees => :environment do
   puts "Checking the outstanding fees that have not been paid yet..."
@@ -55,7 +95,7 @@ task :check_fine_fees => :environment do
     if sf.due_date + 7.days < DateTime.now && Payment.find_by(student_fee_id: sf.id).nil?
       fine = Fine.where("student_fee_id = ?", sf.id)
       if fine.empty?
-        Fine.create!(name: "Fine for " + sf.name,
+        Fine.create!(name: "Late Payment Charges for " + sf.name,
                      amount: 20,
                      student_fee_id: sf.id)
       else
@@ -65,15 +105,12 @@ task :check_fine_fees => :environment do
           fine.each do |f|
             total_amount = total_amount + f.amount
           end
+
           puts total_amount
 
-          if total_amount < 60
-            Fine.create!(name: "Fine for " + sf.name,
-                         amount: 20,
-                         student_fee_id: sf.id)
-          elsif total_amount == 60
-            Fine.create!(name: "Fine for " + sf.name,
-                         amount: 10,
+          if total_amount < 70
+            Fine.create!(name: "Administrative Fees for " + sf.name,
+                         amount: 50,
                          student_fee_id: sf.id)
           else
             puts "Maximum fine reached!"
