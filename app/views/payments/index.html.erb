@@ -21,7 +21,7 @@
             <td><%= sf.id %></td>
             <td><%= sf.name %></td>
             <td><%= sf.description %></td>
-            <td>RM&nbsp;<%= number_with_precision(sf.amount, :precision => 2) %></td>
+            <td>RM&nbsp;<%= number_with_precision(sf.amount + sf.fines.sum(:amount), :precision => 2) %></td>
             <td><%= Payment.find_by(student_fee_id: sf.id).created_at.strftime('%d/%m/%Y')  %></td>
             <td><%= link_to "View", student_student_fee_payment_path(current_user.id, sf.id, Payment.find_by(student_fee_id: sf.id)) %></td>
           </tr>

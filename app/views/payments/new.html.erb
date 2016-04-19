@@ -1,7 +1,7 @@
 <% provide(:title, 'Fee Payment') %>
 
 <div class="container">
-  <h1>Fee Payment</h1>
+  <h1>Fee Payment Confirmation</h1>
   <div class="row">
     <div class="col-md-6 col-md-offset-3 well">
       <h4>Fee Details</h4>
@@ -17,7 +17,7 @@
           </tr>
           <tr>
             <td><b>Amount (Included Fine):</b></td>
-            <td>RM&nbsp;<%= number_with_precision(@student_fee.amount, :precision => 2) %></td>
+            <td>RM&nbsp;<%= number_with_precision(@student_fee.amount + @fine_amount, :precision => 2) %></td>
           </tr>
           <tr>
             <td><b>Due Date:</b></td>

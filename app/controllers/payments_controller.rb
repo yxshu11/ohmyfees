@@ -4,16 +4,8 @@ class PaymentsController < ApplicationController
 
   def pay
     @student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
-
-    fine = @student_fee.fines.all
-
-    total_fine_amount = 0
-
-    fine.each do |f|
-      total_fine_amount = total_fine_amount + f.amount
-    end
-
-    amount = ((@student_fee.amount + total_fine_amount)*100).round
+    fine_amount = @student_fee.fines.sum(:amount)
+    amount = ((@student_fee.amount + fine_amount)*100).round
 
     response = EXPRESS_GATEWAY.setup_purchase(amount,{
                                               :ip                   => request.remote_ip,
@@ -21,12 +13,12 @@ class PaymentsController < ApplicationController
                                               :return_url           => new_student_student_fee_payment_url,
                                               :cancel_return_url    => student_fees_url,
                                               :allow_guest_checkout => true,
-                                              :no_shipping           => 1,
+                                              :no_shipping          => 1,
                                               :items                => [{
                                                                           :name => @student_fee.name,
                                                                           :description => @student_fee.description,
                                                                           :amount => amount,
-                                                                       }]
+                                                                        }]
                                               })
     redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
@@ -34,9 +26,11 @@ class PaymentsController < ApplicationController
   def new
     if current_user.type == "Student"
       @student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
+      @fine_amount = @student_fee.fines.sum(:amount)
       @payment = current_user.payments.build(:express_token => params[:token])
     elsif current_user.type == "Staff"
       @student_fee = StudentFee.find_by(id: params[:student_fee_id])
+      @fine_amount = @student_fee.fines.sum(:amount)
       @current_student = Student.find(@student_fee.user_id)
       @payment = Payment.new
     end
@@ -64,7 +58,7 @@ class PaymentsController < ApplicationController
         redirect_to student_fee
       end
     elsif current_user.type == "Staff"
-      student_fee = StudentFee.find(params[:student_fee_id])
+      student_fee = StudentFee.find_by(id: params[:student_fee_id])
       fine_amount = student_fee.fines.sum(:amount)
       total_amount = student_fee.amount + fine_amount
       Payment.create!(paid_by: "Staff",
@@ -92,6 +86,7 @@ class PaymentsController < ApplicationController
 
   def show
     @student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
+    @fine_amount = @student_fee.fines.sum(:amount)
     @payment = @student_fee.payment
   end
 

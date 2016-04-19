@@ -129,34 +129,64 @@ end
 task :check_fine_fees => :environment do
   puts "Checking the fine that have not been paid yet..."
 
-  StudentFee.all.each do |sf|
-    # If the payment is outstanding for a period of time, fine will be added based on the condition
-    if sf.due_date + 7.days < DateTime.now && Payment.find_by(student_fee_id: sf.id).nil?
-      fine = Fine.where("student_fee_id = ?", sf.id)
-      if fine.empty?
+  # If the payment is outstanding for a period of time, fine will be added based on the condition
+  studentFee = StudentFee.where(paid: false)
+
+  studentFee.each do |sf|
+    fine = Fine.where("student_fee_id = ?", sf.id)
+
+    if sf.due_date + 7.days < Date.today
+      if fine.sum(:amount) < 20
         Fine.create!(name: "Late Payment Charges for " + sf.name,
                      amount: 20,
                      student_fee_id: sf.id)
+        puts "Late Payment charges issued."
+      end
+    end
+
+    if sf.due_date + 21.days < Date.today
+      if fine.sum(:amount) < 70
+        Fine.create!(name: "Administrative Fees for " + sf.name,
+                     amount: 50,
+                     student_fee_id: sf.id)
+        puts "Administrative Fees charges issued."
       else
-        if fine.order(created_at: :desc).first.created_at + 7.days < DateTime.now
-          total_amount = 0
-
-          fine.each do |f|
-            total_amount = total_amount + f.amount
-          end
-
-          puts total_amount
-
-          if total_amount < 70
-            Fine.create!(name: "Administrative Fees for " + sf.name,
-                         amount: 50,
-                         student_fee_id: sf.id)
-          else
-            puts "Maximum fine reached!"
-          end
-        end
+        puts "Maximum fine reached."
       end
     end
   end
+
   puts "Task done."
 end
+
+# StudentFee.all.each do |sf|
+#   # If the payment is outstanding for a period of time, fine will be added based on the condition
+#   if sf.due_date + 7.days < Date.today && sf.paid == false
+#     fine = Fine.where("student_fee_id = ?", sf.id)
+#     if fine.empty?
+#       Fine.create!(name: "Late Payment Charges for " + sf.name,
+#                    amount: 20,
+#                    student_fee_id: sf.id)
+#     else
+#       if fine.order(created_at: :desc).first.created_at + 7.days < Date.today
+#         total_amount = 0
+#
+#         fine.each do |f|
+#           total_amount = total_amount + f.amount
+#         end
+#
+#         puts total_amount
+#
+#         if total_amount < 70
+#           Fine.create!(name: "Administrative Fees for " + sf.name,
+#                        amount: 50,
+#                        student_fee_id: sf.id)
+#         else
+#           puts "Maximum fine reached!"
+#         end
+#       end
+#     end
+#   end
+# end
+# puts "Task done."
+# end

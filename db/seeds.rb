@@ -198,7 +198,8 @@ Student.create!(name: "Homer Simpson",
                 password: "111111",
                 password_confirmation: "111111",
                 admin: false,
-                activated: false)
+                activated: true,
+                activated_at: Time.zone.now)
 
 # Student.create!(name: "Jaemy Ho",
 #                 student_number: "TP028816",
@@ -241,30 +242,30 @@ Student.create!(name: "Homer Simpson",
 
 StudentFee.create!(name: "Outstanding Fee 1",
                     amount: 10,
-                    due_date: DateTime.new(2016,4,20),
+                    due_date: DateTime.new(2016,3,20),
                     description: "Testing the outstanding fees 1.",
                     user_id: 7,
                     paid: false)
 
 StudentFee.create!(name: "Outstanding Fee 2",
                     amount: 20,
-                    due_date: Date.new(2016,4,20),
+                    due_date: Date.new(2016,3,20),
                     description: "Testing the outstanding fees 2.",
                     user_id: 7,
                   paid: false)
 
-amount = [100, 30, 400, 12388, 3359]
-paid_by = ["Student", "Staff"]
-payment_method = ["Cash", "Online", "Cheque", "Bank Transfer"]
-date = DateTime.now
-date = date.beginning_of_year..date.end_of_year
-150.times do |n|
-  Payment.create!(amount: amount.sample,
-                  paid_by: paid_by.sample,
-                  payment_method: payment_method.sample,
-                  student_fee_id: "7",
-                  created_at: rand(date))
-end
+# amount = [100, 30, 400, 12388, 3359]
+# paid_by = ["Student", "Staff"]
+# payment_method = ["Cash", "Online", "Cheque", "Bank Transfer"]
+# date = DateTime.now
+# date = date.beginning_of_year..date.end_of_year
+# 150.times do |n|
+#   Payment.create!(amount: amount.sample,
+#                   paid_by: paid_by.sample,
+#                   payment_method: payment_method.sample,
+#                   student_fee_id: "7",
+#                   created_at: rand(date))
+# end
 
 Location.create!(name: "Asia Pacific Institute Of Information Technology @ TPM",
                  latitude: 3.047882,
