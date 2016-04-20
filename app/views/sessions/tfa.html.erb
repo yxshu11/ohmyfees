@@ -5,15 +5,13 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-1 well">
       <div class="col-md-8">
-          <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 center">
-
-          <p><b>Scan QR-Code below with Google Authenticator or Authy to receive OHMYCode.
+        <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 center">
+          <p><b>Scan QR-Code below with Google Authenticator or Authy to receive your OTP Code.
             <br>
             <a href="#" data-toggle="tooltip" title="Google Authenticator and Authy Apps is available on Apple App Store and Google Play Store.">
               <i class="fa fa-question-circle fa-2x"></i>
             </a>
           </b></p>
-
 
           <%= image_tag @qr %>
 
@@ -22,9 +20,8 @@
           <form action="/tfa" accept-charset="UTF-8" method="post">
             <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <%= hidden_field_tag :sms_otp, true %>
-            <input type="submit" name="commit" value="Receive OHMYCode via SMS" class="btn btn-success">
+            <input type="submit" name="commit" value="Receive OTP via SMS" class="btn btn-success">
           </form>
-
         </div>
       </div>
 
@@ -32,7 +29,7 @@
         <br><br>
         <form action="/tfa" accept-charset="UTF-8" method="post">
           <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <%= label_tag :otp_code, "Enter OHMYCode:" %>
+          <%= label_tag :otp_code, "Enter OTP Code:" %>
           <%= password_field_tag :otp_code, nil, { class: 'form-control'} %>
 
           <input type="submit" name="commit" value="Validate" class="btn btn-primary">

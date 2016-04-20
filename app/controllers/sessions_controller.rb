@@ -80,7 +80,7 @@ class SessionsController < ApplicationController
     @qr = RQRCode::QRCode.new(@otpauth).to_img.resize(200, 200).to_data_url
 
     if !params[:sms_otp].nil?
-      message = "OHMYFEES \nYour one time password (OHMYCode) is: #{@user.otp_code}. \nThank you."
+      message = "OHMYFEES \nYour one time password (OTP) is: #{@user.otp_code}. \nThank you."
       send_message message
       flash.now[:success] = "OTP Code has been sent, please check your phone."
     end
