@@ -135,6 +135,7 @@ task :check_fine_fees => :environment do
   studentFee.each do |sf|
     fine = Fine.where("student_fee_id = ?", sf.id)
 
+    # If the due date of the student fees is exceed with 7 days grade period, add RM20 Fine
     if sf.due_date + 7.days < Date.today
       if fine.sum(:amount) < 20
         Fine.create!(name: "Late Payment Charges for " + sf.name,
@@ -144,6 +145,7 @@ task :check_fine_fees => :environment do
       end
     end
 
+    # If the due date of the student fees is exceed with 21 days of grace period, add RM50 Fine
     if sf.due_date + 21.days < Date.today
       if fine.sum(:amount) < 70
         Fine.create!(name: "Administrative Fees for " + sf.name,
@@ -159,6 +161,7 @@ task :check_fine_fees => :environment do
   puts "Task done."
 end
 
+# Old Student Fine Fees codes
 # StudentFee.all.each do |sf|
 #   # If the payment is outstanding for a period of time, fine will be added based on the condition
 #   if sf.due_date + 7.days < Date.today && sf.paid == false

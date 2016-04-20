@@ -77,7 +77,7 @@ class SessionsController < ApplicationController
 
     @otpauth = @user.provisioning_uri(nil, issuer: 'OHMYFEES')
 
-    @qr = RQRCode::QRCode.new(@otpauth).to_img.resize(250, 250).to_data_url
+    @qr = RQRCode::QRCode.new(@otpauth).to_img.resize(200, 200).to_data_url
 
     if !params[:sms_otp].nil?
       message = "OHMYFEES \nYour one time password (OHMYCode) is: #{@user.otp_code}. \nThank you."

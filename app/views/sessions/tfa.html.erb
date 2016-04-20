@@ -1,35 +1,38 @@
 <% provide(:title, 'TFA') %>
 
 <div class="container">
-<h1>Before we signing you in ...</h1>
+  <h1>Two-factor Authentication</h1>
   <div class="row">
-    <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 well">
-      <p class="center">
-        <b>
-          Scan QR-Code below with Google Authenticator or Authy to receive OHMYCode.
-          <br>
-          <a href="#" data-toggle="tooltip" title="Google Authenticator and Authy Apps is available on Apple App Store and Google Play Store.">
-            <i class="fa fa-question-circle fa-2x"></i>
-          </a>
-        </b>
-      </p>
-      <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 center">
+    <div class="col-md-10 col-md-offset-1 well">
+      <div class="col-md-8">
+          <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 center">
 
-        <%= image_tag @qr %>
+          <p><b>Scan QR-Code below with Google Authenticator or Authy to receive OHMYCode.
+            <br>
+            <a href="#" data-toggle="tooltip" title="Google Authenticator and Authy Apps is available on Apple App Store and Google Play Store.">
+              <i class="fa fa-question-circle fa-2x"></i>
+            </a>
+          </b></p>
 
-        <p><b>OR<b></p>
-        <form action="/tfa" accept-charset="UTF-8" method="post">
-          <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <%= hidden_field_tag :sms_otp, true %>
-          <input type="submit" name="commit" value="Send OHMYCode via SMS" class="btn btn-success">
-        </form>
+
+          <%= image_tag @qr %>
+
+          <p><b>OR<b></p>
+
+          <form action="/tfa" accept-charset="UTF-8" method="post">
+            <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <%= hidden_field_tag :sms_otp, true %>
+            <input type="submit" name="commit" value="Receive OHMYCode via SMS" class="btn btn-success">
+          </form>
+
+        </div>
       </div>
 
-      <div class="col-md-12 col-sm-12">
-        <hr>
+      <div class="col-md-4">
+        <br><br>
         <form action="/tfa" accept-charset="UTF-8" method="post">
           <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <%= label_tag :otp_code, "Enter OHMYCode code:" %>
+          <%= label_tag :otp_code, "Enter OHMYCode:" %>
           <%= password_field_tag :otp_code, nil, { class: 'form-control'} %>
 
           <input type="submit" name="commit" value="Validate" class="btn btn-primary">
