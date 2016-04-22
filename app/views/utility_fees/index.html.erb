@@ -12,7 +12,6 @@
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Name</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Amount</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Repetitive Payment?</th>
-            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Description</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
@@ -25,7 +24,6 @@
               <td><%= uf.name %></td>
               <td>RM&nbsp;<%= uf.amount %></td>
               <td><%= uf.repetitive_payment.to_s.titleize %></td>
-              <td><%= uf.description %></td>
               <td><%= link_to "View", uf %></td>
               <td><%= link_to "Edit", edit_utility_fee_path(uf) %></td>
               <td><%= link_to "Delete", uf, method: :delete, data: { confirm: "Confirm to remove this fee?" } %>

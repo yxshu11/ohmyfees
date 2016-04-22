@@ -3,17 +3,24 @@ desc "This task is called by the Heroku scheduler add-on"
 task :check_due_fees => :environment do
   puts "Checking fees that going to be due"
   # Check the fees that going to be due.
+  # Get the student fee that is not being paid and going to be due on 2 days
+  # and the student fee have not been notify yet or have been notify since a week ago.
   studentFees = StudentFee.where(paid: false).where("due_date = ?", Date.today + 2.days).where("notify = ? OR notify IS NULL", Date.today - 7.days)
 
+  # Group the student fees based on user id
   gsf = studentFees.group(:user_id).count
 
+  # Separate each of the key and value of the hash of grouped student fees
   gsf.each do |sid,dp|
     s = Student.find_by(id: sid)
     sf = studentFees.where(user_id: sid)
 
+    # If the due payment more than 1, sent a group SMS and email.
     if dp > 1
+      # Send the email using mailer
       StudentMailer.due_payment(s, sf.first, dp).deliver_now
       puts "Mail sent"
+      # Send the SMS using Twilio API
       client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
       client.messages.create(from: ENV["twi_from"],
                              to: ENV["twi_to"],
@@ -22,6 +29,7 @@ task :check_due_fees => :environment do
       sf.each do |f|
         f.update_attribute(:notify, Date.today)
       end
+    # Else sent the details information of the one specific due payment.
     else
       # Email the student about the payment is about to due soon.
       StudentMailer.due_payment(s, sf.first, dp).deliver_now
@@ -66,17 +74,24 @@ end
 task :check_outstanding_fees => :environment do
   puts "Checking the outstanding fees that have not been paid yet"
   # Check the outstanding fees for the students.
+  # Get the student fee that is not being paid and due date is less than today
+  # and the student fee have not been notify yet or have been notify since a week ago.
   studentFees = StudentFee.where(paid: false).where("due_date < ?", Date.today).where("notify = ? OR notify IS NULL", Date.today - 7.days)
 
+  # Group the student fees based on user id
   gsf = studentFees.group(:user_id).count
 
+  # Separate each of the key and value of the hash of grouped student fees
   gsf.each do |sid,dp|
     s = Student.find_by(id: sid)
     sf = studentFees.where(user_id: sid)
 
+    # If the due payment more than 1, sent a grouped SMS and email.
     if dp > 1
+      # Send the email using mailer
       StudentMailer.outstanding_payment(s, sf.first, dp).deliver_now
       puts "Mail sent"
+      # Send the SMS using Twilio API
       client = Twilio::REST::Client.new ENV["twi_acc_SID"], ENV["twi_auth_token"]
       client.messages.create(from: ENV["twi_from"],
                              to: ENV["twi_to"],
@@ -85,6 +100,7 @@ task :check_outstanding_fees => :environment do
       sf.each do |f|
         f.update_attribute(:notify, Date.today)
       end
+    # Else sent the details information of the one specific due payment.
     else
       # Email the student about having the outstanding payment.
       StudentMailer.due_payment(s, sf.first, dp).deliver_now
@@ -157,7 +173,6 @@ task :check_fine_fees => :environment do
       end
     end
   end
-
   puts "Task done."
 end
 

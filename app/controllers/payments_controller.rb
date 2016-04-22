@@ -3,10 +3,15 @@ class PaymentsController < ApplicationController
   before_action :correct_student, only: [:pay, :new, :create, :show]
 
   def pay
+    # Fetch the student fee object through the ID
     @student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
+    # Calculate the fine amount of the student fee
     fine_amount = @student_fee.fines.sum(:amount)
+    # Total up the payable amount
     amount = ((@student_fee.amount + fine_amount)*100).round
 
+    # Setup the purchase with necessary information that required by PayPal
+    # and sent the request to the PayPal server.
     response = EXPRESS_GATEWAY.setup_purchase(amount,{
                                               :ip                   => request.remote_ip,
                                               :currency             => 'MYR',
@@ -20,10 +25,12 @@ class PaymentsController < ApplicationController
                                                                           :amount => amount,
                                                                         }]
                                               })
+    # Redirect the student to PayPal site
     redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
 
   def new
+    # Render the payment confirmation page by getting necessary information.
     if current_user.type == "Student"
       @student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
       @fine_amount = @student_fee.fines.sum(:amount)
@@ -38,18 +45,26 @@ class PaymentsController < ApplicationController
 
   def create
     if current_user.type == "Student"
+      # Fetch the student fee object through the ID
       student_fee = current_user.student_fees.find_by(id: params[:student_fee_id])
+      # Calculate the fine amount of the student fee
       fine_amount = student_fee.fines.sum(:amount)
+      # Total up the payable amount
       total_amount = student_fee.amount + fine_amount
+      # Create the payment with all the information availalble
+      # included express payer id, express token, amount, payment method and paid by whom.
       @payment = current_user.payments.build(ip: request.remote_ip,
                                              express_token: params[:express_token],
                                              student_fee_id: student_fee.id,
                                              paid_by: "Student",
                                              amount: total_amount,
                                              payment_method: "Online")
-
+      # Build the payment for the student fee and sent the confirmation request
+      # to the paypal along with all the information.
       if @payment.purchase(total_amount)
+        # Update the student fee attribute to paid
         student_fee.update_attribute(:paid, true)
+        # Save the payment details
         @payment.save
         flash[:success] = "Payment Done Successfully"
         redirect_to student_fee
