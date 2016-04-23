@@ -41,7 +41,7 @@ class ProgrammesControllerTest < ActionController::TestCase
     log_in_as(@admin_staff, remember_me: '1')
     get :edit, id: @programme
     assert_response :success
-    assert_select "title", "Edit Programme Details #{@base_title}"
+    assert_select "title", "Update Programme Details #{@base_title}"
   end
 
   test "should patch update" do
@@ -65,6 +65,6 @@ class ProgrammesControllerTest < ActionController::TestCase
     log_in_as(@admin_staff, remember_me: '1')
     get :index
     assert_response :success
-    assert_select "title", "All Programmes #{@base_title}"
+    assert_select "title", "Programme Index #{@base_title}"
   end
 end

@@ -23,6 +23,7 @@ tfa_student:
   tfa: true
   type: Student
   admin: false
+  otp_secret_key: "bd5o3azpcfcwbuxs"
   activated: true
   activated_at: <%= Time.zone.now %>
   password_digest: <%= User.digest('111111') %>
