@@ -9,7 +9,7 @@ class ProgrammesControllerTest < ActionController::TestCase
     @programme = programmes(:programme_a)
   end
 
-  test "should redirect went is not logged in" do
+  test "should redirect when is not logged in" do
     assert_no_difference 'Programme.count' do
       delete :destroy, id: @admin_staff
     end

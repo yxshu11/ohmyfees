@@ -20,7 +20,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert flash.empty?
   end
 
-  test "Inactivated student login will be redirected" do
+  test "inactivated student login will be redirected" do
     get login_path
     post login_path, session: { email: @nonactivated_student.email, password: '111111'}
     assert_redirected_to root_path
@@ -29,7 +29,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
-  test "Activated student login with valid information" do
+  test "activated student login with valid information" do
     get login_path
     post login_path, session: { email: @activated_student.email, password: '111111' }
     assert_redirected_to dashboard_path
@@ -81,14 +81,14 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
-  test "Normal staff login with valid information, but invalid location" do
+  test "normal staff login with valid information, but invalid location" do
     get login_path
     post login_path, session: {email: @nonadmin_staff.email, password: '111111'}
     assert_template 'sessions/new'
     assert_not flash.empty?
   end
 
-  test "Normal staff login with valid information and valid location" do
+  test "normal staff login with valid information and valid location" do
     get login_path
     cookies[:location_coordinate] = "3.047882|101.692862"
     post login_path, session: {email: @nonadmin_staff.email, password: '111111'}

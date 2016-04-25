@@ -25,7 +25,7 @@
                 <tbody>
                   <% @student_fees.first(3).each do |sf| %>
                     <tr>
-                      <td><%= link_to sf.name, sf %></td>
+                      <td><b>> <%= link_to sf.name, sf %></b></td>
                       <td><%= sf.description %></td>
                       <td>
                         <% if sf.due_date < DateTime.now %>
