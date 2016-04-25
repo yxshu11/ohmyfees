@@ -18,8 +18,13 @@ body,
   position: relative;
 }
 
+a {
+  color: #272523;
+}
+
 a:hover, a:focus {
   text-decoration: none;
+  color: #4F4B47;
 }
 
 a:focus, a:active,
@@ -45,10 +50,6 @@ body {
   color: #4f4b47;
   /* padding-top: 70px; Use for navbar-fixed-top */
 }
-
-// a {
-//   color: #272523;
-// }
 
 body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,
 p, .navbar, .brand, .btn-simple, .alert, a, .td-name, td, button.close {
