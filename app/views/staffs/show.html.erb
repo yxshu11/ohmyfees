@@ -9,7 +9,7 @@
         <% if @staff.picture.blank? %>
           <%= image_tag("default_profile_picture.png", width: '120', :class => "img-circle") %>
           <br><br>
-          <%= link_to "Update your profile picture", edit_staff_path(current_user), class: "btn btn-warning"  %><br><br>
+          <%= link_to "Update your profile picture", edit_staff_path(current_user), class: "btn btn-xs btn-warning" %><br><br>
         <% else %>
           <%= image_tag(@staff.picture_url(:standard)) %>
         <% end %>

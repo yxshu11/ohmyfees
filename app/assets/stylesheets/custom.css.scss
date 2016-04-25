@@ -361,7 +361,7 @@ nav a {
 
 /* Dashboard - panel */
 
-.panel {
+.dashboard-panel {
   border-width: thin;
   border-radius: 4px;
   border-color: grey;
@@ -446,6 +446,7 @@ table.qr-code td {
   width: 5px;
   height: 5px;
 }
+
 table.qr-code td.black { background-color: #000; }
 table.qr-code td.white { background-color: #fff; }
 

@@ -12,7 +12,7 @@
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Description</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Amount</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Paid On</th>
-            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8"></th>
           </tr>
         </thead>
         <tbody>
@@ -23,7 +23,7 @@
             <td><%= sf.description %></td>
             <td>RM&nbsp;<%= number_with_precision(sf.amount + sf.fines.sum(:amount), :precision => 2) %></td>
             <td><%= Payment.find_by(student_fee_id: sf.id).created_at.strftime('%d/%m/%Y')  %></td>
-            <td><%= link_to "View", student_student_fee_payment_path(current_user.id, sf.id, Payment.find_by(student_fee_id: sf.id)) %></td>
+            <td><%= link_to "View", student_student_fee_payment_path(current_user.id, sf.id, Payment.find_by(student_fee_id: sf.id)), class: "btn btn-xs btn-primary" %></td>
           </tr>
           <% end %>
         </tbody>

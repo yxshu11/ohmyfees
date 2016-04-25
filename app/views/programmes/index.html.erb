@@ -26,11 +26,11 @@
             <td><%= p.programme_type%></td>
             <td><%= p.year %></td>
             <td><%= p.semester %></td>
-            <td><%= link_to "View", p %></td>
-            <td><%= link_to "Edit", edit_programme_path(p) %></td>
+            <td><%= link_to "View", p, class: "btn btn-xs btn-primary"  %></td>
+            <td><%= link_to "Edit", edit_programme_path(p), class: "btn btn-xs btn-info"  %></td>
             <td>
               <%= link_to "Delete", p, method: :delete,
-                          data: { confirm: "Confirm to remove this programme?" } %>
+                          data: { confirm: "Confirm to remove this programme?" }, class: "btn btn-xs btn-danger"  %>
             </td>
           </tr>
           <% end %>

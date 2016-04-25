@@ -14,9 +14,9 @@
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Email</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">Contact Number</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Admin Account?</th>
-            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
-            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
-            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8"></th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8"></th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8"></th>
           </tr>
         </thead>
         <tbody>
@@ -28,11 +28,11 @@
             <td><%= s.email %></td>
             <td><%= s.contact_number %></td>
             <td><%= s.admin.to_s.titleize %></td>
-            <td><%= link_to "View", s %></td>
-            <td><%= link_to "Edit", edit_staff_path(s) %></td>
+            <td><%= link_to "View", s, class: "btn btn-xs btn-primary"  %></td>
+            <td><%= link_to "Edit", edit_staff_path(s), class: "btn btn-xs btn-info"  %></td>
             <td>
               <%= link_to "Delete", s, method: :delete,
-                          data: { confirm: "Comfirm to remove this staff?" } %>
+                          data: { confirm: "Comfirm to remove this staff?" }, class: "btn btn-xs btn-danger"  %>
             </td>
           </tr>
           <% end %>

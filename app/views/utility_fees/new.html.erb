@@ -1,5 +1,11 @@
 <% provide(:title, 'New Utility Fee') %>
 
+<script type="text/javascript">
+$(document).ready(function() {
+  $('input:checkbox').bootstrapSwitch();
+});
+</script>
+
 <div class="container">
 <h1>Add New Utility Fee</h1>
   <div class="row">
@@ -15,9 +21,10 @@
         <%= f.text_field :amount, class: 'form-control' %>
 
         <%= f.label :repetitive_payment, "Repetitive Payment?" %>
-        <%= f.select(:repetitive_payment, [['True',true], ['False',false]],
-                    { include_blank: true},
-                    { class: 'form-control'}) %>
+        <br>
+        <%= f.check_box :repetitive_payment,
+                        :data => { 'on-text'=>'YES', 'off-text'=>'NO' } %>
+        <br><br>
 
         <%= f.label :description %>
         <%= f.text_area :description, :size => "30x5", class: 'form-control' %>

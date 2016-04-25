@@ -13,9 +13,9 @@
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Starting Date</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Local Student Fee</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">International Student Fee</th>
-            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
-            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
-            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7"></th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7"></th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8"></th>
           </tr>
         </thead>
         <tbody>
@@ -26,11 +26,11 @@
             <td><%= i.starting_date %></td>
             <td>RM&nbsp;<%= number_with_precision(i.local_student_fee, :precision => 2) %></td>
             <td>RM&nbsp;<%= number_with_precision(i.international_student_fee, :precision => 2) %></td>
-            <td><%= link_to "View", i %></td>
-            <td><%= link_to "Edit", edit_intake_path(i) %></td>
+            <td><%= link_to "View", i, class: "btn btn-xs btn-primary" %></td>
+            <td><%= link_to "Edit", edit_intake_path(i), class: "btn btn-xs btn-info" %></td>
             <td>
               <%= link_to "Delete", i, method: :delete,
-                          data: { confirm: "Confirm to remove this intake?" } %>
+                          data: { confirm: "Confirm to remove this intake?" }, class: "btn btn-xs btn-danger" %>
             </td>
           </tr>
           <% end %>

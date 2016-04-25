@@ -12,9 +12,9 @@
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="3">Name</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">Amount</th>
             <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">Repetitive Payment?</th>
-            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
-            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7">Action</th>
-            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8">Action</th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7"></th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="7"></th>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="8"></th>
           </tr>
         </thead>
         <tbody>
@@ -24,9 +24,9 @@
               <td><%= uf.name %></td>
               <td>RM&nbsp;<%= uf.amount %></td>
               <td><%= uf.repetitive_payment.to_s.titleize %></td>
-              <td><%= link_to "View", uf %></td>
-              <td><%= link_to "Edit", edit_utility_fee_path(uf) %></td>
-              <td><%= link_to "Delete", uf, method: :delete, data: { confirm: "Confirm to remove this fee?" } %>
+              <td><%= link_to "View", uf, class: "btn btn-xs btn-primary" %></td>
+              <td><%= link_to "Edit", edit_utility_fee_path(uf), class: "btn btn-xs btn-info" %></td>
+              <td><%= link_to "Delete", uf, method: :delete, data: { confirm: "Confirm to remove this fee?" }, class: "btn btn-xs btn-danger" %>
               </td>
             </tr>
           <% end %>
