@@ -5,7 +5,7 @@
     <!-- Mobile Friendly CSS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-    <!-- <%= javascript_include_tag "application", "data-turbolinks-track" => true %> -->
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag 'favicon.ico' %>
     <%= render 'layouts/shim' %>
@@ -20,7 +20,9 @@
       <%= yield %>
     </div>
     <%= render 'layouts/footer' %>
-    <!-- Javascript is moved to downpart to unblock the javascript blocking -->
-    <%= javascript_include_tag "application" %>
+    <!-- CSS and Javascript is moved to downpart to unblock the
+    javascript blocking and provides optimised CSS delivery-->
+    <!-- <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %> -->
   </body>
 </html>
