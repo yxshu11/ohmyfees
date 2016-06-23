@@ -96,7 +96,6 @@ class SessionsController < ApplicationController
       flash.now[:success] = "OTP Code has been sent, please check your phone."
     end
 
-
     if !params[:otp_code].nil?
       # Get the OTP Code from the form that entered by the student
       otp_code = params[:otp_code]
